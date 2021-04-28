@@ -303,6 +303,7 @@ Bijkomend moet bij het herschalen onderscheid worden gemaakt tussen werken in pu
 .Manuele workflow voor creatie van jp2 afgeleide beeldbestanden
 image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7",alt="workflow voor creatie afgeleiden als jp2"]
 
+
 Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide beelden te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties bijgewerkt worden op basis van voortschrijdend inzicht.
 
 ====== Bestandsformaat
@@ -572,6 +573,9 @@ Worden minstens gedocumenteerd:
 === Architectuur
 
 ==== Diagram (eenvoudig)
+
+.Eenvoudige voorstelling van IIIF-architectuur (to be) bij meemoo
+image::iiif-basic-architecture.png[alt="Simple architecture diagram"]
 
 ==== Componenten
 
