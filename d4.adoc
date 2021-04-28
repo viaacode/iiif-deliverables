@@ -1,7 +1,9 @@
 IIIF : Deliverable 4: IIIF image endpoint bij meemoo
 ====================================================
 Bart Debunne <bart.debunne@meemoo.be>
+3, 28-04-2021
 :Revision: 3
+:nofooter:
 // fix missing admonition icons on Github
 ifdef::env-github[]
 :tip-caption: :bulb:
@@ -680,5 +682,3 @@ NOTE: Todo => Inschatting + planning (Gantt).
 === WIP Conclusie
 
 NOTE: Te schrijven bij finaliseren deliverable.
-
-'''''
