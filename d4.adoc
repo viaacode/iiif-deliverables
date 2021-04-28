@@ -12,13 +12,10 @@ ifdef::env-github[]
 endif::[]
 // configure TOC
 :toc:
-:toc-placement: preamble
+:toc-placement!:
 :toclevels: 3
 :showtitle:
 :toc-title: Inhoudsopgave
-
-// Need some preamble to get TOC:
-{empty}
 
 toc::[]
 
