@@ -1,8 +1,13 @@
-== IIIF : Deliverable 4: IIIF image endpoint bij meemoo
-
+IIIF : Deliverable 4: IIIF image endpoint bij meemoo
+====================================================
 :toc:
+:toc-placement: preamble
+:toclevels: 3
+:showtitle:
+:toc-title: Inhoudsopgave
 
-'''''
+// Need some preamble to get TOC:
+{empty}
 
 === Inleiding
 
@@ -66,7 +71,8 @@ Aangezien meemoo met de opstelling op termijn mogelijk meer collecties wil ontsl
 
 Aan de hand van de metadata in het meemoo-archiefsysteem voor de silo Lukas/Art in Flanders (AIF) kan een exhaustieve en maximale lijst en omvang bepaald worden van de te ontsluiten werken. Hieruit blijkt dat voor bovenstaande aanbieders momenteel 15905 werken ontsloten worden op Art in Flanders.
 
-[cols=",,,",]
+.Omvang aanbod in scope
+[cols=",,,",options="header"]
 |===
 |Collectie |Aantal items in archief |Items online in AIF |wacht op metadata of mag niet online
 |Musea Brugge |13176 |5481 |7695
