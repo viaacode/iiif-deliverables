@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="author" content="Bart Debunne">
+<title>IIIF : Deliverable 4: IIIF image endpoint bij meemoo</title>
+<style>
+@import url(http://openshift.redhat.com/app/assets-20130701203230/overpass.css);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.0/css/font-awesome.css);
+/* normalize.css v2.1.1 | MIT License | git.io/normalize */
+/* ========================================================================== HTML5 display definitions ========================================================================== */
+/** Correct `block` display not defined in IE 8/9. */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary { display: block; }
+
+/** Correct `inline-block` display not defined in IE 8/9. */
+audio, canvas, video { display: inline-block; }
+
+/** Prevent modern browsers from displaying `audio` without controls. Remove excess height in iOS 5 devices. */
+audio:not([controls]) { display: none; height: 0; }
+
+/** Address styling not present in IE 8/9. */
+[hidden] { display: none; }
+
+/* ========================================================================== Base ========================================================================== */
+/** 1. Prevent system color scheme's background color being used in Firefox, IE, and Opera. 2. Prevent system color scheme's text color being used in Firefox, IE, and Opera. 3. Set default font family to sans-serif. 4. Prevent iOS text size adjust after orientation change, without disabling user zoom. */
+html { background: #fff; /* 1 */ color: #000; /* 2 */ font-family: sans-serif; /* 3 */ -ms-text-size-adjust: 100%; /* 4 */ -webkit-text-size-adjust: 100%; /* 4 */ }
+
+/** Remove default margin. */
+body { margin: 0; }
+
+/* ========================================================================== Links ========================================================================== */
+/** Address `outline` inconsistency between Chrome and other browsers. */
+a:focus { outline: thin dotted; }
+
+/** Improve readability when focused and also mouse hovered in all browsers. */
+a:active, a:hover { outline: 0; }
+
+/* ========================================================================== Typography ========================================================================== */
+/** Address variable `h1` font-size and margin within `section` and `article` contexts in Firefox 4+, Safari 5, and Chrome. */
+h1 { font-size: 2em; margin: 0.67em 0; }
+
+/** Address styling not present in IE 8/9, Safari 5, and Chrome. */
+abbr[title] { border-bottom: 1px dotted; }
+
+/** Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */
+b, strong { font-weight: bold; }
+
+/** Address styling not present in Safari 5 and Chrome. */
+dfn { font-style: italic; }
+
+/** Address differences between Firefox and other browsers. */
+hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
+
+/** Address styling not present in IE 8/9. */
+mark { background: #ff0; color: #000; }
+
+/** Correct font family set oddly in Safari 5 and Chrome. */
+code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+
+/** Improve readability of pre-formatted text in all browsers. */
+pre { white-space: pre-wrap; }
+
+/** Set consistent quote types. */
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/** Address inconsistent and variable font size in all browsers. */
+small { font-size: 80%; }
+
+/** Prevent `sub` and `sup` affecting `line-height` in all browsers. */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+
+sup { top: -0.5em; }
+
+sub { bottom: -0.25em; }
+
+/* ========================================================================== Embedded content ========================================================================== */
+/** Remove border when inside `a` element in IE 8/9. */
+img { border: 0; }
+
+/** Correct overflow displayed oddly in IE 9. */
+svg:not(:root) { overflow: hidden; }
+
+/* ========================================================================== Figures ========================================================================== */
+/** Address margin not present in IE 8/9 and Safari 5. */
+figure { margin: 0; }
+
+/* ========================================================================== Forms ========================================================================== */
+/** Define consistent border, margin, and padding. */
+fieldset { border: 1px solid #c0c0c0; margin: 0 2px; padding: 0.35em 0.625em 0.75em; }
+
+/** 1. Correct `color` not being inherited in IE 8/9. 2. Remove padding so people aren't caught out if they zero out fieldsets. */
+legend { border: 0; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Correct font family not being inherited in all browsers. 2. Correct font size not being inherited in all browsers. 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome. */
+button, input, select, textarea { font-family: inherit; /* 1 */ font-size: 100%; /* 2 */ margin: 0; /* 3 */ }
+
+/** Address Firefox 4+ setting `line-height` on `input` using `!important` in the UA stylesheet. */
+button, input { line-height: normal; }
+
+/** Address inconsistent `text-transform` inheritance for `button` and `select`. All other form control elements do not inherit `text-transform` values. Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+. Correct `select` style inheritance in Firefox 4+ and Opera. */
+button, select { text-transform: none; }
+
+/** 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls. 2. Correct inability to style clickable `input` types in iOS. 3. Improve usability and consistency of cursor style between image-type `input` and others. */
+button, html input[type="button"], input[type="reset"], input[type="submit"] { -webkit-appearance: button; /* 2 */ cursor: pointer; /* 3 */ }
+
+/** Re-set default cursor for disabled elements. */
+button[disabled], html input[disabled] { cursor: default; }
+
+/** 1. Address box sizing set to `content-box` in IE 8/9. 2. Remove excess padding in IE 8/9. */
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome. 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome (include `-moz` to future-proof). */
+input[type="search"] { -webkit-appearance: textfield; /* 1 */ -moz-box-sizing: content-box; -webkit-box-sizing: content-box; /* 2 */ box-sizing: content-box; }
+
+/** Remove inner padding and search cancel button in Safari 5 and Chrome on OS X. */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+
+/** Remove inner padding and border in Firefox 4+. */
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+
+/** 1. Remove default vertical scrollbar in IE 8/9. 2. Improve readability and alignment in all browsers. */
+textarea { overflow: auto; /* 1 */ vertical-align: top; /* 2 */ }
+
+/* ========================================================================== Tables ========================================================================== */
+/** Remove most spacing between table cells. */
+table { border-collapse: collapse; border-spacing: 0; }
+
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body { font-size: 100%; }
+
+body { background: #e5e5e5; color: #222222; padding: 0; margin: 0; font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: auto; }
+
+a:hover { cursor: pointer; }
+
+a:focus { outline: none; }
+
+img, object, embed { max-width: 100%; height: auto; }
+
+object, embed { height: 100%; }
+
+img { -ms-interpolation-mode: bicubic; }
+
+#map_canvas img, #map_canvas embed, #map_canvas object, .map_canvas img, .map_canvas embed, .map_canvas object { max-width: none !important; }
+
+.left { float: left !important; }
+
+.right { float: right !important; }
+
+.text-left { text-align: left !important; }
+
+.text-right { text-align: right !important; }
+
+.text-center { text-align: center !important; }
+
+.text-justify { text-align: justify !important; }
+
+.hide { display: none; }
+
+.antialiased, body { -webkit-font-smoothing: antialiased; }
+
+img { display: inline-block; vertical-align: middle; }
+
+textarea { height: auto; min-height: 50px; }
+
+select { width: 100%; }
+
+p.lead, .paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p { font-size: 1.15625em; line-height: 1.6; }
+
+.subheader, #content #toctitle, .admonitionblock td.content > .title, .exampleblock > .title, .imageblock > .title, .videoblock > .title, .listingblock > .title, .literalblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, .sidebarblock > .title, .tableblock > .title, .verseblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title, .tableblock > caption { line-height: 1.4; color: #4d4d4d; font-weight: 300; margin-top: 0.2em; margin-bottom: 0.5em; }
+
+/* Typography resets */
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6, pre, form, p, blockquote, th, td { margin: 0; padding: 0; direction: ltr; }
+
+/* Default Link Styles */
+a { color: #006699; text-decoration: none; line-height: inherit; }
+a:hover, a:focus { color: #ea0011; }
+a img { border: none; }
+
+/* Default paragraph styles */
+p { font-family: "Helvetica Neue", Helvetica, "Liberation Sans", Arial, sans-serif; font-weight: normal; font-size: 0.9375em; line-height: 1.4; margin-bottom: 1.375em; text-rendering: optimizeLegibility; }
+p aside { font-size: 0.875em; line-height: 1.35; font-style: italic; }
+
+/* Default header styles */
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-family: Overpass, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal; font-style: normal; color: black; text-rendering: optimizeLegibility; margin-top: 1em; margin-bottom: 0.5em; line-height: 1.2125em; }
+h1 small, h2 small, h3 small, #toctitle small, .sidebarblock > .content > .title small, h4 small, h5 small, h6 small { font-size: 60%; color: #4d4d4d; line-height: 0; }
+
+h1 { font-size: 2.125em; }
+
+h2 { font-size: 1.6875em; }
+
+h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.375em; }
+
+h4 { font-size: 1.125em; }
+
+h5 { font-size: 1.125em; }
+
+h6 { font-size: 1em; }
+
+hr { border: solid #dddddd; border-width: 1px 0 0; clear: both; margin: 1.25em 0 1.1875em; height: 0; }
+
+/* Helpful Typography Defaults */
+em, i { font-style: italic; line-height: inherit; }
+
+strong, b { font-weight: bold; line-height: inherit; }
+
+small { font-size: 60%; line-height: inherit; }
+
+code { font-family: Menlo, Monaco, "Liberation Mono", Consolas, monospace; font-weight: normal; color: #3b3b3b; }
+
+/* Lists */
+ul, ol, dl { font-size: 0.9375em; line-height: 1.4; margin-bottom: 1.375em; list-style-position: outside; font-family: "Helvetica Neue", Helvetica, "Liberation Sans", Arial, sans-serif; }
+
+ul, ol { margin-left: 1.625em; }
+
+/* Unordered Lists */
+ul li ul, ul li ol { margin-left: 1.25em; margin-bottom: 0; font-size: 1em; /* Override nested font-size change */ }
+ul.square li ul, ul.circle li ul, ul.disc li ul { list-style: inherit; }
+ul.square { list-style-type: square; }
+ul.circle { list-style-type: circle; }
+ul.disc { list-style-type: disc; }
+ul.no-bullet { list-style: none; }
+
+/* Ordered Lists */
+ol li ul, ol li ol { margin-left: 1.25em; margin-bottom: 0; }
+
+/* Definition Lists */
+dl dt { margin-bottom: 0.3em; font-weight: bold; }
+dl dd { margin-bottom: 0.75em; }
+
+/* Abbreviations */
+abbr, acronym { text-transform: uppercase; font-size: 90%; color: #404040; border-bottom: 1px dotted #dddddd; cursor: help; }
+
+abbr { text-transform: none; }
+
+/* Blockquotes */
+blockquote { margin: 0 0 1.375em; padding: 0 0 0 1em; border-left: 5px solid #ededed; }
+blockquote cite { display: block; font-size: 0.8125em; color: #333333; }
+blockquote cite:before { content: "\2014 \0020"; }
+blockquote cite a, blockquote cite a:visited { color: #333333; }
+
+blockquote, blockquote p { line-height: 1.4; color: #404040; }
+
+/* Microformats */
+.vcard { display: inline-block; margin: 0 0 1.25em 0; border: 1px solid #dddddd; padding: 0.625em 0.75em; }
+.vcard li { margin: 0; display: block; }
+.vcard .fn { font-weight: bold; font-size: 0.9375em; }
+
+.vevent .summary { font-weight: bold; }
+.vevent abbr { cursor: auto; text-decoration: none; font-weight: bold; border: none; padding: 0 0.0625em; }
+
+@media only screen and (min-width: 768px) { h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.4; }
+  h1 { font-size: 2.75em; }
+  h2 { font-size: 2.3125em; }
+  h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.6875em; }
+  h4 { font-size: 1.4375em; } }
+/* Print styles.  Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/ Credit to Paul Irish and HTML5 Boilerplate (html5boilerplate.com)
+*/
+.print-only { display: none !important; }
+
+@media print { * { background: transparent !important; color: #000 !important; /* Black prints faster: h5bp.com/s */ box-shadow: none !important; text-shadow: none !important; }
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; /* h5bp.com/t */ }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3, #toctitle, .sidebarblock > .content > .title { orphans: 3; widows: 3; }
+  h2, h3, #toctitle, .sidebarblock > .content > .title { page-break-after: avoid; }
+  .hide-on-print { display: none !important; }
+  .print-only { display: block !important; }
+  .hide-for-print { display: none !important; }
+  .show-for-print { display: inherit !important; } }
+/* Tables */
+table { background: white; margin-bottom: 1.25em; border: solid 1px #dddddd; }
+table thead, table tfoot { background: whitesmoke; font-weight: bold; }
+table thead tr th, table thead tr td, table tfoot tr th, table tfoot tr td { padding: 0.5em 0.625em 0.625em; font-size: inherit; color: #222222; text-align: left; }
+table tr th, table tr td { padding: 0.5625em 0.625em; font-size: inherit; color: #222222; }
+table tr.even, table tr.alt, table tr:nth-of-type(even) { background: #f9f9f9; }
+table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoot tr td { display: table-cell; line-height: 1.4; }
+
+a:hover, a:focus { text-decoration: underline; }
+
+.clearfix:before, .clearfix:after, .float-group:before, .float-group:after { content: " "; display: table; }
+.clearfix:after, .float-group:after { clear: both; }
+
+*:not(pre) > code { font-size: 0.9375em; padding: 1px 4px; white-space: nowrap; background-color: #eff1f1; border: 1px solid #d4d9d9; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
+
+pre, pre > code { line-height: 1.6; color: #3b3b3b; font-family: Menlo, Monaco, "Liberation Mono", Consolas, monospace; font-weight: normal; }
+
+kbd.keyseq { color: #737373; }
+
+kbd:not(.keyseq) { display: inline-block; color: #404040; font-size: 0.75em; line-height: 1.4; background-color: #F7F7F7; border: 1px solid #ccc; -webkit-border-radius: 3px; border-radius: 3px; -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset; margin: -0.15em 0.15em 0 0.15em; padding: 0.2em 0.6em 0.2em 0.5em; vertical-align: middle; white-space: nowrap; }
+
+kbd kbd:first-child { margin-left: 0; }
+
+kbd kbd:last-child { margin-right: 0; }
+
+.menuseq, .menu { color: #272727; }
+
+#header, #content, #footnotes, #footer { width: 100%; margin-left: auto; margin-right: auto; margin-top: 0; margin-bottom: 0; max-width: 62.5em; *zoom: 1; position: relative; padding-left: 0.9375em; padding-right: 0.9375em; }
+#header:before, #header:after, #content:before, #content:after, #footnotes:before, #footnotes:after, #footer:before, #footer:after { content: " "; display: table; }
+#header:after, #content:after, #footnotes:after, #footer:after { clear: both; }
+
+#header { margin-bottom: 2.5em; }
+#header > h1 { color: black; font-weight: normal; border-bottom: 1px solid #dddddd; margin-bottom: -28px; padding-bottom: 32px; }
+#header span { color: #404040; }
+#header #revnumber { text-transform: capitalize; }
+#header br { display: none; }
+#header br + span { padding-left: 3px; }
+#header br + span:before { content: "\2013 \0020"; }
+#header br + span.author { padding-left: 0; }
+#header br + span.author:before { content: ", "; }
+
+#toc { border-bottom: 0 solid #dddddd; padding-bottom: 1.25em; }
+#toc > ul { margin-left: 0.25em; }
+#toc ul.sectlevel0 > li > a { font-style: italic; }
+#toc ul.sectlevel0 ul.sectlevel1 { margin-left: 0; margin-top: 0.5em; margin-bottom: 0.5em; }
+#toc ul { list-style-type: none; }
+
+#toctitle { color: #4d4d4d; }
+
+@media only screen and (min-width: 1280px) { body.toc2 { padding-left: 20em; }
+  #toc.toc2 { position: fixed; width: 20em; left: 0; top: 0; border-right: 1px solid #dddddd; border-bottom: 0; z-index: 1000; padding: 1em; height: 100%; overflow: auto; }
+  #toc.toc2 #toctitle { margin-top: 0; }
+  #toc.toc2 > ul { font-size: .95em; }
+  #toc.toc2 ul ul { margin-left: 0; padding-left: 1.25em; }
+  #toc.toc2 ul.sectlevel0 ul.sectlevel1 { padding-left: 0; margin-top: 0.5em; margin-bottom: 0.5em; }
+  body.toc2.toc-right { padding-left: 0; padding-right: 20em; }
+  body.toc2.toc-right #toc.toc2 { border-right: 0; border-left: 1px solid #dddddd; left: auto; right: 0; } }
+#content #toc { border-style: solid; border-width: 1px; border-color: #cccccc; margin-bottom: 1.25em; padding: 1.25em; background: #e5e5e5; border-width: 0; -webkit-border-radius: 0; border-radius: 0; }
+#content #toc > :first-child { margin-top: 0; }
+#content #toc > :last-child { margin-bottom: 0; }
+#content #toc a { text-decoration: none; }
+
+#content #toctitle { font-weight: bold; font-family: "Helvetica Neue", Helvetica, "Liberation Sans", Arial, sans-serif; font-size: 1em; padding-left: 0.125em; }
+
+#footer { max-width: 100%; background-color: white; padding: 1.25em; }
+
+#footer-text { color: #666666; line-height: 1.26; }
+
+.sect1 { padding-bottom: 1.25em; }
+
+.sect1 + .sect1 { border-top: 0 solid #dddddd; }
+
+#content h1 > a.anchor, h2 > a.anchor, h3 > a.anchor, #toctitle > a.anchor, .sidebarblock > .content > .title > a.anchor, h4 > a.anchor, h5 > a.anchor, h6 > a.anchor { position: absolute; width: 1em; margin-left: -1em; display: block; text-decoration: none; visibility: hidden; text-align: center; font-weight: normal; }
+#content h1 > a.anchor:before, h2 > a.anchor:before, h3 > a.anchor:before, #toctitle > a.anchor:before, .sidebarblock > .content > .title > a.anchor:before, h4 > a.anchor:before, h5 > a.anchor:before, h6 > a.anchor:before { content: '\00A7'; font-size: .85em; vertical-align: text-top; display: block; margin-top: 0.05em; }
+#content h1:hover > a.anchor, #content h1 > a.anchor:hover, h2:hover > a.anchor, h2 > a.anchor:hover, h3:hover > a.anchor, #toctitle:hover > a.anchor, .sidebarblock > .content > .title:hover > a.anchor, h3 > a.anchor:hover, #toctitle > a.anchor:hover, .sidebarblock > .content > .title > a.anchor:hover, h4:hover > a.anchor, h4 > a.anchor:hover, h5:hover > a.anchor, h5 > a.anchor:hover, h6:hover > a.anchor, h6 > a.anchor:hover { visibility: visible; }
+#content h1 > a.link, h2 > a.link, h3 > a.link, #toctitle > a.link, .sidebarblock > .content > .title > a.link, h4 > a.link, h5 > a.link, h6 > a.link { color: black; text-decoration: none; }
+#content h1 > a.link:hover, h2 > a.link:hover, h3 > a.link:hover, #toctitle > a.link:hover, .sidebarblock > .content > .title > a.link:hover, h4 > a.link:hover, h5 > a.link:hover, h6 > a.link:hover { color: black; }
+
+.imageblock, .literalblock, .listingblock, .verseblock, .videoblock { margin-bottom: 1.25em; }
+
+.admonitionblock td.content > .title, .exampleblock > .title, .imageblock > .title, .videoblock > .title, .listingblock > .title, .literalblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, .sidebarblock > .title, .tableblock > .title, .verseblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { text-align: left; font-weight: bold; }
+
+.tableblock > caption { text-align: left; font-weight: bold; white-space: nowrap; overflow: visible; max-width: 0; }
+
+table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-size: inherit; }
+
+.admonitionblock > table { border: 0; background: none; width: 100%; }
+.admonitionblock > table td.icon { text-align: center; width: 80px; }
+.admonitionblock > table td.icon img { max-width: none; }
+.admonitionblock > table td.icon .title { font-weight: bold; text-transform: uppercase; }
+.admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 1px solid #dddddd; color: #404040; }
+.admonitionblock > table td.content > :last-child > :last-child { margin-bottom: 0; }
+
+.exampleblock > .content { border-style: solid; border-width: 1px; border-color: #cccccc; margin-bottom: 1.25em; padding: 1.25em; background: #e5e5e5; -webkit-border-radius: 0; border-radius: 0; }
+.exampleblock > .content > :first-child { margin-top: 0; }
+.exampleblock > .content > :last-child { margin-bottom: 0; }
+.exampleblock > .content h1, .exampleblock > .content h2, .exampleblock > .content h3, .exampleblock > .content #toctitle, .sidebarblock.exampleblock > .content > .title, .exampleblock > .content h4, .exampleblock > .content h5, .exampleblock > .content h6, .exampleblock > .content p { color: #333333; }
+.exampleblock > .content h1, .exampleblock > .content h2, .exampleblock > .content h3, .exampleblock > .content #toctitle, .sidebarblock.exampleblock > .content > .title, .exampleblock > .content h4, .exampleblock > .content h5, .exampleblock > .content h6 { line-height: 1; margin-bottom: 0.625em; }
+.exampleblock > .content h1.subheader, .exampleblock > .content h2.subheader, .exampleblock > .content h3.subheader, .exampleblock > .content .subheader#toctitle, .sidebarblock.exampleblock > .content > .subheader.title, .exampleblock > .content h4.subheader, .exampleblock > .content h5.subheader, .exampleblock > .content h6.subheader { line-height: 1.4; }
+
+.exampleblock.result > .content { -webkit-box-shadow: 0 1px 8px #cccccc; box-shadow: 0 1px 8px #cccccc; }
+
+.sidebarblock { border-style: solid; border-width: 1px; border-color: #cccccc; margin-bottom: 1.25em; padding: 1.25em; background: #e5e5e5; -webkit-border-radius: 0; border-radius: 0; }
+.sidebarblock > :first-child { margin-top: 0; }
+.sidebarblock > :last-child { margin-bottom: 0; }
+.sidebarblock h1, .sidebarblock h2, .sidebarblock h3, .sidebarblock #toctitle, .sidebarblock > .content > .title, .sidebarblock h4, .sidebarblock h5, .sidebarblock h6, .sidebarblock p { color: #333333; }
+.sidebarblock h1, .sidebarblock h2, .sidebarblock h3, .sidebarblock #toctitle, .sidebarblock > .content > .title, .sidebarblock h4, .sidebarblock h5, .sidebarblock h6 { line-height: 1; margin-bottom: 0.625em; }
+.sidebarblock h1.subheader, .sidebarblock h2.subheader, .sidebarblock h3.subheader, .sidebarblock .subheader#toctitle, .sidebarblock > .content > .subheader.title, .sidebarblock h4.subheader, .sidebarblock h5.subheader, .sidebarblock h6.subheader { line-height: 1.4; }
+.sidebarblock > .content > .title { color: #4d4d4d; margin-top: 0; line-height: 1.4; }
+
+.exampleblock > .content > :last-child > :last-child, .exampleblock > .content .olist > ol > li:last-child > :last-child, .exampleblock > .content .ulist > ul > li:last-child > :last-child, .exampleblock > .content .qlist > ol > li:last-child > :last-child, .sidebarblock > .content > :last-child > :last-child, .sidebarblock > .content .olist > ol > li:last-child > :last-child, .sidebarblock > .content .ulist > ul > li:last-child > :last-child, .sidebarblock > .content .qlist > ol > li:last-child > :last-child { margin-bottom: 0; }
+
+.literalblock > .content pre, .listingblock > .content pre { background: #eff1f1; border-width: 0 0 0 2px; border-style: solid; border-color: rgba(120, 120, 120, 0.35); -webkit-border-radius: 0; border-radius: 0; padding: 1em 1.5em 0.875em 1.5em; word-wrap: break-word; }
+.literalblock > .content pre.nowrap, .listingblock > .content pre.nowrap { overflow-x: auto; white-space: pre; word-wrap: normal; }
+.literalblock > .content pre > code, .listingblock > .content pre > code { display: block; }
+@media only screen { .literalblock > .content pre, .listingblock > .content pre { font-size: 0.7em; } }
+@media only screen and (min-width: 768px) { .literalblock > .content pre, .listingblock > .content pre { font-size: 0.7875em; } }
+@media only screen and (min-width: 1280px) { .literalblock > .content pre, .listingblock > .content pre { font-size: 0.875em; } }
+
+.listingblock > .content { position: relative; }
+
+.listingblock:hover code[class*=" language-"]:before { text-transform: uppercase; font-size: 0.9em; color: #999; position: absolute; top: 0.375em; right: 0.375em; }
+
+.listingblock:hover code.asciidoc:before { content: "asciidoc"; }
+.listingblock:hover code.clojure:before { content: "clojure"; }
+.listingblock:hover code.css:before { content: "css"; }
+.listingblock:hover code.groovy:before { content: "groovy"; }
+.listingblock:hover code.html:before { content: "html"; }
+.listingblock:hover code.java:before { content: "java"; }
+.listingblock:hover code.javascript:before { content: "javascript"; }
+.listingblock:hover code.python:before { content: "python"; }
+.listingblock:hover code.ruby:before { content: "ruby"; }
+.listingblock:hover code.scss:before { content: "scss"; }
+.listingblock:hover code.xml:before { content: "xml"; }
+.listingblock:hover code.yaml:before { content: "yaml"; }
+
+.listingblock.terminal pre .command:before { content: attr(data-prompt); padding-right: 0.5em; color: #999; }
+
+.listingblock.terminal pre .command:not([data-prompt]):before { content: '$'; }
+
+table.pyhltable { border: 0; margin-bottom: 0; }
+
+table.pyhltable td { vertical-align: top; padding-top: 0; padding-bottom: 0; }
+
+table.pyhltable td.code { padding-left: .75em; padding-right: 0; }
+
+.highlight.pygments .lineno, table.pyhltable td:not(.code) { color: #999; padding-left: 0; padding-right: .5em; border-right: 1px solid #dddddd; }
+
+.highlight.pygments .lineno { display: inline-block; margin-right: .25em; }
+
+table.pyhltable .linenodiv { background-color: transparent !important; padding-right: 0 !important; }
+
+.quoteblock { margin: 0 0 1.375em; padding: 0 0 0 1em; border-left: 5px solid #ededed; }
+.quoteblock blockquote { margin: 0 0 1.375em 0; padding: 0 0 0.5625em 0; border: 0; }
+.quoteblock blockquote > .paragraph:last-child p { margin-bottom: 0; }
+.quoteblock .attribution { margin-top: -.25em; padding-bottom: 0.5625em; font-size: 0.8125em; color: #333333; }
+.quoteblock .attribution br { display: none; }
+.quoteblock .attribution cite { display: block; margin-bottom: 0.625em; }
+
+table thead th, table tfoot th { font-weight: bold; }
+
+table.tableblock.grid-all { border-collapse: separate; border-spacing: 1px; -webkit-border-radius: 0; border-radius: 0; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
+
+table.tableblock.frame-topbot, table.tableblock.frame-none { border-left: 0; border-right: 0; }
+
+table.tableblock.frame-sides, table.tableblock.frame-none { border-top: 0; border-bottom: 0; }
+
+table.tableblock td .paragraph:last-child p, table.tableblock td > p:last-child { margin-bottom: 0; }
+
+th.tableblock.halign-left, td.tableblock.halign-left { text-align: left; }
+
+th.tableblock.halign-right, td.tableblock.halign-right { text-align: right; }
+
+th.tableblock.halign-center, td.tableblock.halign-center { text-align: center; }
+
+th.tableblock.valign-top, td.tableblock.valign-top { vertical-align: top; }
+
+th.tableblock.valign-bottom, td.tableblock.valign-bottom { vertical-align: bottom; }
+
+th.tableblock.valign-middle, td.tableblock.valign-middle { vertical-align: middle; }
+
+p.tableblock.header { color: #222222; font-weight: bold; }
+
+td > div.verse { white-space: pre; }
+
+ol { margin-left: 1.875em; }
+
+ul li ol { margin-left: 1.625em; }
+
+dl dd { margin-left: 2em; }
+
+dl dd:last-child, dl dd:last-child > :last-child { margin-bottom: 0; }
+
+ol > li p, ul > li p, ul dd, ol dd, .olist .olist, .ulist .ulist, .ulist .olist, .olist .ulist { margin-bottom: 0.6875em; }
+
+ul.unstyled, ol.unnumbered, ul.checklist, ul.none { list-style-type: none; }
+
+ul.unstyled, ol.unnumbered, ul.checklist { margin-left: 0.625em; }
+
+ul.checklist li > p:first-child > i[class^="icon-check"]:first-child, ul.checklist li > p:first-child > input[type="checkbox"]:first-child { margin-right: 0.25em; }
+
+ul.checklist li > p:first-child > input[type="checkbox"]:first-child { position: relative; top: 1px; }
+
+ul.inline { margin: 0 auto 0.6875em auto; margin-left: -1.375em; margin-right: 0; padding: 0; list-style: none; overflow: hidden; }
+ul.inline > li { list-style: none; float: left; margin-left: 1.375em; display: block; }
+ul.inline > li > * { display: block; }
+
+.unstyled dl dt { font-weight: normal; font-style: normal; }
+
+ol.arabic { list-style-type: decimal; }
+
+ol.decimal { list-style-type: decimal-leading-zero; }
+
+ol.loweralpha { list-style-type: lower-alpha; }
+
+ol.upperalpha { list-style-type: upper-alpha; }
+
+ol.lowerroman { list-style-type: lower-roman; }
+
+ol.upperroman { list-style-type: upper-roman; }
+
+ol.lowergreek { list-style-type: lower-greek; }
+
+.hdlist > table, .colist > table { border: 0; background: none; }
+.hdlist > table > tbody > tr, .colist > table > tbody > tr { background: none; }
+
+td.hdlist1 { padding-right: .8em; font-weight: bold; }
+
+td.hdlist1, td.hdlist2 { vertical-align: top; }
+
+.literalblock + .colist, .listingblock + .colist { margin-top: -0.5em; }
+
+.colist > table tr > td:first-of-type { padding: 0 .8em; line-height: 1; }
+.colist > table tr > td:last-of-type { padding: 0.25em 0; }
+
+.qanda > ol > li > p > em:only-child { color: #005580; }
+
+.thumb, .th { line-height: 0; display: inline-block; border: solid 4px white; -webkit-box-shadow: 0 0 0 1px #dddddd; box-shadow: 0 0 0 1px #dddddd; }
+
+.imageblock.left, .imageblock[style*="float: left"] { margin: 0.25em 0.625em 1.25em 0; }
+.imageblock.right, .imageblock[style*="float: right"] { margin: 0.25em 0 1.25em 0.625em; }
+.imageblock > .title { margin-bottom: 0; }
+.imageblock.thumb, .imageblock.th { border-width: 6px; }
+.imageblock.thumb > .title, .imageblock.th > .title { padding: 0 0.125em; }
+
+.image.left, .image.right { margin-top: 0.25em; margin-bottom: 0.25em; display: inline-block; line-height: 0; }
+.image.left { margin-right: 0.625em; }
+.image.right { margin-left: 0.625em; }
+
+a.image { text-decoration: none; }
+
+span.footnote, span.footnoteref { vertical-align: super; font-size: 0.875em; }
+span.footnote a, span.footnoteref a { text-decoration: none; }
+
+#footnotes { padding-top: 0.75em; padding-bottom: 0.75em; margin-bottom: 0.625em; }
+#footnotes hr { width: 20%; min-width: 6.25em; margin: -.25em 0 .75em 0; border-width: 1px 0 0 0; }
+#footnotes .footnote { padding: 0 0.375em; line-height: 1.3; font-size: 0.875em; margin-left: 1.2em; text-indent: -1.2em; margin-bottom: .2em; }
+#footnotes .footnote a:first-of-type { font-weight: bold; text-decoration: none; }
+#footnotes .footnote:last-of-type { margin-bottom: 0; }
+
+#content #footnotes { margin-top: -0.625em; margin-bottom: 0; padding: 0.75em 0; }
+
+.gist .file-data > table { border: none; background: #fff; width: 100%; margin-bottom: 0; }
+.gist .file-data > table td.line-data { width: 99%; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+.big { font-size: larger; }
+
+.small { font-size: smaller; }
+
+.underline { text-decoration: underline; }
+
+.overline { text-decoration: overline; }
+
+.line-through { text-decoration: line-through; }
+
+.aqua { color: #00bfbf; }
+
+.aqua-background { background-color: #00fafa; }
+
+.black { color: black; }
+
+.black-background { background-color: black; }
+
+.blue { color: #0000bf; }
+
+.blue-background { background-color: #0000fa; }
+
+.fuchsia { color: #bf00bf; }
+
+.fuchsia-background { background-color: #fa00fa; }
+
+.gray { color: #606060; }
+
+.gray-background { background-color: #7d7d7d; }
+
+.green { color: #006000; }
+
+.green-background { background-color: #007d00; }
+
+.lime { color: #00bf00; }
+
+.lime-background { background-color: #00fa00; }
+
+.maroon { color: #600000; }
+
+.maroon-background { background-color: #7d0000; }
+
+.navy { color: #000060; }
+
+.navy-background { background-color: #00007d; }
+
+.olive { color: #606000; }
+
+.olive-background { background-color: #7d7d00; }
+
+.purple { color: #600060; }
+
+.purple-background { background-color: #7d007d; }
+
+.red { color: #bf0000; }
+
+.red-background { background-color: #fa0000; }
+
+.silver { color: #909090; }
+
+.silver-background { background-color: #bcbcbc; }
+
+.teal { color: #006060; }
+
+.teal-background { background-color: #007d7d; }
+
+.white { color: #bfbfbf; }
+
+.white-background { background-color: #fafafa; }
+
+.yellow { color: #bfbf00; }
+
+.yellow-background { background-color: #fafa00; }
+
+span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
+
+.admonitionblock td.icon [class^="icon-"]:before { font-size: 2.5em; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); cursor: default; }
+.admonitionblock td.icon .icon-note:before { content: "\f05a"; color: #006699; color: #004c73; }
+.admonitionblock td.icon .icon-tip:before { content: "\f0eb"; text-shadow: 1px 1px 2px rgba(155, 155, 0, 0.8); color: #111; }
+.admonitionblock td.icon .icon-warning:before { content: "\f071"; color: #bf6900; }
+.admonitionblock td.icon .icon-caution:before { content: "\f06d"; color: #bf3400; }
+.admonitionblock td.icon .icon-important:before { content: "\f06a"; color: #bf0000; }
+
+.conum { display: inline-block; color: white !important; background-color: #404040; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 20px; height: 20px; font-size: 12px; font-weight: bold; line-height: 20px; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -2px; letter-spacing: -1px; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+
+#header, #content, #footnotes { background: white; padding-left: 2.5em; padding-right: 2.5em; }
+
+#header { margin-bottom: 0; }
+#header > h1 { border-bottom: none; }
+
+#footnotes { margin-bottom: 2em; }
+
+.sect1 { padding-bottom: 0; }
+
+ol > li p, ul > li p, ul dd, ol dd, .olist .olist, .ulist .olist, .olist .ulist { margin-bottom: 0.34375em; }
+
+</style>
+</head>
+<body class="article data-line-1">
+<div id="header">
+<h1>IIIF : Deliverable 4: IIIF image endpoint bij meemoo</h1>
+<div class="details">
+<span id="author" class="author">Bart Debunne</span><br>
+<span id="email" class="email"><a href="mailto:bart.debunne@meemoo.be">bart.debunne@meemoo.be</a></span><br>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph data-line-12">
+<p></p>
+</div>
+<hr>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Inhoudsopgave</div>
+<ul class="sectlevel2">
+<li><a href="#_inleiding">Inleiding</a>
+<ul class="sectlevel3">
+<li><a href="#_doelstelling">Doelstelling</a></li>
+<li><a href="#_over_het_vkc_2_project">Over het VKC-2 project</a></li>
+<li><a href="#_over_iiif">Over IIIF</a></li>
+</ul>
+</li>
+<li><a href="#_scope">Scope</a>
+<ul class="sectlevel3">
+<li><a href="#_technische_oplossing">Technische oplossing</a></li>
+<li><a href="#_inhoudelijk_aanbod">Inhoudelijk aanbod</a></li>
+<li><a href="#_bestaande_implementaties">Bestaande implementaties</a></li>
+</ul>
+</li>
+<li><a href="#_specificaties">Specificaties</a>
+<ul class="sectlevel3">
+<li><a href="#_functioneel">Functioneel</a></li>
+<li><a href="#_technisch">Technisch</a></li>
+<li><a href="#_meemoo_infrastructuur">meemoo-infrastructuur</a></li>
+<li><a href="#_performantie">Performantie</a></li>
+<li><a href="#_documentatie">Documentatie</a></li>
+</ul>
+</li>
+<li><a href="#_architectuur">Architectuur</a>
+<ul class="sectlevel3">
+<li><a href="#_diagram_eenvoudig">Diagram (eenvoudig)</a></li>
+<li><a href="#_componenten">Componenten</a></li>
+</ul>
+</li>
+<li><a href="#_wip_impact_en_timing">WIP Impact en timing</a></li>
+<li><a href="#_wip_conclusie">WIP Conclusie</a></li>
+</ul>
+</div>
+</div>
+<div class="sect2 data-line-16">
+<h3 id="_inleiding">Inleiding</h3>
+<div class="sect3 data-line-18">
+<h4 id="_doelstelling">Doelstelling</h4>
+<div class="paragraph data-line-20">
+<p>Doel van Taak 2 is het ontwikkelen door meemoo van een iiif image endpoint op materiaal uit het MAM-systeem. De image endpoint zal worden gebruikt door VKC voor de ontsluiting van de collectie. Op termijn</p>
+</div>
+<div class="paragraph data-line-22">
+<p>wenst meemoo haar endpoint breder in te zetten zowel voor derden als voor eigen gebruik. Bij het bepalen van de specificaties, vereisten en architectuur is hier rekening mee gehouden.</p>
+</div>
+<div class="paragraph data-line-24">
+<p>Dit document geldt als deliverable 4 in het IIIF-project fase 2 (IIIF-2) van VKC in samenwerking met meemoo. De deliverable is het geschreven resultaat van Taak 2 in Werkpakket 2, een omschrijving van een</p>
+</div>
+<div class="paragraph data-line-26">
+<p>nader te realiseren IIIF-compliant image endpoint voor het ontsluiten van archiefbeelden bij meemoo.</p>
+</div>
+</div>
+<div class="sect3 data-line-28">
+<h4 id="_over_het_vkc_2_project">Over het VKC-2 project</h4>
+<div class="paragraph data-line-30">
+<p>De Vlaamse Kunstcollectie (VKC) werkte reeds eerder samen met meemoo aan de uitbouw van een digitaal ecosysteem. Er werd een (proef)opstelling gebouwd waarbij metadata en beelden via een zogenaamde Datahub, en IIIF-Imagehub en -Imageserver vanuit de registratiesystemen en de DAMS voor hergebruik worden beschikbaar gemaakt in de Arthub met IIIF-viewer.</p>
+</div>
+<div class="paragraph data-line-32">
+<p>Het IIIF-2 project bouwt verder op deze samenwerking door vanuit concrete use cases, verbeteringen aan te brengen, met het oog op twee belangrijke doelen: de maximale geautomatiseerde aggregatie van content en het maximaal geautomatiseerd ter beschikking stellen van die content voor hergebruik.</p>
+</div>
+<div class="paragraph data-line-34">
+<p>Het project voorziet in een nauwere aansluiting op de meemoo infrastructuur en archiefsysteem, de verkenning van IIIF-annotaties en IIIF-multi-layerviewers, en de opmaak van een metadatahandboek. Het systeem zal ook worden uitgetest op hybride collecties.</p>
+</div>
+</div>
+<div class="sect3 data-line-36">
+<h4 id="_over_iiif">Over IIIF</h4>
+<div class="paragraph data-line-38">
+<p>IIIF of het International Image Interoperability Framework staat voor:</p>
+</div>
+<div class="ulist data-line-40">
+<ul>
+<li class="data-line-40">
+<p>een set van open standaarden die contentbeheerders toelaat hun digitale collecties en bijhorende informatie te ontsluiten</p>
+</li>
+<li class="data-line-41">
+<p>een community: LAM&#8217;s, softwarebedrijven, developers en anderen die samen de IIIF standaarden omschrijven, ontwikkelen, testen en propageren</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-43">
+<p>Het volledige IIIF-raamwerk bestaat uit vier API&#8217;s (application programming interfaces), waarvan de twee belangrijkste de Image API en de Presentation API zijn. De API&#8217;s bieden een gestandardiseerde methode om bestanden te beschrijven en aan te leveren of uit te wisselen via het internet.</p>
+</div>
+<div class="olist arabic data-line-45">
+<ol class="arabic">
+<li class="data-line-45">
+<p><a href="https://iiif.io/api/image/">Image API</a> voor het aanbieden in al dan niet bewerkte vorm (rotatie, zoom, fragment, kleuraanpassing, formaat) van bestanden en de technische metadata (info.json)</p>
+</li>
+<li class="data-line-46">
+<p><a href="https://iiif.io/api/presentation/">Presentation API</a> voor de beschrijving in json-formaat (manifests) van de structuur en/of layout van een object, een collectie van objecten of gerelateerde objecten</p>
+</li>
+<li class="data-line-47">
+<p><a href="https://iiif.io/api/search/">Content Search API</a> voor het doorzoeken van transcripties (OCR), vertalingen, annotaties van een via IIIF aangeboden bron</p>
+</li>
+<li class="data-line-48">
+<p><a href="https://iiif.io/api/auth/">Authentication API</a> voor het afschermen van de bronnen voor niet geauthenticeerd gebruik (bearer token)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph data-line-50">
+<p>Er zijn nog API&#8217;s in ontwikkeling:</p>
+</div>
+<div class="olist arabic data-line-52">
+<ol class="arabic">
+<li class="data-line-52">
+<p><a href="https://iiif.io/api/discovery/0.9/">Change Discovery API</a> die het machines eenvoudiger maken om IIIF-bronnen te vinden, bv. voor de ontwikkeling van (thematische) zoekmachines en portaalapplicaties</p>
+</li>
+<li class="data-line-53">
+<p><a href="https://iiif.io/api/content-state/0.3/">Content State API</a> waarmee (een deel) van de inhoud van een IIIF Presentation API bron doorgegeven kan worden aan applicaties, ongeacht hun verschillende gebruikersinterfaces en mogelijkheden</p>
+</li>
+</ol>
+</div>
+<div class="paragraph data-line-55">
+<p>Naast louter afbeeldingen kunnen via de IIIF API dus ook weergavegebaseerde of meer bepaald structurele metadata uitgewisseld worden over gestructureerde objecten. Deze metadata kan bijvoorbeeld puur het object beschrijven of kan annotaties (open annotations) op en over het object bevatten.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2 data-line-59">
+<h3 id="_scope">Scope</h3>
+<div class="sect3 data-line-61">
+<h4 id="_technische_oplossing">Technische oplossing</h4>
+<div class="paragraph data-line-63">
+<p>De use case is het bouwen van een IIIF Image API 2.1 compliant endpoint voor de ontsluiting en download van hoog-kwalitatieve afbeeldingen, inclusief de nodige technische en administratieve (rechten) metadata, bewaard in het meemoo-archiefsysteem. De endpoint moet zonder meer kunnen ingeschakeld worden in het VKC-ecosysteem voor gebruik in de Imagehub.</p>
+</div>
+<div class="paragraph data-line-65">
+<p>De oplossing dient ook als proefopstelling voor meemoo met het oog op een bredere inzet van IIIF voor materiaal van meerdere aanbieders dat bij meemoo wordt bewaard en ontsloten mag of moet worden en dient dus voldoende schaalbaar te zijn om grotere en diverse collecties zonder grote drempels aan te kunnen.</p>
+</div>
+</div>
+<div class="sect3 data-line-67">
+<h4 id="_inhoudelijk_aanbod">Inhoudelijk aanbod</h4>
+<div class="paragraph data-line-69">
+<p>In het VKC-2 project zal een afgelijnde set bestanden aangeboden worden van:</p>
+</div>
+<div class="ulist data-line-71">
+<ul>
+<li class="data-line-71">
+<p>Alle aangesloten musea bij VKC, i.c. de 5 Schone Kunsten musea</p>
+</li>
+<li class="data-line-72">
+<p>Collecties Brugse musea (binnen AIF is er een algemene collectie <em>musea brugge</em>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-74">
+<p>Aangezien meemoo met de opstelling op termijn mogelijk meer collecties wil ontsluiten, zowel voor VKC als voor derden, is het relevant voorbij het huidige aanbod van VKC (Image Hub) en Art in Flanders te kijken naar zowel de maximaal potentiële omvang nu als de verwachtte aanwas. Met andere woorden, net als voor het technische aspect is schaalbaarheid een belangrijk aandachtspunt.</p>
+</div>
+<div class="paragraph data-line-76">
+<p>Aan de hand van de metadata in het meemoo-archiefsysteem voor de silo Lukas/Art in Flanders (AIF) kan een exhaustieve en maximale lijst en omvang bepaald worden van de te ontsluiten werken. Hieruit blijkt dat voor bovenstaande aanbieders momenteel 15905 werken ontsloten worden op Art in Flanders.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch data-line-80">
+<caption class="title">Table 1. Omvang aanbod in scope</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Collectie</th>
+<th class="tableblock halign-left valign-top">Aantal items in archief</th>
+<th class="tableblock halign-left valign-top">Items online in AIF</th>
+<th class="tableblock halign-left valign-top">wacht op metadata of mag niet online</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Musea Brugge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">13176</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5481</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7695</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KMSKA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7406</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7270</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">136</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSK Gent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2065</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1502</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">563</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mu.ZEE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1111</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">866</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">245</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M Leuven</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2177</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">786</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1391</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOTAAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25935</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15905</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10030</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bestandsgrootte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gemiddeld</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">van</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 MB per file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">oudste opnames</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">250 MB ** gemiddelde voor hele archief-tenant</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tot</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">600MB per file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nieuwste opnames</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph data-line-94">
+<p>Totalen ontsloten en niet-ontsloten archiefbeelden in de Lukas/AIF tenant in het meemoo archiefsysteem, cijfers per aanbieder (februari 2021).</p>
+</div>
+</div>
+<div class="sect3 data-line-96">
+<h4 id="_bestaande_implementaties">Bestaande implementaties</h4>
+<div class="sect4 data-line-98">
+<h5 id="_het_vkc_ecosysteem_fase_1">Het VKC ecosysteem (fase 1)</h5>
+<div class="sect5 data-line-100">
+<h6 id="_verkenning">Verkenning</h6>
+<div class="paragraph data-line-102">
+<p>Samen met VKC verkende meemoo verschillende technische componenten voor de bouw van de IIIF-infrastructuur. Bij de selectie van de componenten werd ook rekening gehouden met de bestaande infrastructuur van VKC. In de eerste fase van het project, van 2018 tot 2019, werden onderstaande acties uitgevoerd:</p>
+</div>
+<div class="ulist data-line-104">
+<ul>
+<li class="data-line-104">
+<p>De verkenning van verschillende IIIF-beeldservercomponenten in de internationale academische en erfgoedwereld en de selectie van de meest bruikbare component in functie van de hierna genoemde compilatie;</p>
+</li>
+<li class="data-line-105">
+<p>De compilatie van dergelijke IIIF-componenten in een proefopstelling van een beeldinfrastructuur, complementair met de arthub;</p>
+</li>
+<li class="data-line-106">
+<p>De koppeling, in een proefopstelling, van dergelijke IIIF-beeldinfrastructuur aan de VKC-datahub;</p>
+</li>
+<li class="data-line-107">
+<p>Een beknopte analyse van de koppeling met de onderbouw;</p>
+</li>
+<li class="data-line-108">
+<p>De publicatie van de technische informatie van deze proefopstelling op Github en de bekendmaking ervan op relevante nationale en internationale fora;</p>
+</li>
+<li class="data-line-109">
+<p>Tegelijk het voorbereiden van de musea en andere beeldenleveranciers op de noodzakelijke IIIF-metadata.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-111">
+<p>Schema van de gekozen componenten voor de IIIF-proefopstelling, meemoo CC BY-SA</p>
+</div>
+</div>
+<div class="sect5 data-line-113">
+<h6 id="_selectie_van_componenten">Selectie van componenten</h6>
+<div class="paragraph data-line-115">
+<p>In het voorjaar van 2019 zette meemoo samen met de VKC, <a href="http://artinflanders.be/">Blauwdruk gedistribueerd beeldbeheer</a> die we eerder opstelden.</p>
+</div>
+<div class="paragraph data-line-117">
+<p>Centraal in deze tweede fase staat de implementatie van de IIIF-specificaties in online services. Deze open specificaties laten toe om de interacties tussen eindconsument, de toepassing waarin beelden worden gevisualiseerd, en de communicatie met de onderliggende online services te standaardiseren en te automatiseren. Verschillende technische componenten werden verkend voor de bouw van de IIIF-infrastructuur. De keuze van de componenten moet het eenvoudig maken om de beeldinfrastructuur ook in de toekomst te beheren.</p>
+</div>
+<div class="ulist data-line-119">
+<ul>
+<li class="data-line-119">
+<p>Als ingestcomponent is gekozen voor <a href="https://www.resourcespace.com/">ResourceSpace</a>, een software die al door een aantal partners van VKC gebruikt wordt voor de ontsluiting van hun beelden. ResourceSpace is een DAM-systeem (beeldbeheersysteem) waarmee de beelden opgenomen kunnen worden in de proefopstellingen en waarin vervolgens de metadata uit de Datahub gekoppeld kunnen worden aan de beelden.</p>
+</li>
+<li class="data-line-120">
+<p>Als IIIF-beeldenserver kozen we <a href="https://cantaloupe-project.github.io/">Cantaloupe</a>, omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopieën van de afgeleiden. Via Cantaloupe zullen de beelden uitwisselbaar zijn via de IIIF Image API.</p>
+</li>
+<li class="data-line-121">
+<p>Er werd een <a href="http://imagehub.vlaamsekunstcollectie.be/">Imagehub</a> ontwikkeld om de beelden en hun metadata via de IIIF Presentation API te ontsluiten (via IIIF-manifests). Deze webapplicatie wordt gemaakt in hetzelfde framework waarmee de Datahub ontwikkeld werd (PHP/Symfony).</p>
+</li>
+<li class="data-line-122">
+<p>De IIIF-manifests zelf zullen getoond worden in de <a href="https://universalviewer.io/">Universal Viewer</a>. Dit is een beeldenviewer die IIIF-manifests kan weergeven.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-124">
+<p>Samen vormden deze componenten de IIIF-proefopstelling. Testen gebeurde met tweehonderd beelden uit de collecties van de partnermusea van de VKC. De aangepaste versie van de Arthub ontsluit nu beelden via de Universal Viewer door een koppeling met de <a href="http://imagehub.vlaamsekunstcollectie.be/">Imagehub</a>.</p>
+</div>
+<div class="paragraph data-line-126">
+<p>Verdere details over de opzet en architectuur van het VKC-ecosyteem zijn te vinden in Deliverable 1, Architectuur van de proefopstelling, van het VKC-1 project.</p>
+</div>
+<div class="paragraph data-line-128">
+<p>TODO Eventueel te vervangen of aan te vullen door een korte summary aan te leveren door VKC over de effectieve opstelling zoals nu actief?</p>
+</div>
+</div>
+</div>
+<div class="sect4 data-line-130">
+<h5 id="_nieuws_van_de_groote_oorlog">Nieuws van de Groote Oorlog</h5>
+<div class="sect5 data-line-132">
+<h6 id="_voorbeeldpagina">Voorbeeldpagina</h6>
+<div class="paragraph data-line-134">
+<p>Detailpagina op website NVDGO: <a href="https://nieuwsvandegrooteoorlog.hetarchief.be/nl/media//l1MefUOcXVhxmdUiFta43bZl">L&#8217;indépendance belge | Nieuws van de Groote Oorlog (hetarchief.be)</a></p>
+</div>
+<div class="paragraph data-line-136">
+<p>Voor de website <a href="https://nieuwsvandegrooteoorlog.hetarchief.be/">Nieuws van de Groote Oorlog</a> (NVDGO) heeft meemoo (destijds VIAA) een IIPImage server, of ipsrv, opgezet voor de ontsluiting van multipage kranten en andere documenten via een OpenLayers3 canvas-viewer op de site. Als protocol wordt in de viewer Zoomify gebruikt, maar ook IIP en IIIF zijn ondersteund.</p>
+</div>
+<div class="paragraph data-line-138">
+<p>Voor meer info en documentatie zie:</p>
+</div>
+<div class="ulist data-line-140">
+<ul>
+<li class="data-line-140">
+<p><a href="https://meemoo.atlassian.net/wiki/spaces/HAP/pages/111902756/IIPImage%2Ben%2BIIIF">IIPImage en IIIF - Het Archief (Publiek) - meemoo documentation (atlassian.net)</a></p>
+</li>
+<li class="data-line-141">
+<p><a href="https://meemoo.atlassian.net/wiki/spaces/TB/pages/1855684732/Handleiding%2BIIIF-beelden%2Bgebruiken">Handleiding IIIF-beelden gebruiken - Interactie - meemoo documentation (atlassian.net)</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-143">
+<p>Deze image server is oorspronkelijk opgezet als dedicated endpoint voor de NVDGO website. Om ook uitwisseling met derden mogelijk en eenvoudiger te maken is op basis van een initiële vraag van de "Boekentoren" (UGent) een aantal aanpassingen doorgevoerd:</p>
+</div>
+<div class="ulist data-line-145">
+<ul>
+<li class="data-line-145">
+<p>De URL werd herschreven zonder querystring (?IIIF=&#x2026;) naar <a href="http://iiif.viaa.be/">meemoo.be</a>)</p>
+</li>
+<li class="data-line-146">
+<p>De CORS-instellingen werden gewijzigd zodat cross-domain requests toegestaan zijn;</p>
+</li>
+<li class="data-line-147">
+<p>Het lokale media path van het document werd vertaald naar de gemeenschappelijk bekende identifier, in dit geval de external_id bij meemoo (pid).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-149">
+<p>Hiervoor werd een Python script geschreven dat via nginx-specifieke X-Accel-Redirect headers de request doorstuurt naar de relevante URL op <a href="http://images.hetarchief.be/">https://github.com/viaacode/iiif-mapping</a> .</p>
+</div>
+</div>
+<div class="sect5 data-line-151">
+<h6 id="_image_information_request">Image information request</h6>
+<div class="paragraph data-line-153">
+<p><a href="https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json">https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json</a></p>
+</div>
+<div class="listingblock data-line-156">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "@context": "http://iiif.io/api/image/2/context.json",
+  "@id": "http://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001",
+  "protocol": "http://iiif.io/api/image",
+  "width": 4633,
+  "height": 5959,
+  "sizes": [{
+    "width": 144,
+    "height": 186
+  }, {
+    "width": 289,
+    "height": 372
+  }, {
+    "width": 579,
+    "height": 744
+  }, {
+    "width": 1158,
+    "height": 1489
+  }, {
+    "width": 2316,
+    "height": 2979
+  }],
+  "tiles": [{
+    "width": 256,
+    "height": 256,
+    "scaleFactors": [1, 2, 4, 8, 16, 32]
+  }],
+  "profile": ["http://iiif.io/api/image/2/level1.json", {
+    "formats": ["jpg"],
+    "qualities": ["native", "color", "gray", "bitonal"],
+    "supports": ["regionByPct", "regionSquare", "sizeByForcedWh", "sizeByWh", "sizeAboveFull", "rotationBy90s", "mirroring"],
+    "maxWidth": 5000,
+    "maxHeight": 5000
+  }]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5 data-line-194">
+<h6 id="_image_request">Image request</h6>
+<div class="ulist data-line-196">
+<ul>
+<li class="data-line-196">
+<p><a href="https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg">https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg</a></p>
+</li>
+<li class="data-line-197">
+<p><a href="https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg">https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-199">
+<p>Hoewel via beide routes de request wordt afgehandeld door dezelfde image server wijkt de info.json via de <a href="http://iif.meemoo.be/">https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90</a>)</p>
+</div>
+<div class="listingblock data-line-202">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "@context": "http://iiif.io/api/image/2/context.json",
+  "@id": "https://iiif.meemoo.be/wp9t14vr7s_19140404_0001",
+  "protocol": "http://iiif.io/api/image",
+  "width": 4633,
+  "height": 5959,
+  "sizes": [{
+    "width": 144,
+    "height": 186
+  }, {
+    "width": 289,
+    "height": 372
+  }, {
+    "width": 579,
+    "height": 744
+  }, {
+    "width": 1158,
+    "height": 1489
+  }, {
+    "width": 2316,
+    "height": 2979
+  }],
+  "tiles": [{
+    "width": 256,
+    "height": 256,
+    "scaleFactors": [1, 2, 4, 8, 16, 32]
+  }],
+  "profile": ["http://iiif.io/api/image/2/level1.json", {
+    "formats": ["jpg"],
+    "qualities": ["native", "color", "gray", "bitonal"],
+    "supports": ["regionByPct", "regionSquare", "sizeByForcedWh", "sizeByWh", "sizeAboveFull", "rotationBy90s", "mirroring"],
+    "maxWidth": 5000,
+    "maxHeight": 5000
+  }],
+  "rights": "https://nieuwsvandegrooteoorlog.hetarchief.be/nl/gebruiksvoorwaarden"
+}</code></pre>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 data-line-243">
+<h3 id="_specificaties">Specificaties</h3>
+<div class="sect3 data-line-245">
+<h4 id="_functioneel">Functioneel</h4>
+<div class="sect4 data-line-247">
+<h5 id="_image_server">Image server</h5>
+<div class="ulist data-line-249">
+<ul>
+<li class="data-line-249">
+<p>We bieden minstens de Image API 2.1 aan, we voorzien op termijn de mogelijkheid om versie 3.0 te ondersteunen</p>
+</li>
+<li class="data-line-250">
+<p>We streven een level 2 compliance na, echter indien level 1 voldoende functionaliteit biedt voor VKC kan hiermee worden volstaan (<a href="https://iiif.io/api/image/3.0/compliance">https://iiif.io/api/image/3.0/compliance</a>)</p>
+</li>
+<li class="data-line-251">
+<p>De bestanden worden door de image server aangeboden als jpeg en indien mogelijk in png-formaat</p>
+</li>
+<li class="data-line-252">
+<p>Afgeleiden kunnen optioneel in hun geheel gedownload worden, bij voorkeur als TIFF</p>
+</li>
+<li class="data-line-253">
+<p>De archiefbestanden (on_tape) worden niet als download beschikbaar gemaakt, maar kunnen aangevraagd worden bij meemoo via de bestaande kanalen</p>
+</li>
+<li class="data-line-254">
+<p>Er wordt geen presentation API aangeboden in het kader van dit project</p>
+</li>
+<li class="data-line-255">
+<p>Er wordt in het kader van dit project geen authenticatie voorzien</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch data-line-259">
+<caption class="title">Table 2. Features MVP en roadmap</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">_</th>
+<th class="tableblock halign-left valign-top">VKC-2 mvp</th>
+<th class="tableblock halign-left valign-top">Roadmap meemoo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Level compliancy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jpg</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jpg, png</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Download full</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ja, als origineel: jp2 of tiff</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ja, als: jp2 en tiff</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Donwload archive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Presentation API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authentication API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TBA</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4 data-line-270">
+<h5 id="_beeldbestanden">Beeldbestanden</h5>
+<div class="sect5 data-line-272">
+<h6 id="_afgeleiden">Afgeleiden</h6>
+<div class="paragraph data-line-274">
+<p>Het gebruiken van archiefmasters is om verschillende redenen praktisch niet haalbaar. De bestanden zijn zeer groot wat de load op de image server en bandbreedte impacteert en het raadplegen onnodig vertraagd, de kwaliteit is ook hoger dan nodig bij het eenvoudig raadplegen op een gewoon beeldscherm. Bovendien bevatten de beelden doorgaans randen en kleurkaarten die, hoewel relevant binnen een archiefcontext en voor hergebruik. Standaard worden daarom afgeleide bestanden voor ontsluiting en raadpleging gemaakt.</p>
+</div>
+<div class="paragraph data-line-276">
+<p>Bij het omzetten van de bronbestanden naar afgeleide bestanden worden de volgende vuistregels gehanteerd:</p>
+</div>
+<div class="ulist data-line-278">
+<ul>
+<li class="data-line-278">
+<p>De resolutie (ppi) is maximaal 300 ppi voor werken in het publieke domein, afhankelijk van de originele waarde in bronbestand. Voor werken die auteursrechtelijk beschermd zijn, worden de op het moment van creatie van het afgeleide beeld geldende hergebruiksvoorwaarden gerespecteerd.</p>
+</li>
+<li class="data-line-279">
+<p>De afbeeldingen worden herschaald tot een baseline resolutie (grootte) van 5000 pixels voor de langste zijde, de maximale boven- en ondergrens is daarbij de originele resolutie, bestanden worden niet "opgeblazen" indien ze kleiner zijn, maar kunnen bij heel grote bestanden wel verkleind worden.</p>
+</li>
+<li class="data-line-280">
+<p>De beelden worden bijgesneden zodat randen, kleurkaarten kaders niet meer worden getoond.</p>
+</li>
+<li class="data-line-281">
+<p>Bestanden worden aangeboden op en voor het web in sRGB, tegenover AdobeRGB voor de originelen.</p>
+</li>
+<li class="data-line-282">
+<p>Embedded metadata(XMP, Exif, ICC) worden in zoverre in de bron beschikbaar en mogelijk, in de afbeeldingen opgeslaan</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-284">
+<p>De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld staat hier niet steeds tot in verhouding en is afhankelijk van het tijdstip van opname, de fotograaf, het toestel, etc. Voor sommige grote werken zijn verschillende foto&#8217;s aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.</p>
+</div>
+<div class="paragraph data-line-286">
+<p>Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate de herschaling dynamisch kan gebeuren aan de hand van de fysieke afmetingen afgezet tegen de digitale. We vertrekken daarbij van van typewerken zoals Pierrot et Squelette en Jaune van James Ensor.</p>
+</div>
+<div class="paragraph data-line-288">
+<p>Bijkomend moet bij het herschalen onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met sabam heeft worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een definitie van maximum 72dpi hebben.</p>
+</div>
+<div class="paragraph data-line-290">
+<p>Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide beelden te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden.Indien nodig kunnen bovenstaande specificaties bijgewerkt worden op basis van voortschrijdend inzicht.</p>
+</div>
+</div>
+<div class="sect5 data-line-292">
+<h6 id="_bestandsformaat">Bestandsformaat</h6>
+<div class="paragraph data-line-294">
+<p>De twee meest gebruikte bestandsformaten voor het aanbieden van kwalitatieve hoogresolutiebestanden via een image server zijn piramidale tiff&#8217;s (pTIFF) en JPEG2000 (jp2) bestanden. Beide bestandsformaten zijn uitermate geschikt voor grote, hoogkwalitatieve bestanden met verschillende resoluties en grote kleurdieptes, kunnen metadata bevatten, bieden ruime compressiemogelijkheden (lossless en lossy) en ondersteuning voor meerdere colorspaces. De formaten worden als volgt omschreven:</p>
+</div>
+<div class="quoteblock data-line-297">
+<blockquote>
+<div class="paragraph data-line-298">
+<p><strong>JPEG 2000</strong> is an image coding system that uses state-of-the-art compression techniques based on wavelet technology and offers an extremely high level of scalability and accessibility. Content can be coded once at any quality, up to lossless, but accessed and decoded at a potentially very large number of other qualities and resolutions and/or by region of interest, with no significant penalty in coding efficiency.</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; jpeg.org<br>
+<cite>https://jpeg.org/jpeg2000</cite>
+</div>
+</div>
+<div class="quoteblock data-line-303">
+<blockquote>
+<div class="paragraph data-line-304">
+<p><strong>TIFF</strong> is a tag-based file format for storing and interchanging raster images. It serves as a wrapper for different bitstream encodings for bit-mapped (raster) images. The different encodings may represent different compression schemes and different schemes for color representation (photometric interpretation).</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; Library of Congress<br>
+<cite>https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml</cite>
+</div>
+</div>
+<div class="paragraph data-line-308">
+<p>De keuze voor 1 van de twee bestanden kan afhangen van verschillende factoren:</p>
+</div>
+<div class="ulist data-line-310">
+<ul>
+<li class="data-line-310">
+<p>Encodering: bronbestanden converteren naar jp2 is doorgaans eenvoudiger (1 stap) en sneller (resources), mits gebruik van een goede encoder zoals kdu_compress (Kakadu). De creatie van piramidale tiffs is door de band trager. Voor een eenmalige conversie van een in aantal beperkte collectie is de impact beperkt. Wanneer regelmatig grotere batches moeten worden omgezet is de keuze voor jp2 evidenter.</p>
+</li>
+<li class="data-line-311">
+<p>Decodering: jp2-bestanden moeten in tegenstelling tot tiffs on-the-fly gedecodeerd worden door de image server. Dit zorgt voor een kleine overhead bij het aanbieden van jp2-bestanden die echter beperkt kan worden gehouden door de performante Kakadu library te gebruiken. Anderzijds biedt jp2 de mogelijkheid tot progressive transmission waarbij eerst een lagere resolutie wordt getoond tot de hogere resoluties ingeladen zijn.</p>
+</li>
+<li class="data-line-312">
+<p>Compressie en bestandsgrootte: afhankelijk van de complexiteit en resolutie van een beeldbestand enerzijds en anderzijds de gekozen compressie-methode kunnen zowel ptiffs als jp2&#8217;s kleiner zijn dan de andere. Zie voorbeeld Getty. Wanneer kwaliteit(sverlies) een belangrijk aandachtpunt is dan biedt jp2 het voordeel van een lossless compressie met een visueel gelijkwaardige kwaliteit van een uncompressed TIFF voor eeen bestand van kleinere omvang. Het verschil in grootte zonder merkbaar kwaliteitsverlies van jp2 tegenover tiff is vooral uitgesproken bij compressie van grotere bestanden met hogere resoluties.</p>
+</li>
+<li class="data-line-313">
+<p>Resolutie: jp2 wordt opgeslagen in de hoogste resolutie maar kan door de gebruikte wavelettechnologie op verschillende (lagere) resoluties gedecodeerd worden. Tiff moet worden opgeslagen met de gewenste resolutielagen, de weergave is beperkt tot deze resoluties.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-315">
+<p>Gelet op bovenstaande vergelijking, in combinatie met de expertise bij meemoo met de omzetting en het gebruik van jpeg2000, is gekozen om de afgeleide bestanden in een gecomprimeerd jp2-formaat op te slaan voor gebruik in de image server.</p>
+</div>
+<div class="paragraph data-line-317">
+<p>Voor een vergelijking van bestandsgroottes na omzetting zie Appendix A.</p>
+</div>
+</div>
+</div>
+<div class="sect4 data-line-319">
+<h5 id="_identifiers">Identifiers</h5>
+<div class="paragraph data-line-321">
+<p>De base uri van de Image API is opgebouwd als: {scheme}://{server}/{prefix}/{identifier}. De image server verwacht dat de identifier verwijst naar een (lokaal) bestand.</p>
+</div>
+<div class="paragraph data-line-323">
+<p>Binnen het Archiefsysteem (MAM) van meemoo heeft elke intellectuele entiteit (IE) een persistent identif├«er of pid, vb.: wp9t14vr7s (krant). Pids worden toegekend aan het begin en gebruikt doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting. Elk media-object van een IE heeft ook een external_id die bestaat uit de pid en bij meervoudige objecten een bijkomende classifier, vb.: wp9t14vr7s_19140404_0001 (pagina 1 van krant).</p>
+</div>
+<div class="paragraph data-line-325">
+<p>Catalogusnummers en overige lokale identifiers kunnen bewaard worden in de metadata van een object in het archiefsysteem. Het gebruiken van deze identifiers veronderstelt echter dat deze enerzijds altijd bekend zijn en anderzijds consequent toegevoegd en beheerd worden.</p>
+</div>
+<div class="paragraph data-line-327">
+<p>Om een zekere en unieke identifier te hebben kiezen we daarom om de external_id te gebruiken uit het meemoo-archiefsysteem. Om bovendien de relatie te bewaren met de IE worden de afgeleide bestanden opgeslagen als {identifier}.{ext}, vb.wp9t14vr7s_19140404_0001.jp2.</p>
+</div>
+<div class="paragraph data-line-329">
+<p>Vertaald naar het gebruik van de identifier in de Image API wordt een information request:</p>
+</div>
+<div class="paragraph data-line-331">
+<p><a href="https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json">https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json</a></p>
+</div>
+<div class="paragraph data-line-333">
+<p>Het is niet de bedoeling een bijkomende resolver te gebruiken om een image request te mappen van een local (VKC) identifier naar een external_id (meemoo) identifier. Om in <a href="https://arthub.vlaamsekunstcollectie.be/nl/iiif/2/kmska:494/manifest.json">cataloognummer</a> (kmska:494) gemapte meemoo-identifier bij VKC bijgehouden moeten worden. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld (vb. via de MediaHaven Rest API).</p>
+</div>
+</div>
+<div class="sect4 data-line-335">
+<h5 id="_info_json">info.json</h5>
+<div class="paragraph data-line-337">
+<p>Via de info.json biedt de image server informatie over het beeld, voornamelijk technische gegevens maar ook informatie over rechten of services kunnen hierin worden opgenomen.</p>
+</div>
+<div class="paragraph data-line-339">
+<p>De structuur van een request is: {scheme}://{server}\{/prefix}/{identifier}/info.json, de response is een JSON-LD. Om vlot te werken moet CORS (Cross Origin Resource Sharing) toegestaan zijn en moeten de correcte Accept of Content-type headers gebruikt worden in respectievelijk de request of de response.</p>
+</div>
+<div class="paragraph data-line-341">
+<p>In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit zou moeten volstaan binnen de scope van dit project en verder. Let wel, <a href="https://iiif.io/api/image/2.1/%23image-information">https://iiif.io/api/image/3.0/#5-image-information</a></p>
+</div>
+<table class="tableblock frame-all grid-all stretch data-line-344">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Property</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compliance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Omschrijving</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The context document that describes the semantics of the terms used in the document. This must be the URI: <a href="http://iiif.io/api/image/2/context.jsonfor" class="bare">http://iiif.io/api/image/2/context.jsonfor</a> version 2.1 of the IIIF Image API. This document allows the response to be interpreted as RDF, using the <a href="http://www.json-ld.org/">JSON-LD</a>serialization.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The base URI of the image as defined in <a href="https://iiif.io/api/image/2.1/%23uri-syntax">URI Syntax</a>, including scheme, server, prefix and identifier without a trailing slash.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">protocol</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URI <a href="http://iiif.io/api/imagewhich" class="bare">http://iiif.io/api/imagewhich</a> can be used to determine that the document describes an image service which is a version of the IIIF Image API.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The width in pixels of the full image content, given as an integer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">height</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The height in pixels of the full image content, given as an integer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sizes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A set of height and width pairs the client should use in the sizeparameter to request complete images at different sizes that the server has available. This may be used to let a client know the sizes that are available when the server does not support requests for arbitrary sizes, or simply as a hint that requesting an image of this size may result in a faster response. A request constructed with the w,hsyntax using these sizes _must_be supported by the server, even if arbitrary width and height are not.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tiles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A set of descriptions of the parameters to use to request regions of the image (tiles) that are efficient for the server to deliver. Each description gives a width, optionally a height for non-square tiles, and a set of scale factors at which tiles of those dimensions are available.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of profiles, indicated by either a URI or an object describing the features supported. The first entry in the list _must_be a <a href="https://iiif.io/api/image/2.1/%23compliance-levels">https://iiif.io/api/image/2.1/#profile-description</a>voor de properties.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attribution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text that _must_be shown when content obtained from the Image API service is displayed or used. It might include copyright or ownership statements, or a simple acknowledgement of the providing institution. The value _may_contain simple HTML as described in the <a href="https://iiif.io/api/presentation/3.0/%23html-markup-in-property-values">HTML Markup in Property Values</a>section of the Presentation API.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">license</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A link to an external resource that describes the license or rights statement under which content obtained from the Image API service may be used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A small image that represents an individual or organization associated with the content. Logo images _must_be clearly rendered when content obtained from the Image API service is displayed or used. Clients _must not_crop, rotate, or otherwise distort the image.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph data-line-359">
+<p>Voorbeeld json</p>
+</div>
+<div class="listingblock data-line-362">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "@context": "http://iiif.io/api/image/2/context.json",
+  "@id": "http://www.example.org/image-service/abcd1234/1E34750D-38DB-4825-A38A-B60A345E591C",
+  "protocol": "http://iiif.io/api/image",
+  "width": 6000,
+  "height": 4000,
+  "sizes": [{
+    "width": 150,
+    "height": 100
+  }, {
+    "width": 600,
+    "height": 400
+  }, {
+    "width": 3000,
+    "height": 2000
+  }],
+  "tiles": [{
+    "width": 512,
+    "scaleFactors": [1, 2, 4, 8, 16]
+  }],
+  "profile": ["http://iiif.io/api/image/2/level2.json"],
+  "attribution": "Provided by Example Organization",
+  "logo": "http://example.org/images/logo.png",
+  "license": "http://rightsstatements.org/vocab/InC-EDU/1.0/"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4 data-line-390">
+<h5 id="_authenticatie_en_authorisatie">Authenticatie en authorisatie</h5>
+<div class="paragraph data-line-392">
+<p>Authenticatie en authorisatie zijn niet binnen scope van dit project. meemoo behoudt weliswaar de mogelijkheid om in een later stadium authenticatie te voorzien bijvoorbeeld op basis van de IIIF Authentication API in combinatie met de eigen accesstoken-authenticatie services. In dat geval zal de afnemer (i.c. VKC) voldoende documentatie krijgen om de authenticatie te integreren.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect3 data-line-396">
+<h4 id="_technisch">Technisch</h4>
+<div class="sect4 data-line-398">
+<h5 id="_standaardisatie">Standaardisatie</h5>
+<div class="paragraph data-line-400">
+<p>meemoo standardiseert in de mate van het mogelijke haar services op het vlak van programmeertalen, software, RTE, tools voor deployment, gebruik van (open) standaarden, etc. Om tot een onderhoudbare oplossing te komen wordt hierbij best zo nauw mogelijk aangesloten.</p>
+</div>
+<div class="paragraph data-line-402">
+<p>Ter informatie sommen we de typische toepassingen en software bij meemoo op:</p>
+</div>
+<div class="ulist data-line-404">
+<ul>
+<li class="data-line-404">
+<p>Programmeertaal: Python (in mindere mate Ruby)</p>
+</li>
+<li class="data-line-405">
+<p>Database: PostgreSQL</p>
+</li>
+<li class="data-line-406">
+<p>Webserver en proxy: nginx+</p>
+</li>
+<li class="data-line-407">
+<p>Authenticatie en authorisatie: eigen IdP met authenticatie op basis van SAML2.0 en<br>
+OAuth met LDAP als directory</p>
+</li>
+<li class="data-line-409">
+<p>Runtime environment: containers op Openshift (Cloud) of VMWare (on premise)</p>
+</li>
+<li class="data-line-410">
+<p>Deployment: CI/CD met Jenkins (pipelines), Puppet met Foreman (indien VM)</p>
+</li>
+<li class="data-line-411">
+<p>Versioning: Git (Github)</p>
+</li>
+<li class="data-line-412">
+<p>Logging: stdout naar Elasticsearch/Kibana</p>
+</li>
+<li class="data-line-413">
+<p>Queue: RabbitMQ</p>
+</li>
+<li class="data-line-414">
+<p>Reporting: Data Warehouse + Tableau of PowerBI</p>
+</li>
+<li class="data-line-415">
+<p>Storage: Object Store (S3) of persistent local storage (VM)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-417">
+<p>Daarnaast streeft meemoo naar het maximaal inpassen van nieuwe ontwikkelingen in haar eigen eco-systeem. Voor de platformen gericht op ontsluiting en interactie is een architectuur uitgewerkt die herhaalbaar en breed inzetbaar is: de zogenaamde Shared Components. Een voorbeeld van een applicatie die volledig met de componenten is gebouwd is <a href="https://onderwijs.hetarchief.be/">Het Archief voor Onderwijs</a>.</p>
+</div>
+<div class="paragraph data-line-419">
+<p>Het systeem omvat een volledige en modulaire middleware op vlak van ETL, opslag, zoekindex, metadata-API, authenticatie en media delivery, waaruit op basis van de nood componenten kunnen worden ingezet voor de bouw van een toepassing:</p>
+</div>
+<div class="ulist data-line-421">
+<ul>
+<li class="data-line-421">
+<p><a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1172930633/Syncrator">Syncrator</a>: taakgebaseerde ETL-service die de synchronisatie van metadata uit het MAM (de bron) naar de lokale datastore (het doel) verzorgt</p>
+</li>
+<li class="data-line-422">
+<p>(Meta)datastore: een postgresql database die onder meer de metadata van de te ontsluiten archiefitems bevat en ook applicatiespecifieke tabellen kan bevatten</p>
+</li>
+<li class="data-line-423">
+<p><a href="https://gitlab.com/shared-components/indexer">Indexer</a>: een ETL service die de synchronisatie tussen database en index regelt op basis van database triggers en webhooks</p>
+</li>
+<li class="data-line-424">
+<p>ElasticSearch als standaard index die de zoekfunctionaliteit in de platformen mogelijk maakt</p>
+</li>
+<li class="data-line-425">
+<p><a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1373274138">Hasura GraphQL</a> voor naadloos gebruik bovenop een postgresql database. Dit vormt de basis-API waarmee de frontendapplicaties met de datastore kunnen connecteren.</p>
+</li>
+<li class="data-line-426">
+<p><a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1546977330">IDM</a>: een volledige Identity en Access Management stack:</p>
+</li>
+<li class="data-line-428">
+<p>een LDAP store</p>
+</li>
+<li class="data-line-429">
+<p>een SAML IdP</p>
+</li>
+<li class="data-line-430">
+<p>een self-service user management applicatie</p>
+</li>
+<li class="data-line-431">
+<p>een account manager voor admins</p>
+</li>
+<li class="data-line-433">
+<p>Event logger</p>
+</li>
+<li class="data-line-434">
+<p>Media services zoals play ticketing en streaming</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3 data-line-436">
+<h4 id="_meemoo_infrastructuur">meemoo-infrastructuur</h4>
+<div class="sect4 data-line-438">
+<h5 id="_hosting_en_deployment">Hosting en deployment</h5>
+<div class="paragraph data-line-440">
+<p>De image server kan gehost worden bij meemoo op 2 manieren</p>
+</div>
+<div class="ulist data-line-442">
+<ul>
+<li class="data-line-442">
+<p>Virtualisatie in een VM in het eigen datacenter in Oostkamp (DCO)</p>
+</li>
+<li class="data-line-443">
+<p>Virtualisatie in containers op Openshift in IBM Cloud</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-445">
+<p>Gelet op onderstaande punten wordt gekozen voor de eerste oplossing, want:</p>
+</div>
+<div class="ulist data-line-447">
+<ul>
+<li class="data-line-447">
+<p>Netwerkverkeer en bandbreedte zijn goedkoper in DCO dan in de Cloud</p>
+</li>
+<li class="data-line-448">
+<p>Storage is eveneens goedkoper en makkelijk uitbreidbaar in DCO (zie <em>Opslag</em>)</p>
+</li>
+<li class="data-line-449">
+<p>Het netwerkverkeer verloopt via onze eigen nginx proxy met flexibiliteit onder meer op vlak van URL rewrites en image cache</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-451">
+<p>Voor de deployment en management van de software rekenen we op de combinatie Puppet en Foreman. De codebase wordt bewaard en geversioneerd in de Github van meemoo.</p>
+</div>
+</div>
+<div class="sect4 data-line-453">
+<h5 id="_opslag">Opslag</h5>
+<div class="paragraph data-line-455">
+<p>File storage voldoet bij voorkeur aan de volgende vereisten:</p>
+</div>
+<div class="ulist data-line-457">
+<ul>
+<li class="data-line-457">
+<p>low-latency</p>
+</li>
+<li class="data-line-458">
+<p>high-availability</p>
+</li>
+<li class="data-line-459">
+<p>low-cost</p>
+</li>
+<li class="data-line-460">
+<p>scaleable</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-462">
+<p>De door meemoo twee gebruikte oplossingen zijn een eigen Swarm Object Store met S3-connector waarop onder meer de on_disk archiefbestanden en browse copies van het MAM worden bewaard of local disk storage in het datacenter. Beide oplossingen voldoen aan bovenstaande vereisten. Echter, image servers hebben bij voorkeur de bestanden dichtbij en hoewel er S3-oplossingen voor verschillende image servers bestaan zal dit toch trager zijn dan lokale I/O door de overhead van het netwerkverkeer (GET). Aangezien de image server toch in het datacenter wordt gehost en de afgeleide bestanden louter en alleen voor de image server bestaan is het logischer deze te hosten in ons eigen datacenter.</p>
+</div>
+<div class="paragraph data-line-464">
+<p>Om een inschatting te kunnen maken van de nodige opslag is op een aantal testbestanden een conversie uitgevoerd. Voor de creatie van de jp2 bestanden is kdu_compress van Kakadu gebruikt volgens een profiel van het Bodlean.</p>
+</div>
+<div class="listingblock data-line-467">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ kdu_compress -i input.tif -o output.jp2
+  Clevels=6 Clayers=6 \
+  "Cprecincts={256,256},{256,256},{128,128}" \
+  "Stiles={512,512}" \
+  Corder=RPCL \
+  ORGgen_plt=yes \
+  ORGtparts=R \
+  "Cblk={64,64}" \
+  -jp2_space "sRGB" \
+  Cuse_sop=yes \
+  Cuse_eph=yes \
+  -flush_period 1024 \
+  Creversible=yes|no \
+  -rate -|3</code></pre>
+</div>
+</div>
+<div class="ulist data-line-484">
+<ul>
+<li class="data-line-484">
+<p>Creversible: of de compressie omkeerbaar is (lossless) of niet (lossy)</p>
+</li>
+<li class="data-line-485">
+<p>rate: de mate van compressie. een integer of enkel dash (geen)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-487">
+<p>Hieruit blijkt een reductie van de bestandsgrootte van:</p>
+</div>
+<div class="ulist data-line-489">
+<ul>
+<li class="data-line-489">
+<p>full, lossless &#8658; -43%</p>
+</li>
+<li class="data-line-490">
+<p>bijgeknipt en resized, lossless &#8658; -84%</p>
+</li>
+<li class="data-line-491">
+<p>bijgeknipt en geresized, lossy &#8658; -98%</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-493">
+<p>Voor het berekenen van de onder- en bovengrens voor benodigde schijfruimte vertrekken we van de totale omvang van de VKC tenant in het meemoo MAM: 32502 tiffs van gemiddeld 250 MB per tiffs = 8.125TB</p>
+</div>
+<table class="tableblock frame-all grid-all stretch data-line-496">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">formaat</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reductie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schijfruimte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lossless jp2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(8.125/100 )*16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.3 TB</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lossy jp2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(8.125/100)*2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">162.5 GB</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph data-line-502">
+<p>Ter vergelijking, de ca. 300.000 pagina&#8217;s op NVDGO zijn samen 2.4TB, gemiddeld 8MB per afbeelding.</p>
+</div>
+</div>
+<div class="sect4 data-line-504">
+<h5 id="_monitoring_en_logging">Monitoring en logging</h5>
+<div class="paragraph data-line-506">
+<p>Applicaties bij meemoo worden gemonitored. Hieronder verstaan we enerzijds het monitoren van de toestand van de applicatie en anderzijds wat er in die toestand gebeurt:</p>
+</div>
+<div class="ulist data-line-508">
+<ul>
+<li class="data-line-508">
+<p>monitoring: draait mijn applicatie, is ze gezond, zijn er issues</p>
+</li>
+<li class="data-line-509">
+<p>logging: wat doet mijn applicatie, welke acties worden uitgevoerd</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-511">
+<p>De Image endpoint is geen uitzondering. In praktijk houdt dit in dat we de gebruikte resources, de health en uptime en eventuele errors in de gaten houden via PRTG (sensors).</p>
+</div>
+<div class="paragraph data-line-513">
+<p>Typische voorbeelden van sensoren zijn:</p>
+</div>
+<div class="ulist data-line-515">
+<ul>
+<li class="data-line-515">
+<p>CPU, RAM en Disk usage</p>
+</li>
+<li class="data-line-516">
+<p>Connectiviteit (intern en extern)</p>
+</li>
+<li class="data-line-517">
+<p>HTTP health &amp; liveness checks</p>
+</li>
+<li class="data-line-518">
+<p>Certificaatgeldigheid (indien van toepassing)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-520">
+<p>De toepassing logt via stdoutnaar een ELK-stack (Elasticsearch-Logstash-Kibana). Kort samengevat moeten de log messages voldoen aan de volgende voorwaarden:</p>
+</div>
+<div class="ulist data-line-522">
+<ul>
+<li class="data-line-522">
+<p>Single-line JSON*</p>
+</li>
+<li class="data-line-523">
+<p>Standaard gestructureerd formaat en labels</p>
+</li>
+<li class="data-line-524">
+<p>Logs worden weggeschreven naar stdout/err</p>
+</li>
+<li class="data-line-525">
+<p>De x-correlation-id van de request wordt gebruikt als trace of span-id</p>
+</li>
+<li class="data-line-526">
+<p>Healthz en andere monitoring checks worden niet gelogd</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-528">
+<p>Zie voor meer informatie de <a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging">logging guidelines voor developers</a>.</p>
+</div>
+<div class="paragraph data-line-530">
+<p>Optioneel biedt meemoo de mogelijkheid voor het loggen van user events, de zogenaamde event-logger. Aangezien de endpoint voornamelijk bevraagd zal worden door andere services (machines) wordt deze vorm van loggen gezien als buiten scope van dit project en louter vermeld ter informatie.</p>
+</div>
+</div>
+</div>
+<div class="sect3 data-line-532">
+<h4 id="_performantie">Performantie</h4>
+<div class="paragraph data-line-534">
+<p>De proefopstelling zal dienen om de baseline performantie te meten en eventuele verbeteringen door te voeren of een voorstel te doen, vb. voor een redundante HA setup, proxy cache, etc. Dit kan op basis van de gegevens uit monitoring en debug logging, maar we voorzien ook de optie van geautomatiseerde load en stress testing. De aandacht richt zich hierbij op:</p>
+</div>
+<div class="ulist data-line-536">
+<ul>
+<li class="data-line-536">
+<p>Throughput (bandbreedte)</p>
+</li>
+<li class="data-line-537">
+<p>nRequests/sec</p>
+</li>
+<li class="data-line-538">
+<p>Response Time</p>
+</li>
+<li class="data-line-539">
+<p>Up Time</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3 data-line-541">
+<h4 id="_documentatie">Documentatie</h4>
+<div class="paragraph data-line-543">
+<p>Alle applicaties bij meemoo worden beschreven en gedocumenteerd op de Confluence wiki van meemoo in de _Software Factory._Daarnaast bevat elke code repository een README. Handleidingen en developer documentatie worden afhankelijk van de mate van openbaarheid bewaard op de vermelde wiki of indien nuttig ontsloten via <a href="https://developer.meemoo.be/">https://developer.meemoo.be</a>.</p>
+</div>
+<div class="paragraph data-line-545">
+<p>Worden minstens gedocumenteerd:</p>
+</div>
+<div class="ulist data-line-547">
+<ul>
+<li class="data-line-547">
+<p>technische details omgeving (uri&#8217;s, auth, software, dependencies, repo, etc.)</p>
+</li>
+<li class="data-line-548">
+<p>verantwoordelijke en medewerkers</p>
+</li>
+<li class="data-line-549">
+<p>installatieprocedure</p>
+</li>
+<li class="data-line-550">
+<p>links naar externe documentatie</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2 data-line-554">
+<h3 id="_architectuur">Architectuur</h3>
+<div class="sect3 data-line-556">
+<h4 id="_diagram_eenvoudig">Diagram (eenvoudig)</h4>
+
+</div>
+<div class="sect3 data-line-558">
+<h4 id="_componenten">Componenten</h4>
+<div class="paragraph data-line-560">
+<p>Er zijn drie specifieke softwarecomponenten, maar alleen 1 en (optioneel) 2 zijn in scope van dit project:</p>
+</div>
+<div class="olist arabic data-line-562">
+<ol class="arabic">
+<li class="data-line-562">
+<p>Image API: de IIIF compliant image server die beelden levert aan een image viewer</p>
+</li>
+<li class="data-line-563">
+<p>Download API: een custom applicatie die een hoogresolutiebestand levert in een bepaald formaat</p>
+</li>
+<li class="data-line-564">
+<p>Presentation API: een custom applicatie die IIIF compliant manifests levert</p>
+</li>
+</ol>
+</div>
+<div class="sect4 data-line-566">
+<h5 id="_http_proxy">HTTP Proxy</h5>
+<div class="paragraph data-line-568">
+<p>Requests verstuurd naar <a href="https://images.meemoo.be/">https://images.meemoo.be</a> worden opgevangen op de nginx proxy-server van meemoo. De Proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL&#8217;s vertaald en herschreven.</p>
+</div>
+<div class="paragraph data-line-570">
+<p>Daarnaast fungeert de proxy ook als <a href="https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/%23processes">content cache</a> voor de image server. Dit gebeurt bijvoorbeeld voor de jpeg-afbeeldingen die door image server van NVDGO worden aangemaakt. De disk cache van de proxy is een aanvulling op de memcached cache van de image server.</p>
+</div>
+</div>
+<div class="sect4 data-line-572">
+<h5 id="_image_api">Image API</h5>
+<div class="paragraph data-line-574">
+<p>IIIF beschrijft een set aan verplichte en optionele voorwaarden en aanbevelingen waaraan een API moet voldoen. Bijvoorbeeld op vlak van de request URI&#8217;s, response formats en metadata. Het voornaamste en quasi enige doel van de image server is het aanleveren van afbeeldingen voor (her)gebruik in een image viewer of andere toepassingen, op basis van de parameters in de zogenaamde image request request.</p>
+</div>
+<div class="sect5 data-line-576">
+<h6 id="_image_request_2">Image request</h6>
+<div class="paragraph data-line-578">
+<p><a href="https://images.meemoo.be/iiif/&lt;identifier:external_id&gt;/{region}/{size}/{rotation}/{quality}.{format}" class="bare">https://images.meemoo.be/iiif/&lt;identifier:external_id&gt;/{region}/{size}/{rotation}/{quality}.{format}</a></p>
+</div>
+<div class="paragraph data-line-580">
+<p>Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij <a href="https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json">info.json</a>.</p>
+</div>
+</div>
+<div class="sect5 data-line-582">
+<h6 id="_image_information_request_2">Image information request</h6>
+<div class="paragraph data-line-584">
+<p><a href="https://images.meemoo.be/iiif/\{identifier:external_id}/\{info.json}" class="bare">https://images.meemoo.be/iiif/\{identifier:external_id}/\{info.json}</a></p>
+</div>
+<div class="paragraph data-line-586">
+<p>Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, &#8230;&#8203;). Doorgaans wordt verwezen naar <a href="https://github.com/IIIF/awesome-iiif%23image-servers">IIIF/awesome-iiif</a> voor de meest volledige lijst van "mature" image servers die voldoen aan de specificaties van IIIF.</p>
+</div>
+<div class="paragraph data-line-588">
+<p>Voor dit document is geen nieuwe benchmark of technische vergelijking op basis van installaties gemaakt van de verschillende image servers. Er zijn vergelijkingen en benchmarks van image servers beschikbaar zoals recent nog in het <a href="https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing">Getty Common Image Service Research &amp; Design Report (2018)</a>. Ook hier komt IIPImage zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.</p>
+</div>
+<div class="paragraph data-line-590">
+<p>Typische pluspunten die naar voren worden geschoven:</p>
+</div>
+<div class="ulist data-line-592">
+<ul>
+<li class="data-line-592">
+<p>Bewezen technologie. IIPimage wordt breed ingezet in productieomgevingen tot zeer grote omvang en bij<br>
+grote spelers</p>
+</li>
+<li class="data-line-594">
+<p>Jpeg2000 (jp2) ondersteuning met zowel Kakadu als de verbeterde OpenJpeg</p>
+</li>
+<li class="data-line-595">
+<p>Stabiele prestaties en betrouwbare performantie ook met grote datasets van hogere kwaliteit (C++)</p>
+</li>
+<li class="data-line-596">
+<p>Eenvoudige installatie(vereisten): PHP+webserver met fastcgi zoals nginx, Apache</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-598">
+<p>Ook in het voordeel:</p>
+</div>
+<div class="ulist data-line-600">
+<ul>
+<li class="data-line-600">
+<p>Configureerbaar via variabelen</p>
+</li>
+<li class="data-line-601">
+<p>Wordt actief ontwikkeld en ondersteund</p>
+</li>
+<li class="data-line-602">
+<p>Online documentatie, forum, code</p>
+</li>
+<li class="data-line-603">
+<p>Ondersteuning voor Image API 2.1 <a href="https://github.com/ruven/iipsrv/issues/177">en sinds kort ook 3.0</a> (zie onder)</p>
+</li>
+<li class="data-line-604">
+<p>Embedded metadata in tiles</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-606">
+<p>Nadelen:</p>
+</div>
+<div class="ulist data-line-608">
+<ul>
+<li class="data-line-608">
+<p>Niet level 2 compliant wegens geen png output (zelf toe te voegen)</p>
+</li>
+<li class="data-line-609">
+<p>API versie 3.0 is nog maar zeer recent</p>
+</li>
+<li class="data-line-610">
+<p>Slechts 1 maintainer (wel community)</p>
+</li>
+<li class="data-line-611">
+<p>Soms veel tijd tussen releases (maar die zijn dan wel stabiel )</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-613">
+<p>Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.</p>
+</div>
+<div class="paragraph data-line-615">
+<p>IIPImage is now fully version 3 compliant. This commit 1d6c0d5 adds a new server directive IIIF_VERSION which allows you to set the IIIF Image API version (2 or 3). Essentially this affects the info.json output.</p>
+</div>
+<div class="paragraph data-line-617">
+<p>Nodig voor de installatie van IIPImage server (ipsrv) zijn:</p>
+</div>
+<div class="ulist data-line-619">
+<ul>
+<li class="data-line-619">
+<p>OS: Debian</p>
+</li>
+<li class="data-line-620">
+<p>Installatie: autoconf of via apt-get (Debian 7+)</p>
+</li>
+<li class="data-line-621">
+<p>Webserver: Apache+fcgi module (mod_fastcgi) + Nginx proxy</p>
+</li>
+<li class="data-line-622">
+<p>Libraries: libtiff, zlib, kakadu</p>
+</li>
+<li class="data-line-623">
+<p>Configuratie: startup variables, httpd.conf, clean URL&#8217;s en logging (syslog)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-625">
+<p>Voor meer opties en configuratiemogelijkheden zie: <a href="https://iipimage.sourceforge.io/documentation/server/">https://iipimage.sourceforge.io/documentation/server/</a></p>
+</div>
+</div>
+</div>
+<div class="sect4 data-line-627">
+<h5 id="_download_api">Download API</h5>
+<div class="paragraph data-line-629">
+<p>Kleine webapplicatie die op basis van het path een bronbestand in een bepaald formaat als download aanbiedt.</p>
+</div>
+<div class="paragraph data-line-631">
+<p>WIP In welke mate maakt dit deel uit van de scope van dit project, is dit een vereiste?</p>
+</div>
+<div class="paragraph data-line-633">
+<p><a href="https://images.meemoo.be/download/%257Bidentifier:external_id%257D/%257Bformat:jp2%257Ctiff%257Cpng">https://images.meemoo.be/download/\{identifier:external_id}/\{format:jp2|tiff|png</a>}</p>
+</div>
+</div>
+<div class="sect4 data-line-635">
+<h5 id="_presentation_api">Presentation API</h5>
+<div class="paragraph data-line-637">
+<p>De presentation API is niet in scope van dit project aangezien de bestaande API binnen het VKC-ecosysteem zal worden gebruikt. Op termijn zal meemoo wel een presentation API (3.0) voorzien, gebruik makend van de eigen shared components (meemoo-ecoysteem) voor ETL, metadata storage en API endpoint.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 data-line-639">
+<h3 id="_wip_impact_en_timing">WIP Impact en timing</h3>
+<div class="paragraph data-line-641">
+<p>Voor de realisatie van de in dit document beschreven opstelling wordt een impact verwacht op:</p>
+</div>
+<div class="paragraph data-line-643">
+<p>Infrastructuur:</p>
+</div>
+<div class="ulist data-line-645">
+<ul>
+<li class="data-line-645">
+<p>aanmaken en configureren van VM&#8217;s</p>
+</li>
+<li class="data-line-646">
+<p>allocatie van storage</p>
+</li>
+<li class="data-line-647">
+<p>netwerkconnectiviteit</p>
+</li>
+<li class="data-line-648">
+<p>DNS</p>
+</li>
+<li class="data-line-649">
+<p>nginx configuratie</p>
+</li>
+<li class="data-line-650">
+<p>monitoring en maintenance</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-652">
+<p>Devops:</p>
+</div>
+<div class="ulist data-line-654">
+<ul>
+<li class="data-line-654">
+<p>installatie en configuratie software</p>
+</li>
+<li class="data-line-655">
+<p>ontwikkeling custom componenten</p>
+</li>
+<li class="data-line-656">
+<p>deployment configuratie</p>
+</li>
+<li class="data-line-657">
+<p>automatisering workflow afgeleide beeldbestanden</p>
+</li>
+<li class="data-line-658">
+<p>maintenance</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-660">
+<p>Business:</p>
+</div>
+<div class="ulist data-line-662">
+<ul>
+<li class="data-line-662">
+<p>aanmaak en controle afgeleide beeldbestanden (bewerking, bijsnijden en verkleinen) ism devops</p>
+</li>
+<li class="data-line-663">
+<p>QA en testen van de opstelling</p>
+</li>
+<li class="data-line-664">
+<p>metadatabeheer</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-666">
+<p>TODO Inschatting + planning (Gantt).</p>
+</div>
+</div>
+<div class="sect2 data-line-668">
+<h3 id="_wip_conclusie">WIP Conclusie</h3>
+<div class="paragraph data-line-670">
+<p>TODO Te schrijven bij finaliseren deliverable.</p>
+</div>
+<hr>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2021-04-28 12:18:03 +0200
+</div>
+</div>
+</body>
+</html>

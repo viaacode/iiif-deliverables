@@ -2,6 +2,15 @@ IIIF : Deliverable 4: IIIF image endpoint bij meemoo
 ====================================================
 Bart Debunne <bart.debunne@meemoo.be>
 :Revision: 3
+// fix missing admonition icons on Github
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+// configure TOC
 :toc:
 :toc-placement: preamble
 :toclevels: 3
@@ -10,6 +19,8 @@ Bart Debunne <bart.debunne@meemoo.be>
 
 // Need some preamble to get TOC:
 {empty}
+
+toc::[]
 
 '''''
 
@@ -298,10 +309,12 @@ ____
 *JPEG 2000* is an image coding system that uses state-of-the-art compression techniques based on wavelet technology and offers an extremely high level of scalability and accessibility. Content can be coded once at any quality, up to lossless, but accessed and decoded at a potentially very large number of other qualities and resolutions and/or by region of interest, with no significant penalty in coding efficiency.
 ____
 
+
 [quote,Library of Congress,https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml]
 ____
 *TIFF* is a tag-based file format for storing and interchanging raster images. It serves as a wrapper for different bitstream encodings for bit-mapped (raster) images. The different encodings may represent different compression schemes and different schemes for color representation (photometric interpretation).
 ____
+
 
 De keuze voor 1 van de twee bestanden kan afhangen van verschillende factoren:
 
