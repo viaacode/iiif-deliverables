@@ -299,7 +299,11 @@ Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte va
 
 Bijkomend moet bij het herschalen onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met sabam heeft worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een definitie van maximum 72dpi hebben.
 
-Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide beelden te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden.Indien nodig kunnen bovenstaande specificaties bijgewerkt worden op basis van voortschrijdend inzicht.
+++++
+<iframe src="https://cawemo.com/embed/d893035f-bdbc-419b-9524-e9ff161992d7" style="width:700px;height:500px;border:1px solid #ccc" allowfullscreen></iframe>
+++++
+
+Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide beelden te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties bijgewerkt worden op basis van voortschrijdend inzicht.
 
 ====== Bestandsformaat
 
