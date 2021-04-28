@@ -1,5 +1,7 @@
 IIIF : Deliverable 4: IIIF image endpoint bij meemoo
 ====================================================
+Bart Debunne <bart.debunne@meemoo.be>
+:Revision: 3
 :toc:
 :toc-placement: preamble
 :toclevels: 3
@@ -8,6 +10,8 @@ IIIF : Deliverable 4: IIIF image endpoint bij meemoo
 
 // Need some preamble to get TOC:
 {empty}
+
+'''''
 
 === Inleiding
 
@@ -38,15 +42,15 @@ IIIF of het International Image Interoperability Framework staat voor:
 
 Het volledige IIIF-raamwerk bestaat uit vier API's (application programming interfaces), waarvan de twee belangrijkste de Image API en de Presentation API zijn. De API's bieden een gestandardiseerde methode om bestanden te beschrijven en aan te leveren of uit te wisselen via het internet.
 
-. https://www.google.com/url?q=https://iiif.io/api/image/&sa=D&source=editors&ust=1619601270737000&usg=AOvVaw1O0zPDRjbCQbOvAHyUvCF4[Image API] voor het aanbieden in al dan niet bewerkte vorm (rotatie, zoom, fragment, kleuraanpassing, formaat) van bestanden en de technische metadata (info.json)
-. https://www.google.com/url?q=https://iiif.io/api/presentation/&sa=D&source=editors&ust=1619601270738000&usg=AOvVaw3HLsrbupHmj_RZg2kG6OfE[Presentation API] voor de beschrijving in json-formaat (manifests) van de structuur en/of layout van een object, een collectie van objecten of gerelateerde objecten
-. https://www.google.com/url?q=https://iiif.io/api/search/&sa=D&source=editors&ust=1619601270738000&usg=AOvVaw1Kv8vHP2hLd7CAEDyUkQpK[Content Search API] voor het doorzoeken van transcripties (OCR), vertalingen, annotaties van een via IIIF aangeboden bron
-. https://www.google.com/url?q=https://iiif.io/api/auth/&sa=D&source=editors&ust=1619601270739000&usg=AOvVaw02uj_E6P-rdVaeVkZP62Kd[Authentication API] voor het afschermen van de bronnen voor niet geauthenticeerd gebruik (bearer token)
+. https://iiif.io/api/image/[Image API] voor het aanbieden in al dan niet bewerkte vorm (rotatie, zoom, fragment, kleuraanpassing, formaat) van bestanden en de technische metadata (info.json)
+. https://iiif.io/api/presentation/[Presentation API] voor de beschrijving in json-formaat (manifests) van de structuur en/of layout van een object, een collectie van objecten of gerelateerde objecten
+. https://iiif.io/api/search/[Content Search API] voor het doorzoeken van transcripties (OCR), vertalingen, annotaties van een via IIIF aangeboden bron
+. https://iiif.io/api/auth/[Authentication API] voor het afschermen van de bronnen voor niet geauthenticeerd gebruik (bearer token)
 
 Er zijn nog API's in ontwikkeling:
 
-. https://www.google.com/url?q=https://iiif.io/api/discovery/0.9/&sa=D&source=editors&ust=1619601270739000&usg=AOvVaw1say0fInbSrograClfSWLt[Change Discovery API] die het machines eenvoudiger maken om IIIF-bronnen te vinden, bv. voor de ontwikkeling van (thematische) zoekmachines en portaalapplicaties
-. https://www.google.com/url?q=https://iiif.io/api/content-state/0.3/&sa=D&source=editors&ust=1619601270740000&usg=AOvVaw3sKp9lgIEtZG9tw-eEkkRZ[Content State API] waarmee (een deel) van de inhoud van een IIIF Presentation API bron doorgegeven kan worden aan applicaties, ongeacht hun verschillende gebruikersinterfaces en mogelijkheden
+. https://iiif.io/api/discovery/0.9/[Change Discovery API] die het machines eenvoudiger maken om IIIF-bronnen te vinden, bv. voor de ontwikkeling van (thematische) zoekmachines en portaalapplicaties
+. https://iiif.io/api/content-state/0.3/[Content State API] waarmee (een deel) van de inhoud van een IIIF Presentation API bron doorgegeven kan worden aan applicaties, ongeacht hun verschillende gebruikersinterfaces en mogelijkheden
 
 Naast louter afbeeldingen kunnen via de IIIF API dus ook weergavegebaseerde of meer bepaald structurele metadata uitgewisseld worden over gestructureerde objecten. Deze metadata kan bijvoorbeeld puur het object beschrijven of kan annotaties (open annotations) op en over het object bevatten.
 
@@ -65,9 +69,9 @@ De oplossing dient ook als proefopstelling voor meemoo met het oog op een breder
 In het VKC-2 project zal een afgelijnde set bestanden aangeboden worden van:
 
 * Alle aangesloten musea bij VKC, i.c. de 5 Schone Kunsten musea
-* Collecties Brugse musea (binnen AIF is er een algemene collectie ÔÇÿmusea brugge')
+* Collecties Brugse musea (binnen AIF is er een algemene collectie 'musea brugge')
 
-Aangezien meemoo met de opstelling op termijn mogelijk meer collecties wil ontsluiten, zowel voor VKC als voor derden, is het relevant voorbij het huidige aanbod van VKC (Image Hub) en Art in Flanders te kijken naar zowel de maximaal potenti├½le omvang nu als de verwachtte aanwas. Met andere woorden, net als voor het technische aspect is schaalbaarheid een belangrijk aandachtspunt.
+Aangezien meemoo met de opstelling op termijn mogelijk meer collecties wil ontsluiten, zowel voor VKC als voor derden, is het relevant voorbij het huidige aanbod van VKC (Image Hub) en Art in Flanders te kijken naar zowel de maximaal potentiële omvang nu als de verwachtte aanwas. Met andere woorden, net als voor het technische aspect is schaalbaarheid een belangrijk aandachtspunt.
 
 Aan de hand van de metadata in het meemoo-archiefsysteem voor de silo Lukas/Art in Flanders (AIF) kan een exhaustieve en maximale lijst en omvang bepaald worden van de te ontsluiten werken. Hieruit blijkt dat voor bovenstaande aanbieders momenteel 15905 werken ontsloten worden op Art in Flanders.
 
@@ -108,16 +112,16 @@ Schema van de gekozen componenten voor de IIIF-proefopstelling, meemoo CC BY-SA
 
 ====== Selectie van componenten
 
-In het voorjaar van 2019 zette meemoo samen met de VKC, https://www.google.com/url?q=http://artinflanders.be/&sa=D&source=editors&ust=1619601270761000&usg=AOvVaw15eBHPRTWgizKbdunzor7g[artinflanders.be] en andere beeldpartners de eerste stappen naar een vlotte, effici├½nte en geautomatiseerde ontsluiting van beeldmateriaal in de tweede fase van dit project. Daarbij houden we rekening met de (technische) aanbevelingen (de zogenaamde modelarchitectuur) uit de https://www.google.com/url?q=https://www.projectcest.be/wiki/Projecten:Blauwdruk_Gedistribueerd_Beeldbeheer&sa=D&source=editors&ust=1619601270761000&usg=AOvVaw12BOysqJqKGrDHI1iLSH7X[Blauwdruk gedistribueerd beeldbeheer] die we eerder opstelden.
+In het voorjaar van 2019 zette meemoo samen met de VKC, http://artinflanders.be/[Blauwdruk gedistribueerd beeldbeheer] die we eerder opstelden.
 
 Centraal in deze tweede fase staat de implementatie van de IIIF-specificaties in online services. Deze open specificaties laten toe om de interacties tussen eindconsument, de toepassing waarin beelden worden gevisualiseerd, en de communicatie met de onderliggende online services te standaardiseren en te automatiseren. Verschillende technische componenten werden verkend voor de bouw van de IIIF-infrastructuur. De keuze van de componenten moet het eenvoudig maken om de beeldinfrastructuur ook in de toekomst te beheren.
 
-* Als ingestcomponent is gekozen voor https://www.google.com/url?q=https://www.resourcespace.com/&sa=D&source=editors&ust=1619601270762000&usg=AOvVaw38kdneEypoAsyxCirX-BNV[ResourceSpace], een software die al door een aantal partners van VKC gebruikt wordt voor de ontsluiting van hun beelden. ResourceSpace is een DAM-systeem (beeldbeheersysteem) waarmee de beelden opgenomen kunnen worden in de proefopstellingen en waarin vervolgens de metadata uit de Datahub gekoppeld kunnen worden aan de beelden.
-* Als IIIF-beeldenserver kozen we https://www.google.com/url?q=https://cantaloupe-project.github.io/&sa=D&source=editors&ust=1619601270762000&usg=AOvVaw02m21oJHlqZ_mbjaY_YjEj[Cantaloupe], omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopie├½n van de afgeleiden. Via Cantaloupe zullen de beelden uitwisselbaar zijn via de IIIF Image API.
-* Er werd een https://www.google.com/url?q=http://imagehub.vlaamsekunstcollectie.be/&sa=D&source=editors&ust=1619601270763000&usg=AOvVaw0dS8Uxeq6BjwaI5XnvB2xn[Imagehub] ontwikkeld om de beelden en hun metadata via de IIIF Presentation API te ontsluiten (via IIIF-manifests). Deze webapplicatie wordt gemaakt in hetzelfde framework waarmee de Datahub ontwikkeld werd (PHP/Symfony).
-* De IIIF-manifests zelf zullen getoond worden in de https://www.google.com/url?q=https://universalviewer.io/&sa=D&source=editors&ust=1619601270763000&usg=AOvVaw1QYGjldmmtoU01nQEwHvX1[Universal Viewer]. Dit is een beeldenviewer die IIIF-manifests kan weergeven.
+* Als ingestcomponent is gekozen voor https://www.resourcespace.com/[ResourceSpace], een software die al door een aantal partners van VKC gebruikt wordt voor de ontsluiting van hun beelden. ResourceSpace is een DAM-systeem (beeldbeheersysteem) waarmee de beelden opgenomen kunnen worden in de proefopstellingen en waarin vervolgens de metadata uit de Datahub gekoppeld kunnen worden aan de beelden.
+* Als IIIF-beeldenserver kozen we https://cantaloupe-project.github.io/[Cantaloupe], omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopieën van de afgeleiden. Via Cantaloupe zullen de beelden uitwisselbaar zijn via de IIIF Image API.
+* Er werd een http://imagehub.vlaamsekunstcollectie.be/[Imagehub] ontwikkeld om de beelden en hun metadata via de IIIF Presentation API te ontsluiten (via IIIF-manifests). Deze webapplicatie wordt gemaakt in hetzelfde framework waarmee de Datahub ontwikkeld werd (PHP/Symfony).
+* De IIIF-manifests zelf zullen getoond worden in de https://universalviewer.io/[Universal Viewer]. Dit is een beeldenviewer die IIIF-manifests kan weergeven.
 
-Samen vormden deze componenten de IIIF-proefopstelling. Testen gebeurde met tweehonderd beelden uit de collecties van de partnermusea van de VKC. De aangepaste versie van de Arthub ontsluit nu beelden via de Universal Viewer door een koppeling met de https://www.google.com/url?q=http://imagehub.vlaamsekunstcollectie.be/&sa=D&source=editors&ust=1619601270764000&usg=AOvVaw23xs2e50JkcMfcMY2u5cF_[Imagehub].
+Samen vormden deze componenten de IIIF-proefopstelling. Testen gebeurde met tweehonderd beelden uit de collecties van de partnermusea van de VKC. De aangepaste versie van de Arthub ontsluit nu beelden via de Universal Viewer door een koppeling met de http://imagehub.vlaamsekunstcollectie.be/[Imagehub].
 
 Verdere details over de opzet en architectuur van het VKC-ecosyteem zijn te vinden in Deliverable 1, Architectuur van de proefopstelling, van het VKC-1 project.
 
@@ -127,26 +131,26 @@ TODO Eventueel te vervangen of aan te vullen door een korte summary aan te lever
 
 ====== Voorbeeldpagina
 
-Detailpagina op website NVDGO: https://www.google.com/url?q=https://nieuwsvandegrooteoorlog.hetarchief.be/nl/media//l1MefUOcXVhxmdUiFta43bZl&sa=D&source=editors&ust=1619601270765000&usg=AOvVaw3MgyhvYZJN4gl-kDmtuY1a[L'ind├®pendance belge | Nieuws van de Groote Oorlog (hetarchief.be)]
+Detailpagina op website NVDGO: https://nieuwsvandegrooteoorlog.hetarchief.be/nl/media//l1MefUOcXVhxmdUiFta43bZl[L'indépendance belge | Nieuws van de Groote Oorlog (hetarchief.be)]
 
-Voor de website https://www.google.com/url?q=https://nieuwsvandegrooteoorlog.hetarchief.be/&sa=D&source=editors&ust=1619601270766000&usg=AOvVaw1-SdUKm-MWtnwbJ6xzMRd_[Nieuws van de Groote Oorlog] (NVDGO) heeft meemoo (destijds VIAA) een IIPImage server, of ipsrv, opgezet voor de ontsluiting van multipage kranten en andere documenten via een OpenLayers3 canvas-viewer op de site. Als protocol wordt in de viewer Zoomify gebruikt, maar ook IIP en IIIF zijn ondersteund.
+Voor de website https://nieuwsvandegrooteoorlog.hetarchief.be/[Nieuws van de Groote Oorlog] (NVDGO) heeft meemoo (destijds VIAA) een IIPImage server, of ipsrv, opgezet voor de ontsluiting van multipage kranten en andere documenten via een OpenLayers3 canvas-viewer op de site. Als protocol wordt in de viewer Zoomify gebruikt, maar ook IIP en IIIF zijn ondersteund.
 
 Voor meer info en documentatie zie:
 
-* https://www.google.com/url?q=https://meemoo.atlassian.net/wiki/spaces/HAP/pages/111902756/IIPImage%2Ben%2BIIIF&sa=D&source=editors&ust=1619601270767000&usg=AOvVaw3wB-PGwFIHxAei7sd_Pu8P[IIPImage en IIIF - Het Archief (Publiek) - meemoo documentation (atlassian.net)]
-* https://www.google.com/url?q=https://meemoo.atlassian.net/wiki/spaces/TB/pages/1855684732/Handleiding%2BIIIF-beelden%2Bgebruiken&sa=D&source=editors&ust=1619601270767000&usg=AOvVaw2DqXW24LifoNOhh7AoNOI4[Handleiding IIIF-beelden gebruiken - Interactie - meemoo documentation (atlassian.net)]
+* https://meemoo.atlassian.net/wiki/spaces/HAP/pages/111902756/IIPImage%2Ben%2BIIIF[IIPImage en IIIF - Het Archief (Publiek) - meemoo documentation (atlassian.net)]
+* https://meemoo.atlassian.net/wiki/spaces/TB/pages/1855684732/Handleiding%2BIIIF-beelden%2Bgebruiken[Handleiding IIIF-beelden gebruiken - Interactie - meemoo documentation (atlassian.net)]
 
-Deze image server is oorspronkelijk opgezet als dedicated endpoint voor de NVDGO website. Om ook uitwisseling met derden mogelijk en eenvoudiger te maken is op basis van een initi├½le vraag van de "Boekentoren" (UGent) een aantal aanpassingen doorgevoerd:
+Deze image server is oorspronkelijk opgezet als dedicated endpoint voor de NVDGO website. Om ook uitwisseling met derden mogelijk en eenvoudiger te maken is op basis van een initiële vraag van de "Boekentoren" (UGent) een aantal aanpassingen doorgevoerd:
 
-* De URL werd herschreven zonder querystring (?IIIF=&#x2026;) naar https://www.google.com/url?q=http://iiif.viaa.be/&sa=D&source=editors&ust=1619601270768000&usg=AOvVaw0IbXp-2-zMGkNaJnjS_NSA[iiif.viaa.be] (nu https://www.google.com/url?q=http://meemoo.be/&sa=D&source=editors&ust=1619601270768000&usg=AOvVaw1IqpqwPGUgRSeyH3N4-cFI[meemoo.be])
+* De URL werd herschreven zonder querystring (?IIIF=&#x2026;) naar http://iiif.viaa.be/[meemoo.be])
 * De CORS-instellingen werden gewijzigd zodat cross-domain requests toegestaan zijn;
 * Het lokale media path van het document werd vertaald naar de gemeenschappelijk bekende identifier, in dit geval de external_id bij meemoo (pid).
 
-Hiervoor werd een Python script geschreven dat via nginx-specifieke X-Accel-Redirect headers de request doorstuurt naar de relevante URL op https://www.google.com/url?q=http://images.hetarchief.be/&sa=D&source=editors&ust=1619601270769000&usg=AOvVaw0v3yzLRwKB2iL5HplFjm0G[http://images.hetarchief.be]. Zie: https://www.google.com/url?q=https://github.com/viaacode/iiif-mapping&sa=D&source=editors&ust=1619601270770000&usg=AOvVaw0xk-k1q2XMTbGFLJQdyPcT[https://github.com/viaacode/iiif-mapping] .
+Hiervoor werd een Python script geschreven dat via nginx-specifieke X-Accel-Redirect headers de request doorstuurt naar de relevante URL op http://images.hetarchief.be/[https://github.com/viaacode/iiif-mapping] .
 
 ====== Image information request
 
-https://www.google.com/url?q=https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json&sa=D&source=editors&ust=1619601270770000&usg=AOvVaw0BJ80odREo10pxn0S9vq4J[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json]
+https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json]
 
 [source,json]
 ----
@@ -189,10 +193,10 @@ https://www.google.com/url?q=https://images.hetarchief.be/iipsrv/?IIIF%3D/media/
 
 ====== Image request
 
-* https://www.google.com/url?q=https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg&sa=D&source=editors&ust=1619601270775000&usg=AOvVaw12Hm9TqkDzdvZBRYnQlMtM[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
-* https://www.google.com/url?q=https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg&sa=D&source=editors&ust=1619601270775000&usg=AOvVaw0eMF_td-xK9c277XQw3aJ6[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
+* https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
+* https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
 
-Hoewel via beide routes de request wordt afgehandeld door dezelfde image server wijkt de info.json via de https://www.google.com/url?q=http://iif.meemoo.be/&sa=D&source=editors&ust=1619601270776000&usg=AOvVaw1oC5IcfgvFWw749r0gC-kK[iif.meemoo.be] route af door de toevoeging van een rights-attribuut onderin de json (https://www.google.com/url?q=https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90&sa=D&source=editors&ust=1619601270776000&usg=AOvVaw2Pt7bi27D2i-7CGAmqAU9S[https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90])
+Hoewel via beide routes de request wordt afgehandeld door dezelfde image server wijkt de info.json via de http://iif.meemoo.be/[https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90])
 
 [source,json]
 ----
@@ -243,14 +247,15 @@ Hoewel via beide routes de request wordt afgehandeld door dezelfde image server 
 ===== Image server
 
 * We bieden minstens de Image API 2.1 aan, we voorzien op termijn de mogelijkheid om versie 3.0 te ondersteunen
-* We streven een level 2 compliance na, echter indien level 1 voldoende functionaliteit biedt voor VKC kan hiermee worden volstaan (https://www.google.com/url?q=https://iiif.io/api/image/3.0/compliance&sa=D&source=editors&ust=1619601270781000&usg=AOvVaw3QB3ufPDnqaQtwji7ogInA[https://iiif.io/api/image/3.0/compliance])
+* We streven een level 2 compliance na, echter indien level 1 voldoende functionaliteit biedt voor VKC kan hiermee worden volstaan (https://iiif.io/api/image/3.0/compliance[https://iiif.io/api/image/3.0/compliance])
 * De bestanden worden door de image server aangeboden als jpeg en indien mogelijk in png-formaat
 * Afgeleiden kunnen optioneel in hun geheel gedownload worden, bij voorkeur als TIFF
 * De archiefbestanden (on_tape) worden niet als download beschikbaar gemaakt, maar kunnen aangevraagd worden bij meemoo via de bestaande kanalen
 * Er wordt geen presentation API aangeboden in het kader van dit project
 * Er wordt in het kader van dit project geen authenticatie voorzien
 
-[cols=",,",]
+.Features MVP en roadmap
+[cols=",,",options="header"]
 |===
 |_ |VKC-2 mvp |Roadmap meemoo
 |Image API |2.1 |3.0
@@ -288,13 +293,15 @@ Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide 
 
 De twee meest gebruikte bestandsformaten voor het aanbieden van kwalitatieve hoogresolutiebestanden via een image server zijn piramidale tiff's (pTIFF) en JPEG2000 (jp2) bestanden. Beide bestandsformaten zijn uitermate geschikt voor grote, hoogkwalitatieve bestanden met verschillende resoluties en grote kleurdieptes, kunnen metadata bevatten, bieden ruime compressiemogelijkheden (lossless en lossy) en ondersteuning voor meerdere colorspaces. De formaten worden als volgt omschreven:
 
-https://www.google.com/url?q=https://jpeg.org/jpeg2000/&sa=D&source=editors&ust=1619601270796000&usg=AOvVaw216r8kllL1E-su_iGlJNWe[JPEG - JPEG 2000]
+[quote,jpeg.org,https://jpeg.org/jpeg2000]
+____
+*JPEG 2000* is an image coding system that uses state-of-the-art compression techniques based on wavelet technology and offers an extremely high level of scalability and accessibility. Content can be coded once at any quality, up to lossless, but accessed and decoded at a potentially very large number of other qualities and resolutions and/or by region of interest, with no significant penalty in coding efficiency.
+____
 
-JPEG 2000 is an image coding system that uses state-of-the-art compression techniques based on wavelet technology and offers an extremely high level of scalability and accessibility. Content can be coded once at any quality, up to lossless, but accessed and decoded at a potentially very large number of other qualities and resolutions and/or by region of interest, with no significant penalty in coding efficiency.
-
-https://www.google.com/url?q=https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml&sa=D&source=editors&ust=1619601270797000&usg=AOvVaw2GU-oUUW10qgAP7pKAuBub[TIFF, Revision 6.0 (loc.gov)]
-
-A tag-based file format for storing and interchanging raster images. TIFF serves as a wrapper for different bitstream encodings for bit-mapped (raster) images. The different encodings may represent different compression schemes and different schemes for color representation (photometric interpretation).
+[quote,Library of Congress,https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml]
+____
+*TIFF* is a tag-based file format for storing and interchanging raster images. It serves as a wrapper for different bitstream encodings for bit-mapped (raster) images. The different encodings may represent different compression schemes and different schemes for color representation (photometric interpretation).
+____
 
 De keuze voor 1 van de twee bestanden kan afhangen van verschillende factoren:
 
@@ -319,9 +326,9 @@ Om een zekere en unieke identifier te hebben kiezen we daarom om de external_id 
 
 Vertaald naar het gebruik van de identifier in de Image API wordt een information request:
 
-https://www.google.com/url?q=https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json&sa=D&source=editors&ust=1619601270800000&usg=AOvVaw2Z3ILjBKl6dCpEWUY-t5as[https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json]
+https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json[https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json]
 
-Het is niet de bedoeling een bijkomende resolver te gebruiken om een image request te mappen van een local (VKC) identifier naar een external_id (meemoo) identifier. Om in https://www.google.com/url?q=https://arthub.vlaamsekunstcollectie.be/nl/iiif/2/kmska:494/manifest.json&sa=D&source=editors&ust=1619601270801000&usg=AOvVaw14nI86-lFH4rPGPZNnU8oC[de presentation manifests van de VKC-Arthub] de correcte @id voor een beeld weer te geven zal in de database van de VKC de op https://www.google.com/url?q=https://arthub.vlaamsekunstcollectie.be/nl/catalog/kmska:494&sa=D&source=editors&ust=1619601270801000&usg=AOvVaw3brx91biUMHc6MdlBzuYMC[cataloognummer] (kmska:494) gemapte meemoo-identifier bij VKC bijgehouden moeten worden. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld (vb. via de MediaHaven Rest API).
+Het is niet de bedoeling een bijkomende resolver te gebruiken om een image request te mappen van een local (VKC) identifier naar een external_id (meemoo) identifier. Om in https://arthub.vlaamsekunstcollectie.be/nl/iiif/2/kmska:494/manifest.json[cataloognummer] (kmska:494) gemapte meemoo-identifier bij VKC bijgehouden moeten worden. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld (vb. via de MediaHaven Rest API).
 
 ===== info.json
 
@@ -329,20 +336,20 @@ Via de info.json biedt de image server informatie over het beeld, voornamelijk t
 
 De structuur van een request is: \{scheme}://\{server}\{/prefix}/\{identifier}/info.json, de response is een JSON-LD. Om vlot te werken moet CORS (Cross Origin Resource Sharing) toegestaan zijn en moeten de correcte Accept of Content-type headers gebruikt worden in respectievelijk de request of de response.
 
-In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit zou moeten volstaan binnen de scope van dit project en verder. Let wel, https://www.google.com/url?q=https://iiif.io/api/image/2.1/%23image-information&sa=D&source=editors&ust=1619601270802000&usg=AOvVaw3hoGBw9iB0s2i8s9aUROgA[dit is voor versie 2.1 van de Image API], meer informatie over de info.json in versie 3.0 is terug te vinden op: https://www.google.com/url?q=https://iiif.io/api/image/3.0/%235-image-information&sa=D&source=editors&ust=1619601270803000&usg=AOvVaw2bHdMonqp9bnF0hqas4fG_[https://iiif.io/api/image/3.0/#5-image-information]
+In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit zou moeten volstaan binnen de scope van dit project en verder. Let wel, https://iiif.io/api/image/2.1/%23image-information[https://iiif.io/api/image/3.0/#5-image-information]
 
 [cols=",,",]
 |===
 |Property |Compliance |Omschrijving
-|@context |Required |The context document that describes the semantics of the terms used in the document. This must be the URI: http://iiif.io/api/image/2/context.jsonfor version 2.1 of the IIIF Image API. This document allows the response to be interpreted as RDF, using the https://www.google.com/url?q=http://www.json-ld.org/&sa=D&source=editors&ust=1619601270806000&usg=AOvVaw2PR7NIJms82v-4Ruu7kFkd[JSON-LD]serialization.
-|@id |Required |The base URI of the image as defined in https://www.google.com/url?q=https://iiif.io/api/image/2.1/%23uri-syntax&sa=D&source=editors&ust=1619601270808000&usg=AOvVaw3Vhye_GiUrVyb4cazQQLvP[URI Syntax], including scheme, server, prefix and identifier without a trailing slash.
+|@context |Required |The context document that describes the semantics of the terms used in the document. This must be the URI: http://iiif.io/api/image/2/context.jsonfor version 2.1 of the IIIF Image API. This document allows the response to be interpreted as RDF, using the http://www.json-ld.org/[JSON-LD]serialization.
+|@id |Required |The base URI of the image as defined in https://iiif.io/api/image/2.1/%23uri-syntax[URI Syntax], including scheme, server, prefix and identifier without a trailing slash.
 |protocol |Required |The URI http://iiif.io/api/imagewhich can be used to determine that the document describes an image service which is a version of the IIIF Image API.
 |width |Required |The width in pixels of the full image content, given as an integer.
 |height |Required |The height in pixels of the full image content, given as an integer.
 |sizes |Optional |A set of height and width pairs the client should use in the sizeparameter to request complete images at different sizes that the server has available. This may be used to let a client know the sizes that are available when the server does not support requests for arbitrary sizes, or simply as a hint that requesting an image of this size may result in a faster response. A request constructed with the w,hsyntax using these sizes _must_be supported by the server, even if arbitrary width and height are not.
 |tiles |Optional |A set of descriptions of the parameters to use to request regions of the image (tiles) that are efficient for the server to deliver. Each description gives a width, optionally a height for non-square tiles, and a set of scale factors at which tiles of those dimensions are available.
-|profile |Required |A list of profiles, indicated by either a URI or an object describing the features supported. The first entry in the list _must_be a https://www.google.com/url?q=https://iiif.io/api/image/2.1/%23compliance-levels&sa=D&source=editors&ust=1619601270815000&usg=AOvVaw1HC1jF6PjE4KFLvXdzKNni[compliance level URI]. Zie https://www.google.com/url?q=https://iiif.io/api/image/2.1/%23profile-description&sa=D&source=editors&ust=1619601270816000&usg=AOvVaw0pwwh0BY7qSK5-u5pMJlNu[https://iiif.io/api/image/2.1/#profile-description]voor de properties.
-|attribution |Optional |Text that _must_be shown when content obtained from the Image API service is displayed or used. It might include copyright or ownership statements, or a simple acknowledgement of the providing institution. The value _may_contain simple HTML as described in the https://www.google.com/url?q=https://iiif.io/api/presentation/3.0/%23html-markup-in-property-values&sa=D&source=editors&ust=1619601270817000&usg=AOvVaw0yJtyUqZjL6waBva_CN2qx[HTML Markup in Property Values]section of the Presentation API.
+|profile |Required |A list of profiles, indicated by either a URI or an object describing the features supported. The first entry in the list _must_be a https://iiif.io/api/image/2.1/%23compliance-levels[https://iiif.io/api/image/2.1/#profile-description]voor de properties.
+|attribution |Optional |Text that _must_be shown when content obtained from the Image API service is displayed or used. It might include copyright or ownership statements, or a simple acknowledgement of the providing institution. The value _may_contain simple HTML as described in the https://iiif.io/api/presentation/3.0/%23html-markup-in-property-values[HTML Markup in Property Values]section of the Presentation API.
 |license |Optional |A link to an external resource that describes the license or rights statement under which content obtained from the Image API service may be used.
 |logo |Optional |A small image that represents an individual or organization associated with the content. Logo images _must_be clearly rendered when content obtained from the Image API service is displayed or used. Clients _must not_crop, rotate, or otherwise distort the image.
 |===
@@ -405,16 +412,16 @@ OAuth met LDAP als directory
 * Reporting: Data Warehouse + Tableau of PowerBI
 * Storage: Object Store (S3) of persistent local storage (VM)
 
-Daarnaast streeft meemoo naar het maximaal inpassen van nieuwe ontwikkelingen in haar eigen eco-systeem. Voor de platformen gericht op ontsluiting en interactie is een architectuur uitgewerkt die herhaalbaar en breed inzetbaar is: de zogenaamde Shared Components. Een voorbeeld van een applicatie die volledig met de componenten is gebouwd is https://www.google.com/url?q=https://onderwijs.hetarchief.be/&sa=D&source=editors&ust=1619601270826000&usg=AOvVaw3jB7XayhBf9DU6xznk6eUN[Het Archief voor Onderwijs].
+Daarnaast streeft meemoo naar het maximaal inpassen van nieuwe ontwikkelingen in haar eigen eco-systeem. Voor de platformen gericht op ontsluiting en interactie is een architectuur uitgewerkt die herhaalbaar en breed inzetbaar is: de zogenaamde Shared Components. Een voorbeeld van een applicatie die volledig met de componenten is gebouwd is https://onderwijs.hetarchief.be/[Het Archief voor Onderwijs].
 
 Het systeem omvat een volledige en modulaire middleware op vlak van ETL, opslag, zoekindex, metadata-API, authenticatie en media delivery, waaruit op basis van de nood componenten kunnen worden ingezet voor de bouw van een toepassing:
 
-* https://www.google.com/url?q=https://meemoo.atlassian.net/wiki/spaces/SF/pages/1172930633/Syncrator&sa=D&source=editors&ust=1619601270827000&usg=AOvVaw3qT2sy0jgSwXSys33J3gBL[Syncrator]: taakgebaseerde ETL-service die de synchronisatie van metadata uit het MAM (de bron) naar de lokale datastore (het doel) verzorgt
+* https://meemoo.atlassian.net/wiki/spaces/SF/pages/1172930633/Syncrator[Syncrator]: taakgebaseerde ETL-service die de synchronisatie van metadata uit het MAM (de bron) naar de lokale datastore (het doel) verzorgt
 * (Meta)datastore: een postgresql database die onder meer de metadata van de te ontsluiten archiefitems bevat en ook applicatiespecifieke tabellen kan bevatten
-* https://www.google.com/url?q=https://gitlab.com/shared-components/indexer&sa=D&source=editors&ust=1619601270827000&usg=AOvVaw19Ayb9rs3HbFpmVL6stJl4[Indexer]: een ETL service die de synchronisatie tussen database en index regelt op basis van database triggers en webhooks
+* https://gitlab.com/shared-components/indexer[Indexer]: een ETL service die de synchronisatie tussen database en index regelt op basis van database triggers en webhooks
 * ElasticSearch als standaard index die de zoekfunctionaliteit in de platformen mogelijk maakt
-* https://www.google.com/url?q=https://meemoo.atlassian.net/wiki/spaces/SF/pages/1373274138&sa=D&source=editors&ust=1619601270828000&usg=AOvVaw0AnkdEHd0f91LBz6i3_8NG[Hasura GraphQL] voor naadloos gebruik bovenop een postgresql database. Dit vormt de basis-API waarmee de frontendapplicaties met de datastore kunnen connecteren.
-* https://www.google.com/url?q=https://meemoo.atlassian.net/wiki/spaces/SF/pages/1546977330&sa=D&source=editors&ust=1619601270829000&usg=AOvVaw3OKwpxn092h5gIuiU0FDH2[IDM]: een volledige Identity en Access Management stack:
+* https://meemoo.atlassian.net/wiki/spaces/SF/pages/1373274138[Hasura GraphQL] voor naadloos gebruik bovenop een postgresql database. Dit vormt de basis-API waarmee de frontendapplicaties met de datastore kunnen connecteren.
+* https://meemoo.atlassian.net/wiki/spaces/SF/pages/1546977330[IDM]: een volledige Identity en Access Management stack:
 
 * een LDAP store
 * een SAML IdP
@@ -436,7 +443,7 @@ De image server kan gehost worden bij meemoo op 2 manieren
 Gelet op onderstaande punten wordt gekozen voor de eerste oplossing, want:
 
 * Netwerkverkeer en bandbreedte zijn goedkoper in DCO dan in de Cloud
-* Storage is eveneens goedkoper en makkelijk uitbreidbaar in DCO (zie ÔÇÿOpslag')
+* Storage is eveneens goedkoper en makkelijk uitbreidbaar in DCO (zie 'Opslag')
 * Het netwerkverkeer verloopt via onze eigen nginx proxy met flexibiliteit onder meer op vlak van URL rewrites en image cache
 
 Voor de deployment en management van de software rekenen we op de combinatie Puppet en Foreman. De codebase wordt bewaard en geversioneerd in de Github van meemoo.
@@ -516,7 +523,7 @@ De toepassing logt via stdoutnaar een ELK-stack (Elasticsearch-Logstash-Kibana).
 * De x-correlation-id van de request wordt gebruikt als trace of span-id
 * Healthz en andere monitoring checks worden niet gelogd
 
-Zie voor meer informatie de https://www.google.com/url?q=https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging&sa=D&source=editors&ust=1619601270842000&usg=AOvVaw27xqUouhRodjbZPkZ76bOM[logging guidelines voor developers].
+Zie voor meer informatie de https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging[logging guidelines voor developers].
 
 Optioneel biedt meemoo de mogelijkheid voor het loggen van user events, de zogenaamde event-logger. Aangezien de endpoint voornamelijk bevraagd zal worden door andere services (machines) wordt deze vorm van loggen gezien als buiten scope van dit project en louter vermeld ter informatie.
 
@@ -531,7 +538,7 @@ De proefopstelling zal dienen om de baseline performantie te meten en eventuele 
 
 ==== Documentatie
 
-Alle applicaties bij meemoo worden beschreven en gedocumenteerd op de Confluence wiki van meemoo in de _Software Factory._Daarnaast bevat elke code repository een README. Handleidingen en developer documentatie worden afhankelijk van de mate van openbaarheid bewaard op de vermelde wiki of indien nuttig ontsloten via https://www.google.com/url?q=https://developer.meemoo.be/&sa=D&source=editors&ust=1619601270844000&usg=AOvVaw1Bu14fifhbBt_hjQbqZrjn[https://developer.meemoo.be].
+Alle applicaties bij meemoo worden beschreven en gedocumenteerd op de Confluence wiki van meemoo in de _Software Factory._Daarnaast bevat elke code repository een README. Handleidingen en developer documentatie worden afhankelijk van de mate van openbaarheid bewaard op de vermelde wiki of indien nuttig ontsloten via https://developer.meemoo.be/[https://developer.meemoo.be].
 
 Worden minstens gedocumenteerd:
 
@@ -556,9 +563,9 @@ Er zijn drie specifieke softwarecomponenten, maar alleen 1 en (optioneel) 2 zijn
 
 ===== HTTP Proxy
 
-Requests verstuurd naar https://www.google.com/url?q=https://images.meemoo.be/&sa=D&source=editors&ust=1619601270847000&usg=AOvVaw2urtVDoy-IGx0vKqY8DsXw[https://images.meemoo.be] worden opgevangen op de nginx proxy-server van meemoo. De Proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL's vertaald en herschreven.
+Requests verstuurd naar https://images.meemoo.be/[https://images.meemoo.be] worden opgevangen op de nginx proxy-server van meemoo. De Proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL's vertaald en herschreven.
 
-Daarnaast fungeert de proxy ook als https://www.google.com/url?q=https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/%23processes&sa=D&source=editors&ust=1619601270847000&usg=AOvVaw0s_lQCwucXyUCSGAnStsWW[content cache] voor de image server. Dit gebeurt bijvoorbeeld voor de jpeg-afbeeldingen die door image server van NVDGO worden aangemaakt. De disk cache van de proxy is een aanvulling op de memcached cache van de image server.
+Daarnaast fungeert de proxy ook als https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/%23processes[content cache] voor de image server. Dit gebeurt bijvoorbeeld voor de jpeg-afbeeldingen die door image server van NVDGO worden aangemaakt. De disk cache van de proxy is een aanvulling op de memcached cache van de image server.
 
 ===== Image API
 
@@ -568,15 +575,15 @@ IIIF beschrijft een set aan verplichte en optionele voorwaarden en aanbevelingen
 
 https://images.meemoo.be/iiif/<identifier:external_id>/\{region}/\{size}/\{rotation}/\{quality}.\{format}
 
-Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij https://www.google.com/url?q=https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json&sa=D&source=editors&ust=1619601270849000&usg=AOvVaw124sYepbRAgjtGxlKzpe_J[info.json].
+Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json[info.json].
 
 ====== Image information request
 
 https://images.meemoo.be/iiif/\{identifier:external_id}/\{info.json}
 
-Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, ...). Doorgaans wordt verwezen naar https://www.google.com/url?q=https://github.com/IIIF/awesome-iiif%23image-servers&sa=D&source=editors&ust=1619601270850000&usg=AOvVaw0WQT66SEol9dAi8lvTlYSY[IIIF/awesome-iiif] voor de meest volledige lijst van "mature" image servers die voldoen aan de specificaties van IIIF.
+Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, ...). Doorgaans wordt verwezen naar https://github.com/IIIF/awesome-iiif%23image-servers[IIIF/awesome-iiif] voor de meest volledige lijst van "mature" image servers die voldoen aan de specificaties van IIIF.
 
-Voor dit document is geen nieuwe benchmark of technische vergelijking op basis van installaties gemaakt van de verschillende image servers. Er zijn vergelijkingen en benchmarks van image servers beschikbaar zoals recent nog in het https://www.google.com/url?q=https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing&sa=D&source=editors&ust=1619601270851000&usg=AOvVaw1i1-rXUOfLfQUKsTFpyuL1[Getty Common Image Service Research & Design Report (2018)]. Ook hier komt IIPImage zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.
+Voor dit document is geen nieuwe benchmark of technische vergelijking op basis van installaties gemaakt van de verschillende image servers. Er zijn vergelijkingen en benchmarks van image servers beschikbaar zoals recent nog in het https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing[Getty Common Image Service Research & Design Report (2018)]. Ook hier komt IIPImage zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.
 
 Typische pluspunten die naar voren worden geschoven:
 
@@ -591,7 +598,7 @@ Ook in het voordeel:
 * Configureerbaar via variabelen
 * Wordt actief ontwikkeld en ondersteund
 * Online documentatie, forum, code
-* Ondersteuning voor Image API 2.1 https://www.google.com/url?q=https://github.com/ruven/iipsrv/issues/177&sa=D&source=editors&ust=1619601270852000&usg=AOvVaw2a4YbtKIuKhAsr7P3JdJ2i[en sinds kort ook 3.0] (zie onder)
+* Ondersteuning voor Image API 2.1 https://github.com/ruven/iipsrv/issues/177[en sinds kort ook 3.0] (zie onder)
 * Embedded metadata in tiles
 
 Nadelen:
@@ -613,7 +620,7 @@ Nodig voor de installatie van IIPImage server (ipsrv) zijn:
 * Libraries: libtiff, zlib, kakadu
 * Configuratie: startup variables, httpd.conf, clean URL's en logging (syslog)
 
-Voor meer opties en configuratiemogelijkheden zie: https://www.google.com/url?q=https://iipimage.sourceforge.io/documentation/server/&sa=D&source=editors&ust=1619601270855000&usg=AOvVaw3SUDcE9EC6FJAc_gdB9LA-[https://iipimage.sourceforge.io/documentation/server/]
+Voor meer opties en configuratiemogelijkheden zie: https://iipimage.sourceforge.io/documentation/server/[https://iipimage.sourceforge.io/documentation/server/]
 
 ===== Download API
 
@@ -621,7 +628,7 @@ Kleine webapplicatie die op basis van het path een bronbestand in een bepaald fo
 
 WIP In welke mate maakt dit deel uit van de scope van dit project, is dit een vereiste?
 
-https://www.google.com/url?q=https://images.meemoo.be/download/%257Bidentifier:external_id%257D/%257Bformat:jp2%257Ctiff%257Cpng&sa=D&source=editors&ust=1619601270856000&usg=AOvVaw1pTil0VxO9rWzEOFPL0g05[https://images.meemoo.be/download/\{identifier:external_id}/\{format:jp2|tiff|png]}
+https://images.meemoo.be/download/%257Bidentifier:external_id%257D/%257Bformat:jp2%257Ctiff%257Cpng[https://images.meemoo.be/download/\{identifier:external_id}/\{format:jp2|tiff|png]}
 
 ===== Presentation API
 
@@ -661,5 +668,3 @@ TODO Inschatting + planning (Gantt).
 TODO Te schrijven bij finaliseren deliverable.
 
 '''''
-
-Created by Bart Debunne, last modified on 30 mrt. 2021
