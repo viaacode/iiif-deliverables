@@ -286,11 +286,13 @@ Het gebruiken van archiefmasters is om verschillende redenen praktisch niet haal
 
 Bij het omzetten van de bronbestanden naar afgeleide bestanden worden de volgende vuistregels gehanteerd:
 
+======
 * De resolutie (ppi) is maximaal 300 ppi voor werken in het publieke domein, afhankelijk van de originele waarde in bronbestand. Voor werken die auteursrechtelijk beschermd zijn, worden de op het moment van creatie van het afgeleide beeld geldende hergebruiksvoorwaarden gerespecteerd.
 * De afbeeldingen worden herschaald tot een baseline resolutie (grootte) van 5000 pixels voor de langste zijde, de maximale boven- en ondergrens is daarbij de originele resolutie, bestanden worden niet "opgeblazen" indien ze kleiner zijn, maar kunnen bij heel grote bestanden wel verkleind worden.
 * De beelden worden bijgesneden zodat randen, kleurkaarten kaders niet meer worden getoond.
 * Bestanden worden aangeboden op en voor het web in sRGB, tegenover AdobeRGB voor de originelen.
 * Embedded metadata(XMP, Exif, ICC) worden in zoverre in de bron beschikbaar en mogelijk, in de afbeeldingen opgeslaan
+======
 
 De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld staat hier niet steeds tot in verhouding en is afhankelijk van het tijdstip van opname, de fotograaf, het toestel, etc. Voor sommige grote werken zijn verschillende foto's aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.
 
