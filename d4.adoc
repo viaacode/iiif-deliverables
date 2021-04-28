@@ -318,10 +318,10 @@ ____
 
 De keuze voor 1 van de twee bestanden kan afhangen van verschillende factoren:
 
-* Encodering: bronbestanden converteren naar jp2 is doorgaans eenvoudiger (1 stap) en sneller (resources), mits gebruik van een goede encoder zoals kdu_compress (Kakadu). De creatie van piramidale tiffs is door de band trager. Voor een eenmalige conversie van een in aantal beperkte collectie is de impact beperkt. Wanneer regelmatig grotere batches moeten worden omgezet is de keuze voor jp2 evidenter.
-* Decodering: jp2-bestanden moeten in tegenstelling tot tiffs on-the-fly gedecodeerd worden door de image server. Dit zorgt voor een kleine overhead bij het aanbieden van jp2-bestanden die echter beperkt kan worden gehouden door de performante Kakadu library te gebruiken. Anderzijds biedt jp2 de mogelijkheid tot progressive transmission waarbij eerst een lagere resolutie wordt getoond tot de hogere resoluties ingeladen zijn.
-* Compressie en bestandsgrootte: afhankelijk van de complexiteit en resolutie van een beeldbestand enerzijds en anderzijds de gekozen compressie-methode kunnen zowel ptiffs als jp2's kleiner zijn dan de andere. Zie voorbeeld Getty. Wanneer kwaliteit(sverlies) een belangrijk aandachtpunt is dan biedt jp2 het voordeel van een lossless compressie met een visueel gelijkwaardige kwaliteit van een uncompressed TIFF voor eeen bestand van kleinere omvang. Het verschil in grootte zonder merkbaar kwaliteitsverlies van jp2 tegenover tiff is vooral uitgesproken bij compressie van grotere bestanden met hogere resoluties.
-* Resolutie: jp2 wordt opgeslagen in de hoogste resolutie maar kan door de gebruikte wavelettechnologie op verschillende (lagere) resoluties gedecodeerd worden. Tiff moet worden opgeslagen met de gewenste resolutielagen, de weergave is beperkt tot deze resoluties.
+* *Encodering*: bronbestanden converteren naar jp2 is doorgaans eenvoudiger (1 stap) en sneller (resources), mits gebruik van een goede encoder zoals kdu_compress (Kakadu). De creatie van piramidale tiffs is door de band trager. Voor een eenmalige conversie van een in aantal beperkte collectie is de impact beperkt. Wanneer regelmatig grotere batches moeten worden omgezet is de keuze voor jp2 evidenter.
+* *Decodering*: jp2-bestanden moeten in tegenstelling tot tiffs on-the-fly gedecodeerd worden door de image server. Dit zorgt voor een kleine overhead bij het aanbieden van jp2-bestanden die echter beperkt kan worden gehouden door de performante Kakadu library te gebruiken. Anderzijds biedt jp2 de mogelijkheid tot progressive transmission waarbij eerst een lagere resolutie wordt getoond tot de hogere resoluties ingeladen zijn.
+* *Compressie en bestandsgrootte*: afhankelijk van de complexiteit en resolutie van een beeldbestand enerzijds en anderzijds de gekozen compressie-methode kunnen zowel ptiffs als jp2's kleiner zijn dan de andere. Zie voorbeeld Getty. Wanneer kwaliteit(sverlies) een belangrijk aandachtpunt is dan biedt jp2 het voordeel van een lossless compressie met een visueel gelijkwaardige kwaliteit van een uncompressed TIFF voor eeen bestand van kleinere omvang. Het verschil in grootte zonder merkbaar kwaliteitsverlies van jp2 tegenover tiff is vooral uitgesproken bij compressie van grotere bestanden met hogere resoluties.
+* *Resolutie*: jp2 wordt opgeslagen in de hoogste resolutie maar kan door de gebruikte wavelettechnologie op verschillende (lagere) resoluties gedecodeerd worden. Tiff moet worden opgeslagen met de gewenste resolutielagen, de weergave is beperkt tot deze resoluties.
 
 Gelet op bovenstaande vergelijking, in combinatie met de expertise bij meemoo met de omzetting en het gebruik van jpeg2000, is gekozen om de afgeleide bestanden in een gecomprimeerd jp2-formaat op te slaan voor gebruik in de image server.
 
@@ -331,7 +331,7 @@ Voor een vergelijking van bestandsgroottes na omzetting zie Appendix A.
 
 De base uri van de Image API is opgebouwd als: \{scheme}://\{server}/\{prefix}/\{identifier}. De image server verwacht dat de identifier verwijst naar een (lokaal) bestand.
 
-Binnen het Archiefsysteem (MAM) van meemoo heeft elke intellectuele entiteit (IE) een persistent identif├«er of pid, vb.: wp9t14vr7s (krant). Pids worden toegekend aan het begin en gebruikt doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting. Elk media-object van een IE heeft ook een external_id die bestaat uit de pid en bij meervoudige objecten een bijkomende classifier, vb.: wp9t14vr7s_19140404_0001 (pagina 1 van krant).
+Binnen het Archiefsysteem (MAM) van meemoo heeft elke intellectuele entiteit (IE) een persistent identifier of pid, vb.: wp9t14vr7s (krant). Pids worden toegekend aan het begin en gebruikt doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting. Elk media-object van een IE heeft ook een external_id die bestaat uit de pid en bij meervoudige objecten een bijkomende classifier, vb.: wp9t14vr7s_19140404_0001 (pagina 1 van krant).
 
 Catalogusnummers en overige lokale identifiers kunnen bewaard worden in de metadata van een object in het archiefsysteem. Het gebruiken van deze identifiers veronderstelt echter dat deze enerzijds altijd bekend zijn en anderzijds consequent toegevoegd en beheerd worden.
 
@@ -351,7 +351,8 @@ De structuur van een request is: \{scheme}://\{server}\{/prefix}/\{identifier}/i
 
 In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit zou moeten volstaan binnen de scope van dit project en verder. Let wel, https://iiif.io/api/image/2.1/%23image-information[https://iiif.io/api/image/3.0/#5-image-information]
 
-[cols=",,",]
+.info.json properties en hun omschrijving: overgenomen van iiif.io
+[cols="m,,",options="header"]
 |===
 |Property |Compliance |Omschrijving
 |@context |Required |The context document that describes the semantics of the terms used in the document. This must be the URI: http://iiif.io/api/image/2/context.jsonfor version 2.1 of the IIIF Image API. This document allows the response to be interpreted as RDF, using the http://www.json-ld.org/[JSON-LD]serialization.
@@ -359,12 +360,12 @@ In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit
 |protocol |Required |The URI http://iiif.io/api/imagewhich can be used to determine that the document describes an image service which is a version of the IIIF Image API.
 |width |Required |The width in pixels of the full image content, given as an integer.
 |height |Required |The height in pixels of the full image content, given as an integer.
-|sizes |Optional |A set of height and width pairs the client should use in the sizeparameter to request complete images at different sizes that the server has available. This may be used to let a client know the sizes that are available when the server does not support requests for arbitrary sizes, or simply as a hint that requesting an image of this size may result in a faster response. A request constructed with the w,hsyntax using these sizes _must_be supported by the server, even if arbitrary width and height are not.
+|sizes |Optional |A set of height and width pairs the client should use in the sizeparameter to request complete images at different sizes that the server has available. This may be used to let a client know the sizes that are available when the server does not support requests for arbitrary sizes, or simply as a hint that requesting an image of this size may result in a faster response. A request constructed with the w,hsyntax using these sizes _must_ be supported by the server, even if arbitrary width and height are not.
 |tiles |Optional |A set of descriptions of the parameters to use to request regions of the image (tiles) that are efficient for the server to deliver. Each description gives a width, optionally a height for non-square tiles, and a set of scale factors at which tiles of those dimensions are available.
-|profile |Required |A list of profiles, indicated by either a URI or an object describing the features supported. The first entry in the list _must_be a https://iiif.io/api/image/2.1/%23compliance-levels[https://iiif.io/api/image/2.1/#profile-description]voor de properties.
-|attribution |Optional |Text that _must_be shown when content obtained from the Image API service is displayed or used. It might include copyright or ownership statements, or a simple acknowledgement of the providing institution. The value _may_contain simple HTML as described in the https://iiif.io/api/presentation/3.0/%23html-markup-in-property-values[HTML Markup in Property Values]section of the Presentation API.
+|profile |Required |A list of profiles, indicated by either a URI or an object describing the features supported. The first entry in the list _must_ be a https://iiif.io/api/image/2.1/%23compliance-levels[https://iiif.io/api/image/2.1/#profile-description]voor de properties.
+|attribution |Optional |Text that _must_ be shown when content obtained from the Image API service is displayed or used. It might include copyright or ownership statements, or a simple acknowledgement of the providing institution. The value _may_ contain simple HTML as described in the https://iiif.io/api/presentation/3.0/%23html-markup-in-property-values[HTML Markup in Property Values]section of the Presentation API.
 |license |Optional |A link to an external resource that describes the license or rights statement under which content obtained from the Image API service may be used.
-|logo |Optional |A small image that represents an individual or organization associated with the content. Logo images _must_be clearly rendered when content obtained from the Image API service is displayed or used. Clients _must not_crop, rotate, or otherwise distort the image.
+|logo |Optional |A small image that represents an individual or organization associated with the content. Logo images _must_ be clearly rendered when content obtained from the Image API service is displayed or used. Clients _must not_ crop, rotate, or otherwise distort the image.
 |===
 
 Voorbeeld json
@@ -503,9 +504,10 @@ Hieruit blijkt een reductie van de bestandsgrootte van:
 
 Voor het berekenen van de onder- en bovengrens voor benodigde schijfruimte vertrekken we van de totale omvang van de VKC tenant in het meemoo MAM: 32502 tiffs van gemiddeld 250 MB per tiffs = 8.125TB
 
-[cols=",,",]
+.Schatting minimaal benodigde opslagruimte, afhankelijk van formaat
+[cols=",,",options="header"]
 |===
-|formaat |reductie |schijfruimte
+|formaat |reductie |nodige schijfruimte
 |lossless jp2 |(8.125/100 )*16 |1.3 TB
 |lossy jp2 |(8.125/100)*2 |162.5 GB
 |===
@@ -528,15 +530,15 @@ Typische voorbeelden van sensoren zijn:
 * HTTP health & liveness checks
 * Certificaatgeldigheid (indien van toepassing)
 
-De toepassing logt via stdoutnaar een ELK-stack (Elasticsearch-Logstash-Kibana). Kort samengevat moeten de log messages voldoen aan de volgende voorwaarden:
+De developer guidelines van meemoo worden gehanteerd. Deze kunnen geraadpleegd worden op: https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging[logging guidelines voor developers].
+
+De toepassing logt via stdout naar een ELK-stack (Elasticsearch-Logstash-Kibana). Kort samengevat moeten de log messages voldoen aan de volgende voorwaarden:
 
 * Single-line JSON*
 * Standaard gestructureerd formaat en labels
 * Logs worden weggeschreven naar stdout/err
 * De x-correlation-id van de request wordt gebruikt als trace of span-id
 * Healthz en andere monitoring checks worden niet gelogd
-
-Zie voor meer informatie de https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging[logging guidelines voor developers].
 
 Optioneel biedt meemoo de mogelijkheid voor het loggen van user events, de zogenaamde event-logger. Aangezien de endpoint voornamelijk bevraagd zal worden door andere services (machines) wordt deze vorm van loggen gezien als buiten scope van dit project en louter vermeld ter informatie.
 
@@ -647,7 +649,7 @@ https://images.meemoo.be/download/%257Bidentifier:external_id%257D/%257Bformat:j
 
 De presentation API is niet in scope van dit project aangezien de bestaande API binnen het VKC-ecosysteem zal worden gebruikt. Op termijn zal meemoo wel een presentation API (3.0) voorzien, gebruik makend van de eigen shared components (meemoo-ecoysteem) voor ETL, metadata storage en API endpoint.
 
-=== WIP Impact en timing
+=== Impact en timing
 
 Voor de realisatie van de in dit document beschreven opstelling wordt een impact verwacht op:
 
@@ -674,10 +676,10 @@ Business:
 * QA en testen van de opstelling
 * metadatabeheer
 
-TODO Inschatting + planning (Gantt).
+NOTE: Todo => Inschatting + planning (Gantt).
 
 === WIP Conclusie
 
-TODO Te schrijven bij finaliseren deliverable.
+NOTE: Te schrijven bij finaliseren deliverable.
 
 '''''
