@@ -586,11 +586,11 @@ image::iiif-basic-architecture.png[alt="Simple architecture diagram"]
 
 ==== Componenten
 
-Er zijn drie specifieke softwarecomponenten, maar alleen 1 en (optioneel) 2 zijn in scope van dit project:
+Er zijn drie specifieke softwarecomponenten, maar alleen 1 is in scope van dit project:
 
 . Image API: de IIIF compliant image server die beelden levert aan een image viewer
-. Download API: een custom applicatie die een hoogresolutiebestand levert in een bepaald formaat
-. Presentation API: een custom applicatie die IIIF compliant manifests levert
+. _Download API: een custom applicatie die een hoogresolutiebestand levert in een bepaald formaat_
+. _Presentation API: een custom applicatie die IIIF compliant manifests levert_
 
 ===== HTTP Proxy
 
@@ -602,19 +602,21 @@ Daarnaast fungeert de proxy ook als https://docs.nginx.com/nginx/admin-guide/con
 
 IIIF beschrijft een set aan verplichte en optionele voorwaarden en aanbevelingen waaraan een API moet voldoen. Bijvoorbeeld op vlak van de request URI's, response formats en metadata. Het voornaamste en quasi enige doel van de image server is het aanleveren van afbeeldingen voor (her)gebruik in een image viewer of andere toepassingen, op basis van de parameters in de zogenaamde image request request.
 
-====== Image request
-
+.Image request
+====
 https://images.hetarchief.be/iiif/<identifier:external_id>/\{region}/\{size}/\{rotation}/\{quality}.\{format}
+====
 
 Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json[info.json].
 
-====== Image information request
-
+.Image information request
+====
 https://images.hetarchief.be/iiif/\{identifier:external_id}/\{info.json}
+====
 
-Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, ...). Doorgaans wordt verwezen naar https://github.com/IIIF/awesome-iiif%23image-servers[IIIF/awesome-iiif] voor de meest volledige lijst van "mature" image servers die voldoen aan de specificaties van IIIF.
+Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, ...). Zie https://github.com/IIIF/awesome-iiif%23image-servers[IIIF/awesome-iiif] voor een uitgebreide lijst van "mature" IIIF-compliant image servers.
 
-Voor dit document is geen nieuwe benchmark of technische vergelijking op basis van installaties gemaakt van de verschillende image servers. Een recente vergelijking en benchmark van image servers werd uitgevoerd door Getty en gerapporteerd in https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing[Getty Common Image Service Research & Design Report (2018)]. IIPImage komt hier zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.
+Voor dit document is geen technische benchmark verricht op basis van geïnstalleerde image servers. Een recente vergelijking en benchmark van image servers werd uitgevoerd door Getty en gerapporteerd in https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing[Getty Common Image Service Research & Design Report (2018)]. IIPImage komt hier zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.
 
 Typische pluspunten die naar voren worden geschoven zijn:
 
@@ -640,10 +642,10 @@ Er zijn echter ook minpunten:
 
 Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.
 
-NOTE
-=====
+[NOTE]
+====
 IIPImage is now fully version 3 compliant. This commit 1d6c0d5 adds a new server directive IIIF_VERSION which allows you to set the IIIF Image API version (2 or 3). Essentially this affects the info.json output.
-=====
+====
 
 De standaardvereisten voor de installatie van de IIPImage software (ipsrv) zijn:
 
