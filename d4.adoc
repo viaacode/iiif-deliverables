@@ -300,7 +300,7 @@ Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte va
 
 Bijkomend moet bij het herschalen onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met sabam heeft worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een definitie van maximum 72dpi hebben.
 
-.Manuele workflow voor creatie van jp2 afgeleide beeldbestanden
+.Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden
 image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7",alt="workflow voor creatie afgeleiden als jp2"]
 
 
@@ -335,19 +335,27 @@ Voor een vergelijking van bestandsgroottes na omzetting zie Appendix A.
 
 ===== Identifiers
 
-De base uri van de Image API is opgebouwd als: \{scheme}://\{server}/\{prefix}/\{identifier}. De image server verwacht dat de identifier verwijst naar een (lokaal) bestand.
+De URI van een typische _image request_ is https://example.com/iiif/´´´identifier´´´
+Aan de hand van de identifier in de uri weet of kan de image server achterhalen (_resolve_) welk beeld in de _response_ teruggeven moet worden. Het formaat van de identifier kan vrij gekozen worden (ARK, URN, filename, ...) zolang de link met en naar een beeld achterhaalbaar, uniek en persistent is.
 
-Binnen het Archiefsysteem (MAM) van meemoo heeft elke intellectuele entiteit (IE) een persistent identifier of pid, vb.: wp9t14vr7s (krant). Pids worden toegekend aan het begin en gebruikt doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting. Elk media-object van een IE heeft ook een external_id die bestaat uit de pid en bij meervoudige objecten een bijkomende classifier, vb.: wp9t14vr7s_19140404_0001 (pagina 1 van krant).
+Doel is om op een eenduidige manier aan de hand van een gekende pid een beeld te kunnen opvragen via de image API van meemoo zonder dat hiervoor nog de tussenstap van een zogenaamde resolver nodig is. Vaak wordt de identifier gebruikt in de bestandsnaam van het beeld dat wordt opgevraagd.
 
-Catalogusnummers en overige lokale identifiers kunnen bewaard worden in de metadata van een object in het archiefsysteem. Het gebruiken van deze identifiers veronderstelt echter dat deze enerzijds altijd bekend zijn en anderzijds consequent toegevoegd en beheerd worden.
+In het VKC-project zijn verschillende identifiers gekend voor dezelfde werken, afhankelijk van het systeem waar de collectie en de metadata van de beelden beheerd worden, van historische inventarisnummers tot persistente digitaal-archiefnummers.
 
-Om een zekere en unieke identifier te hebben kiezen we daarom om de external_id te gebruiken uit het meemoo-archiefsysteem. Om bovendien de relatie te bewaren met de IE worden de afgeleide bestanden opgeslagen als \{identifier}.\{ext}, vb.wp9t14vr7s_19140404_0001.jp2.
+In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke _persistent identifier_ (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor https://n2t.net/e/noid.html[noid], vb. ´´´wp9t14vr7s´´´. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.
 
-Vertaald naar het gebruik van de identifier in de Image API wordt een information request:
+NOTE
+=====
+In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, vb.: wp9t14vr7s_19140404_0001, pagina 1 van krant wp9t14vr7s. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
+=====
 
-https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json[https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json]
+De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoitn zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vb.wp9t14vr7s_19140404_0001.jp2.
 
-Het is niet de bedoeling een bijkomende resolver te gebruiken om een image request te mappen van een local (VKC) identifier naar een external_id (meemoo) identifier. Om in https://arthub.vlaamsekunstcollectie.be/nl/iiif/2/kmska:494/manifest.json[cataloognummer] (kmska:494) gemapte meemoo-identifier bij VKC bijgehouden moeten worden. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld (vb. via de MediaHaven Rest API).
+De meemoo-identifiers moeten uiteraard bekend zijn in de datahub van VKC, bij voorkeur zonder de nood aan bijkomende resolvers en mappings. Met andere woorden VKC zal de meemoo-identifier in de metadata van https://arthub.vlaamsekunstcollectie.be/nl/catalog/kmska:5006[kmska:494] moeten bijhouden om de image en information requests te kunnen doen. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld via de API's.
+
+Vertaald naar een image information request:
+
+https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json
 
 ===== info.json
 
