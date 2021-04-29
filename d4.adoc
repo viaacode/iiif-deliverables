@@ -5,6 +5,7 @@ Bart Debunne <bart.debunne@meemoo.be>
 :Revision: 3
 :nofooter:
 :imagesdir: images
+:source-highlighter: rouge
 // fix missing admonition icons on Github
 ifdef::env-github[]
 :tip-caption: :bulb:
@@ -28,21 +29,17 @@ toc::[]
 
 ==== Doelstelling
 
-Doel van Taak 2 is het ontwikkelen door meemoo van een iiif image endpoint op materiaal uit het MAM-systeem. De image endpoint zal worden gebruikt door VKC voor de ontsluiting van de collectie. Op termijn
+Doel van Taak 2 is het ontwikkelen door meemoo van een IIIF Image API endpoint op materiaal uit het MAM-systeem. De endpoint zal worden gebruikt door VKC voor de ontsluiting van de collectie. Op termijn zal meemoo de endpoint breder inzetten, zowel voor derden als voor eigen gebruik. Bij het bepalen van de specificaties, vereisten en architectuur is hier rekening mee gehouden.
 
-wenst meemoo haar endpoint breder in te zetten zowel voor derden als voor eigen gebruik. Bij het bepalen van de specificaties, vereisten en architectuur is hier rekening mee gehouden.
-
-Dit document geldt als deliverable 4 in het IIIF-project fase 2 (IIIF-2) van VKC in samenwerking met meemoo. De deliverable is het geschreven resultaat van Taak 2 in Werkpakket 2, een omschrijving van een
-
-nader te realiseren IIIF-compliant image endpoint voor het ontsluiten van archiefbeelden bij meemoo.
+Dit document geldt als deliverable 4 in het IIIF-project fase 2 (IIIF-2) van VKC in samenwerking met meemoo. De deliverable is het geschreven resultaat van Taak 2 in Werkpakket 2, een omschrijving van een te realiseren IIIF-compliant image endpoint voor het ontsluiten van archiefbeelden bij meemoo.
 
 ==== Over het VKC-2 project
 
 De Vlaamse Kunstcollectie (VKC) werkte reeds eerder samen met meemoo aan de uitbouw van een digitaal ecosysteem. Er werd een (proef)opstelling gebouwd waarbij metadata en beelden via een zogenaamde Datahub, en IIIF-Imagehub en -Imageserver vanuit de registratiesystemen en de DAMS voor hergebruik worden beschikbaar gemaakt in de Arthub met IIIF-viewer.
 
-Het IIIF-2 project bouwt verder op deze samenwerking door vanuit concrete use cases, verbeteringen aan te brengen, met het oog op twee belangrijke doelen: de maximale geautomatiseerde aggregatie van content en het maximaal geautomatiseerd ter beschikking stellen van die content voor hergebruik.
+Het IIIF-2 project bouwt verder op deze samenwerking door vanuit concrete use cases verbeteringen aan te brengen met het oog op twee belangrijke doelen: de maximale geautomatiseerde aggregatie van content en het maximaal geautomatiseerd ter beschikking stellen van die content voor hergebruik.
 
-Het project voorziet in een nauwere aansluiting op de meemoo infrastructuur en archiefsysteem, de verkenning van IIIF-annotaties en IIIF-multi-layerviewers, en de opmaak van een metadatahandboek. Het systeem zal ook worden uitgetest op hybride collecties.
+Het project voorziet in een nauwere aansluiting op de infrastructuur en het archiefsysteem van meemoo, de verkenning van IIIF-annotaties en IIIF-multi-layerviewers, en de opmaak van een metadatahandboek. Het systeem zal ook worden uitgetest op hybride collecties.
 
 ==== Over IIIF
 
@@ -79,14 +76,14 @@ De oplossing dient ook als proefopstelling voor meemoo met het oog op een breder
 
 In het VKC-2 project zal een afgelijnde set bestanden aangeboden worden van:
 
-* Alle aangesloten musea bij VKC, i.c. de 5 Schone Kunsten musea
+* De aangesloten musea bij VKC, i.c. de 5 Schone Kunsten musea
 * Collecties Brugse musea (binnen AIF is er een algemene collectie 'musea brugge')
 
 Aangezien meemoo met de opstelling op termijn mogelijk meer collecties wil ontsluiten, zowel voor VKC als voor derden, is het relevant voorbij het huidige aanbod van VKC (Image Hub) en Art in Flanders te kijken naar zowel de maximaal potentiële omvang nu als de verwachtte aanwas. Met andere woorden, net als voor het technische aspect is schaalbaarheid een belangrijk aandachtspunt.
 
 Aan de hand van de metadata in het meemoo-archiefsysteem voor de silo Lukas/Art in Flanders (AIF) kan een exhaustieve en maximale lijst en omvang bepaald worden van de te ontsluiten werken. Hieruit blijkt dat voor bovenstaande aanbieders momenteel 15905 werken ontsloten worden op Art in Flanders.
 
-.Omvang aanbod in scope
+.Totale omvang ontsloten en niet-ontsloten archiefbeelden in de Lukas/AIF tenant in het meemoo archiefsysteem, cijfers per aanbieder (februari 2021).
 [cols=",,,",options="header"]
 |===
 |Collectie |Aantal items in archief |Items online in AIF |wacht op metadata of mag niet online
@@ -102,11 +99,13 @@ Aan de hand van de metadata in het meemoo-archiefsysteem voor de silo Lukas/Art 
 |tot | |600MB per file |nieuwste opnames
 |===
 
-Totalen ontsloten en niet-ontsloten archiefbeelden in de Lukas/AIF tenant in het meemoo archiefsysteem, cijfers per aanbieder (februari 2021).
+
 
 ==== Bestaande implementaties
 
 ===== Het VKC ecosysteem (fase 1)
+
+IMPORTANT: Onderstaande eventueel te vervangen of aan te vullen door een korte summary aan te leveren door VKC over de effectieve opstelling zoals nu actief
 
 ====== Verkenning
 
@@ -125,28 +124,29 @@ Schema van de gekozen componenten voor de IIIF-proefopstelling, meemoo CC BY-SA
 
 In het voorjaar van 2019 zette meemoo samen met de VKC, http://artinflanders.be/[Blauwdruk gedistribueerd beeldbeheer] die we eerder opstelden.
 
-Centraal in deze tweede fase staat de implementatie van de IIIF-specificaties in online services. Deze open specificaties laten toe om de interacties tussen eindconsument, de toepassing waarin beelden worden gevisualiseerd, en de communicatie met de onderliggende online services te standaardiseren en te automatiseren. Verschillende technische componenten werden verkend voor de bouw van de IIIF-infrastructuur. De keuze van de componenten moet het eenvoudig maken om de beeldinfrastructuur ook in de toekomst te beheren.
+Centraal in deze fase stond de implementatie van de IIIF-specificaties in online services. Deze open specificaties laten toe om de interacties tussen eindconsument, de toepassing waarin beelden worden gevisualiseerd, en de communicatie met de onderliggende online services te standaardiseren en te automatiseren. Verschillende technische componenten werden verkend voor de bouw van de IIIF-infrastructuur. De keuze van de componenten moet het eenvoudig maken om de beeldinfrastructuur ook in de toekomst te beheren.
+
+.Schema van de gekozen componenten voor de IIIF-proefopstelling
+image::VKC-IIIF-1-architectuur.png[]
 
 * Als ingestcomponent is gekozen voor https://www.resourcespace.com/[ResourceSpace], een software die al door een aantal partners van VKC gebruikt wordt voor de ontsluiting van hun beelden. ResourceSpace is een DAM-systeem (beeldbeheersysteem) waarmee de beelden opgenomen kunnen worden in de proefopstellingen en waarin vervolgens de metadata uit de Datahub gekoppeld kunnen worden aan de beelden.
-* Als IIIF-beeldenserver kozen we https://cantaloupe-project.github.io/[Cantaloupe], omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopieën van de afgeleiden. Via Cantaloupe zullen de beelden uitwisselbaar zijn via de IIIF Image API.
-* Er werd een http://imagehub.vlaamsekunstcollectie.be/[Imagehub] ontwikkeld om de beelden en hun metadata via de IIIF Presentation API te ontsluiten (via IIIF-manifests). Deze webapplicatie wordt gemaakt in hetzelfde framework waarmee de Datahub ontwikkeld werd (PHP/Symfony).
-* De IIIF-manifests zelf zullen getoond worden in de https://universalviewer.io/[Universal Viewer]. Dit is een beeldenviewer die IIIF-manifests kan weergeven.
+* Als IIIF-beeldenserver kozen we https://cantaloupe-project.github.io/[Cantaloupe], omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopieën van de afgeleiden. Via Cantaloupe zijn de beelden uitwisselbaar via de IIIF Image API 2.
+* Er werd een http://imagehub.vlaamsekunstcollectie.be/[Imagehub] ontwikkeld om de beelden en hun metadata via de IIIF Presentation API te ontsluiten (via IIIF-manifests). Deze webapplicatie is gemaakt in hetzelfde framework waarmee de Datahub ontwikkeld werd (PHP/Symfony).
+* De IIIF-manifests zelf worden getoond in de https://universalviewer.io/[Universal Viewer]. Dit is een beeldenviewer die IIIF-manifests kan weergeven.
 
-Samen vormden deze componenten de IIIF-proefopstelling. Testen gebeurde met tweehonderd beelden uit de collecties van de partnermusea van de VKC. De aangepaste versie van de Arthub ontsluit nu beelden via de Universal Viewer door een koppeling met de http://imagehub.vlaamsekunstcollectie.be/[Imagehub].
+Samen vormen deze componenten de IIIF-proefopstelling. Testen gebeurde met tweehonderd beelden uit de collecties van de partnermusea van de VKC. De aangepaste versie van de Arthub ontsluit nu beelden via de Universal Viewer door een koppeling met de http://imagehub.vlaamsekunstcollectie.be/[Imagehub].
 
-Verdere details over de opzet en architectuur van het VKC-ecosyteem zijn te vinden in Deliverable 1, Architectuur van de proefopstelling, van het VKC-1 project.
-
-TODO Eventueel te vervangen of aan te vullen door een korte summary aan te leveren door VKC over de effectieve opstelling zoals nu actief?
+Verdere details over de opzet en architectuur van het VKC-ecosysteem zijn te vinden in https://vlaamsekunstcollectie.files.wordpress.com/2019/10/d1_-architectuur-van-de-proefopstelling-2.pdf[Deliverable 1, Architectuur van de proefopstelling], van het VKC-1 project.
 
 ===== Nieuws van de Groote Oorlog
 
-====== Voorbeeldpagina
-
-Detailpagina op website NVDGO: https://nieuwsvandegrooteoorlog.hetarchief.be/nl/media//l1MefUOcXVhxmdUiFta43bZl[L'indépendance belge | Nieuws van de Groote Oorlog (hetarchief.be)]
-
 Voor de website https://nieuwsvandegrooteoorlog.hetarchief.be/[Nieuws van de Groote Oorlog] (NVDGO) heeft meemoo (destijds VIAA) een IIPImage server, of ipsrv, opgezet voor de ontsluiting van multipage kranten en andere documenten via een OpenLayers3 canvas-viewer op de site. Als protocol wordt in de viewer Zoomify gebruikt, maar ook IIP en IIIF zijn ondersteund.
 
-Voor meer info en documentatie zie:
+=====
+Voorbeeld detailpagina NVDGO: https://nieuwsvandegrooteoorlog.hetarchief.be/nl/pid/wp9t14vr7s[L'indépendance belge | Nieuws van de Groote Oorlog (hetarchief.be)]
+=====
+
+Voor meer informatie en documentatie over de IIIF-implementatie voor NVDGO zie:
 
 * https://meemoo.atlassian.net/wiki/spaces/HAP/pages/111902756/IIPImage%2Ben%2BIIIF[IIPImage en IIIF - Het Archief (Publiek) - meemoo documentation (atlassian.net)]
 * https://meemoo.atlassian.net/wiki/spaces/TB/pages/1855684732/Handleiding%2BIIIF-beelden%2Bgebruiken[Handleiding IIIF-beelden gebruiken - Interactie - meemoo documentation (atlassian.net)]
@@ -159,10 +159,10 @@ Deze image server is oorspronkelijk opgezet als dedicated endpoint voor de NVDGO
 
 Hiervoor werd een Python script geschreven dat via nginx-specifieke X-Accel-Redirect headers de request doorstuurt naar de relevante URL op http://images.hetarchief.be/[https://github.com/viaacode/iiif-mapping] .
 
-====== Image information request
-
+.Image information request
+====
 https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json]
-
+====
 [source,json]
 ----
 {
@@ -202,12 +202,12 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
 }
 ----
 
-====== Image request
+.Image request:
+====
+. https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
 
-* https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
-* https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
-
-Hoewel via beide routes de request wordt afgehandeld door dezelfde image server wijkt de info.json via de http://iif.meemoo.be/[https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90])
+. https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
+====
 
 [source,json]
 ----
@@ -245,9 +245,10 @@ Hoewel via beide routes de request wordt afgehandeld door dezelfde image server 
     "maxWidth": 5000,
     "maxHeight": 5000
   }],
-  "rights": "https://nieuwsvandegrooteoorlog.hetarchief.be/nl/gebruiksvoorwaarden"
+  "rights": "https://nieuwsvandegrooteoorlog.hetarchief.be/nl/gebruiksvoorwaarden" // <1>
 }
 ----
+<1> Uit het voorbeeld blijkt dat image langs twee routes via IIIF kan opgevraagd worden. Hoewel beide requests afgehandeld worden door dezelfde image server wijkt de info.json via http://iif.meemoo.be af. Zie https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90[meemoo iiif-mapping op Github].
 
 '''''
 
@@ -303,7 +304,7 @@ Bijkomend moet bij het herschalen onderscheid worden gemaakt tussen werken in pu
 .Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden
 image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7",alt="workflow voor creatie afgeleiden als jp2"]
 
-
+We starten met een die eenvoudig kan bijgesteld worden om uiteiendelijk te komen tot een  geautomatiseerde workflow.
 Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide beelden te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties bijgewerkt worden op basis van voortschrijdend inzicht.
 
 ====== Bestandsformaat
@@ -595,7 +596,7 @@ Er zijn drie specifieke softwarecomponenten, maar alleen 1 en (optioneel) 2 zijn
 
 ===== HTTP Proxy
 
-Requests verstuurd naar https://images.meemoo.be/[https://images.meemoo.be] worden opgevangen op de nginx proxy-server van meemoo. De Proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL's vertaald en herschreven.
+Requests verstuurd naar https://images.hetarchief.be/[https://images.hetarchief.be] worden opgevangen op de nginx proxy-server van meemoo. De proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL's vertaald en herschreven.
 
 Daarnaast fungeert de proxy ook als https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/%23processes[content cache] voor de image server. Dit gebeurt bijvoorbeeld voor de jpeg-afbeeldingen die door image server van NVDGO worden aangemaakt. De disk cache van de proxy is een aanvulling op de memcached cache van de image server.
 
@@ -605,50 +606,52 @@ IIIF beschrijft een set aan verplichte en optionele voorwaarden en aanbevelingen
 
 ====== Image request
 
-https://images.meemoo.be/iiif/<identifier:external_id>/\{region}/\{size}/\{rotation}/\{quality}.\{format}
+https://images.hetarchief.be/iiif/<identifier:external_id>/\{region}/\{size}/\{rotation}/\{quality}.\{format}
 
 Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json[info.json].
 
 ====== Image information request
 
-https://images.meemoo.be/iiif/\{identifier:external_id}/\{info.json}
+https://images.hetarchief.be/iiif/\{identifier:external_id}/\{info.json}
 
 Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, ...). Doorgaans wordt verwezen naar https://github.com/IIIF/awesome-iiif%23image-servers[IIIF/awesome-iiif] voor de meest volledige lijst van "mature" image servers die voldoen aan de specificaties van IIIF.
 
-Voor dit document is geen nieuwe benchmark of technische vergelijking op basis van installaties gemaakt van de verschillende image servers. Er zijn vergelijkingen en benchmarks van image servers beschikbaar zoals recent nog in het https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing[Getty Common Image Service Research & Design Report (2018)]. Ook hier komt IIPImage zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.
+Voor dit document is geen nieuwe benchmark of technische vergelijking op basis van installaties gemaakt van de verschillende image servers. Een recente vergelijking en benchmark van image servers werd uitgevoerd door Getty en gerapporteerd in https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing[Getty Common Image Service Research & Design Report (2018)]. IIPImage komt hier zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.
 
-Typische pluspunten die naar voren worden geschoven:
+Typische pluspunten die naar voren worden geschoven zijn:
 
-* Bewezen technologie. IIPimage wordt breed ingezet in productieomgevingen tot zeer grote omvang en bij +
-grote spelers
+* Bewezen technologie. IIPImage wordt breed ingezet in productieomgevingen tot zeer grote omvang en bij grote spelers
 * Jpeg2000 (jp2) ondersteuning met zowel Kakadu als de verbeterde OpenJpeg
 * Stabiele prestaties en betrouwbare performantie ook met grote datasets van hogere kwaliteit (C++)
 * Eenvoudige installatie(vereisten): PHP+webserver met fastcgi zoals nginx, Apache
 
-Ook in het voordeel:
+Spreken ook in het voordeel:
 
 * Configureerbaar via variabelen
-* Wordt actief ontwikkeld en ondersteund
-* Online documentatie, forum, code
+* Matuur en nog steeds actief ontwikkeld en ondersteund
+* Online beschikbaarheid van documentatie, gebruikersforum, code
 * Ondersteuning voor Image API 2.1 https://github.com/ruven/iipsrv/issues/177[en sinds kort ook 3.0] (zie onder)
 * Embedded metadata in tiles
 
-Nadelen:
+Er zijn echter ook minpunten:
 
 * Niet level 2 compliant wegens geen png output (zelf toe te voegen)
-* API versie 3.0 is nog maar zeer recent
-* Slechts 1 maintainer (wel community)
-* Soms veel tijd tussen releases (maar die zijn dan wel stabiel )
+* Ondersteuning voor de Image API versie 3.0 is nog maar zeer recent
+* Slechts 1 hoofd-maintainer (wel community)
+* Soms veel tijd tussen releases (maar die zijn dan wel stabiel)
 
 Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.
 
+NOTE
+=====
 IIPImage is now fully version 3 compliant. This commit 1d6c0d5 adds a new server directive IIIF_VERSION which allows you to set the IIIF Image API version (2 or 3). Essentially this affects the info.json output.
+=====
 
-Nodig voor de installatie van IIPImage server (ipsrv) zijn:
+De standaardvereisten voor de installatie van de IIPImage software (ipsrv) zijn:
 
 * OS: Debian
 * Installatie: autoconf of via apt-get (Debian 7+)
-* Webserver: Apache+fcgi module (mod_fastcgi) + Nginx proxy
+* Webserver: Apache+fcgi module (mod_fastcgi) + Nginx proxy (rewrites etc.)
 * Libraries: libtiff, zlib, kakadu
 * Configuratie: startup variables, httpd.conf, clean URL's en logging (syslog)
 
@@ -656,17 +659,17 @@ Voor meer opties en configuratiemogelijkheden zie: https://iipimage.sourceforge.
 
 ===== Download API
 
-Kleine webapplicatie die op basis van het path een bronbestand in een bepaald formaat als download aanbiedt.
+IIPImage voorziet als default enkel de "download" van het volledige bestand in jpeg-formaat. Het is niet mogelijk het jp2-bestand of een rasterformaat zoals tiff of png te downloaden via de IIIF endpoint. Indien er voldoende vraag is naar beelden in de verschillende bestandsformaten en of andere transformatie te downloaden kan dit worden opgevangen met een kleine webapplicatie die op basis van de identifier een afgeleide in een bepaald formaat als download aanbiedt.
 
-WIP In welke mate maakt dit deel uit van de scope van dit project, is dit een vereiste?
+Tenzij dit wordt gezien als een ernstige regressie van de huidige setup van VKC, behoort deze API niet tot de scope van het project, maar dit kan op termijn wel deel uiitmaken van de meemoo-setup.
 
-https://images.meemoo.be/download/%257Bidentifier:external_id%257D/%257Bformat:jp2%257Ctiff%257Cpng[https://images.meemoo.be/download/\{identifier:external_id}/\{format:jp2|tiff|png]}
+https://images.hetarchief.be/download/\{identifier:external-id}.{format:jpg|jp2|tiff|png]}
 
 ===== Presentation API
 
-De presentation API is niet in scope van dit project aangezien de bestaande API binnen het VKC-ecosysteem zal worden gebruikt. Op termijn zal meemoo wel een presentation API (3.0) voorzien, gebruik makend van de eigen shared components (meemoo-ecoysteem) voor ETL, metadata storage en API endpoint.
+De presentation API is niet in scope van dit project aangezien de bestaande API binnen het VKC-ecosysteem zal worden gebruikt. Op termijn wil meemoo wel een presentation API (3.0) voorzien, gebruik makend van de eigen shared components (meemoo-ecoysteem) voor ETL, metadata storage en API endpoint.
 
-=== Impact en timing
+=== Impact
 
 Voor de realisatie van de in dit document beschreven opstelling wordt een impact verwacht op:
 
@@ -674,27 +677,31 @@ Infrastructuur:
 
 * aanmaken en configureren van VM's
 * allocatie van storage
-* netwerkconnectiviteit
-* DNS
-* nginx configuratie
+* voorzien en configureren netwerkconnectiviteit
+* DNS-configuratie
+* nginx-configuratie
 * monitoring en maintenance
 
 Devops:
 
-* installatie en configuratie software
-* ontwikkeling custom componenten
-* deployment configuratie
+* installatie en configuratie van de IIPImage software
+* deployment configuratie: Openshift en Jenkins
+* ontwikkeling custom componenten en scripts
 * automatisering workflow afgeleide beeldbestanden
-* maintenance
+* monitoring en maintenance
 
 Business:
 
-* aanmaak en controle afgeleide beeldbestanden (bewerking, bijsnijden en verkleinen) ism devops
+* workflow aanmaak en controle afgeleide beeldbestanden (bewerking, bijsnijden en verkleinen) ism devops
 * QA en testen van de opstelling
 * metadatabeheer
+* opvolging
 
-NOTE: Todo => Inschatting + planning (Gantt).
 
-=== WIP Conclusie
+=== Conclusie
 
-NOTE: Te schrijven bij finaliseren deliverable.
+meemoo voorziet in het kader van het IIIF-project fase 2 van VKC een IIIF Image API. De API zal in eerste instantie een aanbod van De Musea voor Schone Kunsten en de Brugse Musea ontsluiten voor gebruik door VKC. VKC voorziet in de presentation API. Op termijn zal de endpoint breder ingezet worden met een groter aanbod en zowel voor gebruik door derden als voor eigen gebruik van meemoo.
+
+De endpoint zal bestaan uit een IIPImage image server met lokale opslag en bereikbaar via een nginx proxy-server. De implementatie gebeurt volledig op de infrastructuur van en door meemoo.
+
+Als ontsluitingsformaat wordt jpeg2000 (jp2) gehanteerd. Er wordt een workflow uitgewerkt waarmee de archiefbestanden vlot kunnen worden omgezet naar dit formaat. De afgeleide bestanden worden op de meemoo-infrastructuur bewaard.
