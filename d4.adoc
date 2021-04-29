@@ -338,20 +338,19 @@ Gelet op bovenstaande vergelijking, in combinatie met de expertise bij meemoo me
 
 ===== Identifiers
 
-De URI van een typische _image request_ is https://example.com/iiif/´´´identifier´´´
+De URI van een typische _image request_ is https://example.com/iiif/`identifier`
 Aan de hand van de identifier in de uri weet of kan de image server achterhalen (_resolve_) welk beeld in de _response_ teruggeven moet worden. Het formaat van de identifier kan vrij gekozen worden (ARK, URN, filename, ...) zolang de link met en naar een beeld achterhaalbaar, uniek en persistent is.
 
 Doel is om op een eenduidige manier aan de hand van een gekende pid een beeld te kunnen opvragen via de image API van meemoo zonder dat hiervoor nog de tussenstap van een zogenaamde resolver nodig is. Vaak wordt de identifier gebruikt in de bestandsnaam van het beeld dat wordt opgevraagd.
 
 In het VKC-project zijn verschillende identifiers gekend voor dezelfde werken, afhankelijk van het systeem waar de collectie en de metadata van de beelden beheerd worden, van historische inventarisnummers tot persistente digitaal-archiefnummers.
 
-In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke _persistent identifier_ (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor https://n2t.net/e/noid.html[noid], vb. ´´´wp9t14vr7s´´´. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.
+In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke _persistent identifier_ (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor https://n2t.net/e/noid.html[noid], vb. `wp9t14vr7s`. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.
 
 [NOTE]
-In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, vb.: wp9t14vr7s_19140404_0001, pagina 1 van krant wp9t14vr7s. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
+In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, bijvoorbeeld: `wp9t14vr7s_19140404_0001`, pagina 1 van krant `wp9t14vr7s`. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
 
-De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoint zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vb.wp9t14vr7s_19140404_0001.jp2.
-
+De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoint zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vbijvoorbeeld: `wp9t14vr7s_19140404_0001.jp2` .
 De meemoo-identifiers moeten uiteraard bekend zijn in de datahub van VKC, bij voorkeur zonder de nood aan bijkomende resolvers en mappings. Met andere woorden VKC zal de meemoo-identifier in de metadata van https://arthub.vlaamsekunstcollectie.be/nl/catalog/kmska:5006[kmska:494] moeten bijhouden om de image en information requests te kunnen doen. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld via de API's.
 
 Vertaald naar een image information request:
