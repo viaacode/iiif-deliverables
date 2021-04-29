@@ -414,7 +414,7 @@ In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit
 
 ===== Authenticatie en authorisatie
 
-Authenticatie en authorisatie zijn niet binnen scope van dit project. meemoo behoudt weliswaar de mogelijkheid om in een later stadium authenticatie te voorzien bijvoorbeeld op basis van de IIIF Authentication API in combinatie met de eigen accesstoken-authenticatie services. In dat geval zal de afnemer (i.c. VKC) voldoende documentatie krijgen om de authenticatie te integreren.
+Authenticatie en authorisatie zijn niet binnen scope van dit project. meemoo behoudt weliswaar de mogelijkheid om in een later stadium authenticatie te voorzien bijvoorbeeld op basis van de IIIF Authentication API in combinatie met de eigen accesstoken-authenticatie services. In dat geval zal de afnemer (i.c. VKC) voldoende documentatie krijgen om de authenticatie te integreren. Hiervoor dient eerst een grondige analyse te worden uitgevoerd.
 
 '''''
 
@@ -604,14 +604,14 @@ IIIF beschrijft een set aan verplichte en optionele voorwaarden en aanbevelingen
 
 .Image request
 ====
-https://images.hetarchief.be/iiif/<identifier:external_id>/\{region}/\{size}/\{rotation}/\{quality}.\{format}
+`https://images.hetarchief.be/iiif/<identifier:external_id>/\{region}/\{size}/\{rotation}/\{quality}.\{format}`
 ====
 
 Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json[info.json].
 
 .Image information request
 ====
-https://images.hetarchief.be/iiif/\{identifier:external_id}/\{info.json}
+`https://images.hetarchief.be/iiif/\{identifier:external_id}/\{info.json}`
 ====
 
 Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, ...). Zie https://github.com/IIIF/awesome-iiif%23image-servers[IIIF/awesome-iiif] voor een uitgebreide lijst van "mature" IIIF-compliant image servers.
@@ -630,7 +630,10 @@ Spreken ook in het voordeel:
 * Configureerbaar via variabelen
 * Matuur en nog steeds actief ontwikkeld en ondersteund
 * Online beschikbaarheid van documentatie, gebruikersforum, code
-* Ondersteuning voor Image API 2.1 https://github.com/ruven/iipsrv/issues/177[en sinds kort ook 3.0] (zie onder)
+* Ondersteuning voor Image API 2.1 https://github.com/ruven/iipsrv/issues/177[en sinds kort ook 3.0]:
+____
+IIPImage is now fully version 3 compliant. This commit 1d6c0d5 adds a new server directive IIIF_VERSION which allows you to set the IIIF Image API version (2 or 3). Essentially this affects the info.json output.
+____
 * Embedded metadata in tiles
 
 Er zijn echter ook minpunten:
@@ -640,12 +643,9 @@ Er zijn echter ook minpunten:
 * Slechts 1 hoofd-maintainer (wel community)
 * Soms veel tijd tussen releases (maar die zijn dan wel stabiel)
 
-Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.
 
-[NOTE]
-====
-IIPImage is now fully version 3 compliant. This commit 1d6c0d5 adds a new server directive IIIF_VERSION which allows you to set the IIIF Image API version (2 or 3). Essentially this affects the info.json output.
-====
+
+Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.
 
 De standaardvereisten voor de installatie van de IIPImage software (ipsrv) zijn:
 
@@ -663,7 +663,10 @@ IIPImage voorziet als default enkel de "download" van het volledige bestand in j
 
 Tenzij dit wordt gezien als een ernstige regressie van de huidige setup van VKC, behoort deze API niet tot de scope van het project, maar dit kan op termijn wel deel uiitmaken van de meemoo-setup.
 
-https://images.hetarchief.be/download/\{identifier:external-id}.{format:jpg|jp2|tiff|png]}
+.Mogelijke download request
+====
+`https://images.hetarchief.be/download/\{identifier:external-id}.{format:jpg|jp2|tiff|png]}`
+====
 
 ===== Presentation API
 
@@ -673,7 +676,7 @@ De presentation API is niet in scope van dit project aangezien de bestaande API 
 
 Voor de realisatie van de in dit document beschreven opstelling wordt een impact verwacht op:
 
-Infrastructuur:
+Infrastructuur::
 
 * aanmaken en configureren van VM's
 * allocatie van storage
@@ -682,7 +685,7 @@ Infrastructuur:
 * nginx-configuratie
 * monitoring en maintenance
 
-Devops:
+Devops::
 
 * installatie en configuratie van de IIPImage software
 * deployment configuratie: Openshift en Jenkins
@@ -690,7 +693,7 @@ Devops:
 * automatisering workflow afgeleide beeldbestanden
 * monitoring en maintenance
 
-Business:
+Business::
 
 * workflow aanmaak en controle afgeleide beeldbestanden (bewerking, bijsnijden en verkleinen) ism devops
 * QA en testen van de opstelling
