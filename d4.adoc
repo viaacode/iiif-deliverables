@@ -311,15 +311,17 @@ image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d89303
 
 De twee meest gebruikte bestandsformaten voor het aanbieden van kwalitatieve hoogresolutiebestanden via een image server zijn piramidale tiff's (pTIFF) en JPEG2000 (jp2) bestanden. Beide bestandsformaten zijn uitermate geschikt voor grote, hoogkwalitatieve bestanden met verschillende resoluties en grote kleurdieptes, kunnen metadata bevatten, bieden ruime compressiemogelijkheden (lossless en lossy) en ondersteuning voor meerdere colorspaces. De formaten worden als volgt omschreven:
 
-[quote,jpeg.org,https://jpeg.org/jpeg2000]
+[quote]
 ____
 *JPEG 2000* is an image coding system that uses state-of-the-art compression techniques based on wavelet technology and offers an extremely high level of scalability and accessibility. Content can be coded once at any quality, up to lossless, but accessed and decoded at a potentially very large number of other qualities and resolutions and/or by region of interest, with no significant penalty in coding efficiency.
+-- https://jpeg.org/jpeg2000[jpeg.org]
 ____
 
 
-[quote,Library of Congress,https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml]
+[quote]
 ____
 *TIFF* is a tag-based file format for storing and interchanging raster images. It serves as a wrapper for different bitstream encodings for bit-mapped (raster) images. The different encodings may represent different compression schemes and different schemes for color representation (photometric interpretation).
+-- https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml[Library of Congress]
 ____
 
 
@@ -345,7 +347,8 @@ In het VKC-project zijn verschillende identifiers gekend voor dezelfde werken, a
 
 In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke _persistent identifier_ (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor https://n2t.net/e/noid.html[noid], vb. ´´´wp9t14vr7s´´´. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.
 
-NOTE: In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, vb.: wp9t14vr7s_19140404_0001, pagina 1 van krant wp9t14vr7s. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
+[NOTE]
+In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, vb.: wp9t14vr7s_19140404_0001, pagina 1 van krant wp9t14vr7s. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
 
 De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoint zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vb.wp9t14vr7s_19140404_0001.jp2.
 
@@ -380,8 +383,7 @@ In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit
 |logo |Optional |A small image that represents an individual or organization associated with the content. Logo images _must_ be clearly rendered when content obtained from the Image API service is displayed or used. Clients _must not_ crop, rotate, or otherwise distort the image.
 |===
 
-Voorbeeld json
-
+.Voorbeeld json
 [source,json]
 ----
 {
