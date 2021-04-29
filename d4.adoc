@@ -245,7 +245,7 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
     "maxWidth": 5000,
     "maxHeight": 5000
   }],
-  "rights": "https://nieuwsvandegrooteoorlog.hetarchief.be/nl/gebruiksvoorwaarden" // <1>
+  "rights": "https://nieuwsvandegrooteoorlog.hetarchief.be/nl/gebruiksvoorwaarden" <1>
 }
 ----
 <1> Uit het voorbeeld blijkt dat image langs twee routes via IIIF kan opgevraagd worden. Hoewel beide requests afgehandeld worden door dezelfde image server wijkt de info.json via http://iif.meemoo.be af. Zie https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90[meemoo iiif-mapping op Github].
@@ -260,7 +260,7 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
 
 * We bieden minstens de Image API 2.1 aan, we voorzien op termijn de mogelijkheid om versie 3.0 te ondersteunen
 * We streven een level 2 compliance na, echter indien level 1 voldoende functionaliteit biedt voor VKC kan hiermee worden volstaan (https://iiif.io/api/image/3.0/compliance[https://iiif.io/api/image/3.0/compliance])
-* De bestanden worden door de image server aangeboden als jpeg en indien mogelijk in png-formaat
+* De bestanden worden door de image server aangeboden als jpeg en optioneel indien mogelijk in png-formaat
 * Afgeleiden kunnen optioneel in hun geheel gedownload worden, bij voorkeur als TIFF
 * De archiefbestanden (on_tape) worden niet als download beschikbaar gemaakt, maar kunnen aangevraagd worden bij meemoo via de bestaande kanalen
 * Er wordt geen presentation API aangeboden in het kader van dit project
@@ -272,40 +272,40 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
 |_ |VKC-2 mvp |Roadmap meemoo
 |Image API |2.1 |3.0
 |Level compliancy |1 |2
-|Output format |jpg |jpg, png
-|Download full |ja, als origineel: jp2 of tiff |ja, als: jp2 en tiff
-|Donwload archive |- |-
+|Default output |jpg |jpg, png
+|Download full image |ja, als jpg |ja, origineel en raster
+|Download archival image |nee |nee
 |Presentation API |- |3.0
-|Authentication API |- |TBA
+|Authentication API |- |TBD
 |===
 
 ===== Beeldbestanden
 
 ====== Afgeleiden
 
-Het gebruiken van archiefmasters is om verschillende redenen praktisch niet haalbaar. De bestanden zijn zeer groot wat de load op de image server en bandbreedte impacteert en het raadplegen onnodig vertraagd, de kwaliteit is ook hoger dan nodig bij het eenvoudig raadplegen op een gewoon beeldscherm. Bovendien bevatten de beelden doorgaans randen en kleurkaarten die, hoewel relevant binnen een archiefcontext en voor hergebruik. Standaard worden daarom afgeleide bestanden voor ontsluiting en raadpleging gemaakt.
+Het gebruiken van archiefmasters is om verschillende redenen praktisch niet haalbaar. De bestanden zijn zeer groot wat de load op de image server en bandbreedte impacteert en het raadplegen onnodig vertraagd, de kwaliteit is ook hoger dan nodig bij het eenvoudig raadplegen op een gewoon beeldscherm. Bovendien bevatten de beelden doorgaans randen en kleurkaarten die enkel relevant zijn in een archivistische context of voor hergebruik. Standaard worden daarom afgeleide bestanden voor ontsluiting en raadpleging gemaakt.
 
-Bij het omzetten van de bronbestanden naar afgeleide bestanden worden de volgende vuistregels gehanteerd:
+Bij het omzetten van de archiefbestanden naar afgeleide bestanden worden de volgende vuistregels gehanteerd:
 
-======
-* De resolutie (ppi) is maximaal 300 ppi voor werken in het publieke domein, afhankelijk van de originele waarde in bronbestand. Voor werken die auteursrechtelijk beschermd zijn, worden de op het moment van creatie van het afgeleide beeld geldende hergebruiksvoorwaarden gerespecteerd.
+====
+* De resolutie (ppi) is maximaal 300 ppi voor werken in het publieke domein, afhankelijk van de originele waarde in het bronbestand. Voor werken die auteursrechtelijk beschermd zijn, worden de op het moment van creatie van het afgeleide beeld geldende hergebruiksvoorwaarden gerespecteerd.
 * De afbeeldingen worden herschaald tot een baseline resolutie (grootte) van 5000 pixels voor de langste zijde, de maximale boven- en ondergrens is daarbij de originele resolutie, bestanden worden niet "opgeblazen" indien ze kleiner zijn, maar kunnen bij heel grote bestanden wel verkleind worden.
 * De beelden worden bijgesneden zodat randen, kleurkaarten kaders niet meer worden getoond.
 * Bestanden worden aangeboden op en voor het web in sRGB, tegenover AdobeRGB voor de originelen.
-* Embedded metadata(XMP, Exif, ICC) worden in zoverre in de bron beschikbaar en mogelijk, in de afbeeldingen opgeslaan
-======
+* Embedded metadata(XMP, Exif, ICC) worden in zoverre in de bron beschikbaar en mogelijk, in de afbeeldingen opgeslaan.
+====
 
-De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld staat hier niet steeds tot in verhouding en is afhankelijk van het tijdstip van opname, de fotograaf, het toestel, etc. Voor sommige grote werken zijn verschillende foto's aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.
+De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld is niet per se in verhouding en is afhankelijk van de leeftijd, de fotograaf, het opnametoestel, etc. Voor sommige grote werken zijn verschillende foto's aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.
 
-Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate de herschaling dynamisch kan gebeuren aan de hand van de fysieke afmetingen afgezet tegen de digitale. We vertrekken daarbij van van typewerken zoals Pierrot et Squelette en Jaune van James Ensor.
+Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate een relatie bestaat tussen de fysieke en digitale afmetingen op basis waarvan herschaling dynamisch kan gebeuren. We onderzoeken dit aan de hand vaan een aantal typewerken zoals _Pierrot et Squelette en Jaune_ van James Ensor.
 
-Bijkomend moet bij het herschalen onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met sabam heeft worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een definitie van maximum 72dpi hebben.
+CAUTION: Bij het herschalen moet onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met de auteursrechtenorganisatie Sabam heeft, worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een resolutie van maximum 72dpi hebben.
+
+Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
+Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.
 
 .Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden
 image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7",alt="workflow voor creatie afgeleiden als jp2"]
-
-We starten met een die eenvoudig kan bijgesteld worden om uiteiendelijk te komen tot een  geautomatiseerde workflow.
-Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide beelden te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties bijgewerkt worden op basis van voortschrijdend inzicht.
 
 ====== Bestandsformaat
 
@@ -323,16 +323,16 @@ ____
 ____
 
 
-De keuze voor 1 van de twee bestanden kan afhangen van verschillende factoren:
+De keuze voor een bestandsformaat voor ontsluiting hangt af van verschillende factoren:
 
 * *Encodering*: bronbestanden converteren naar jp2 is doorgaans eenvoudiger (1 stap) en sneller (resources), mits gebruik van een goede encoder zoals kdu_compress (Kakadu). De creatie van piramidale tiffs is door de band trager. Voor een eenmalige conversie van een in aantal beperkte collectie is de impact beperkt. Wanneer regelmatig grotere batches moeten worden omgezet is de keuze voor jp2 evidenter.
 * *Decodering*: jp2-bestanden moeten in tegenstelling tot tiffs on-the-fly gedecodeerd worden door de image server. Dit zorgt voor een kleine overhead bij het aanbieden van jp2-bestanden die echter beperkt kan worden gehouden door de performante Kakadu library te gebruiken. Anderzijds biedt jp2 de mogelijkheid tot progressive transmission waarbij eerst een lagere resolutie wordt getoond tot de hogere resoluties ingeladen zijn.
-* *Compressie en bestandsgrootte*: afhankelijk van de complexiteit en resolutie van een beeldbestand enerzijds en anderzijds de gekozen compressie-methode kunnen zowel ptiffs als jp2's kleiner zijn dan de andere. Zie voorbeeld Getty. Wanneer kwaliteit(sverlies) een belangrijk aandachtpunt is dan biedt jp2 het voordeel van een lossless compressie met een visueel gelijkwaardige kwaliteit van een uncompressed TIFF voor eeen bestand van kleinere omvang. Het verschil in grootte zonder merkbaar kwaliteitsverlies van jp2 tegenover tiff is vooral uitgesproken bij compressie van grotere bestanden met hogere resoluties.
+* *Compressie en bestandsgrootte*: afhankelijk van de complexiteit en resolutie van een beeldbestand enerzijds en anderzijds de gekozen compressie-methode kunnen zowel ptiffs als jp2's kleiner zijn dan de andere. Zie voorbeeld Getty. Wanneer kwaliteit(sverlies) een belangrijk aandachtpunt is dan biedt jp2 het voordeel van een lossless compressie met een visueel gelijkwaardige kwaliteit van een uncompressed TIFF voor eeen bestand van kleinere omvang. Het verschil in grootte zonder merkbaar kwaliteitsverlies van jp2 tegenover tiff is vooral uitgesproken bij compressie van grotere bestanden met hogere resoluties. Voor een vergelijking van bestandsgroottes na omzetting zie Appendix A.
 * *Resolutie*: jp2 wordt opgeslagen in de hoogste resolutie maar kan door de gebruikte wavelettechnologie op verschillende (lagere) resoluties gedecodeerd worden. Tiff moet worden opgeslagen met de gewenste resolutielagen, de weergave is beperkt tot deze resoluties.
 
+====
 Gelet op bovenstaande vergelijking, in combinatie met de expertise bij meemoo met de omzetting en het gebruik van jpeg2000, is gekozen om de afgeleide bestanden in een gecomprimeerd jp2-formaat op te slaan voor gebruik in de image server.
-
-Voor een vergelijking van bestandsgroottes na omzetting zie Appendix A.
+====
 
 ===== Identifiers
 
@@ -345,12 +345,9 @@ In het VKC-project zijn verschillende identifiers gekend voor dezelfde werken, a
 
 In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke _persistent identifier_ (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor https://n2t.net/e/noid.html[noid], vb. ´´´wp9t14vr7s´´´. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.
 
-NOTE
-=====
-In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, vb.: wp9t14vr7s_19140404_0001, pagina 1 van krant wp9t14vr7s. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
-=====
+NOTE: In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, vb.: wp9t14vr7s_19140404_0001, pagina 1 van krant wp9t14vr7s. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
 
-De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoitn zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vb.wp9t14vr7s_19140404_0001.jp2.
+De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoint zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vb.wp9t14vr7s_19140404_0001.jp2.
 
 De meemoo-identifiers moeten uiteraard bekend zijn in de datahub van VKC, bij voorkeur zonder de nood aan bijkomende resolvers en mappings. Met andere woorden VKC zal de meemoo-identifier in de metadata van https://arthub.vlaamsekunstcollectie.be/nl/catalog/kmska:5006[kmska:494] moeten bijhouden om de image en information requests te kunnen doen. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld via de API's.
 
