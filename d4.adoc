@@ -161,8 +161,9 @@ Hiervoor werd een Python script geschreven dat via nginx-specifieke X-Accel-Redi
 
 .Image information request
 ====
+=====
 https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json]
-
+=====
 [source,json]
 ----
 {
@@ -205,10 +206,11 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
 
 .Image request:
 ====
+=====
 . https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
 
 . https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
-
+=====
 [source,json]
 ----
 {

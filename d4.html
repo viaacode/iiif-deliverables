@@ -450,7 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div id="toc" class="data-line-23">
+<div id="toc" class="data-line-24">
 <div id="toctitle" class="title">Inhoudsopgave</div>
 <ul class="sectlevel2">
 <li><a href="#_inleiding">Inleiding</a>
@@ -482,129 +482,123 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_componenten">Componenten</a></li>
 </ul>
 </li>
-<li><a href="#_impact_en_timing">Impact en timing</a></li>
-<li><a href="#_wip_conclusie">WIP Conclusie</a></li>
+<li><a href="#_impact">Impact</a></li>
+<li><a href="#_conclusie">Conclusie</a></li>
 </ul>
 </div>
 <hr>
 </div>
 </div>
-<div class="sect2 data-line-27">
+<div class="sect2 data-line-28">
 <h3 id="_inleiding">Inleiding</h3>
-<div class="sect3 data-line-29">
+<div class="sect3 data-line-30">
 <h4 id="_doelstelling">Doelstelling</h4>
-<div class="paragraph data-line-31">
-<p>Doel van Taak 2 is het ontwikkelen door meemoo van een iiif image endpoint op materiaal uit het MAM-systeem. De image endpoint zal worden gebruikt door VKC voor de ontsluiting van de collectie. Op termijn</p>
+<div class="paragraph data-line-32">
+<p>Doel van Taak 2 is het ontwikkelen door meemoo van een IIIF Image API endpoint op materiaal uit het MAM-systeem. De endpoint zal worden gebruikt door VKC voor de ontsluiting van de collectie. Op termijn zal meemoo de endpoint breder inzetten, zowel voor derden als voor eigen gebruik. Bij het bepalen van de specificaties, vereisten en architectuur is hier rekening mee gehouden.</p>
 </div>
-<div class="paragraph data-line-33">
-<p>wenst meemoo haar endpoint breder in te zetten zowel voor derden als voor eigen gebruik. Bij het bepalen van de specificaties, vereisten en architectuur is hier rekening mee gehouden.</p>
-</div>
-<div class="paragraph data-line-35">
-<p>Dit document geldt als deliverable 4 in het IIIF-project fase 2 (IIIF-2) van VKC in samenwerking met meemoo. De deliverable is het geschreven resultaat van Taak 2 in Werkpakket 2, een omschrijving van een</p>
-</div>
-<div class="paragraph data-line-37">
-<p>nader te realiseren IIIF-compliant image endpoint voor het ontsluiten van archiefbeelden bij meemoo.</p>
+<div class="paragraph data-line-34">
+<p>Dit document geldt als deliverable 4 in het IIIF-project fase 2 (IIIF-2) van VKC in samenwerking met meemoo. De deliverable is het geschreven resultaat van Taak 2 in Werkpakket 2, een omschrijving van een te realiseren IIIF-compliant image endpoint voor het ontsluiten van archiefbeelden bij meemoo.</p>
 </div>
 </div>
-<div class="sect3 data-line-39">
+<div class="sect3 data-line-36">
 <h4 id="_over_het_vkc_2_project">Over het VKC-2 project</h4>
-<div class="paragraph data-line-41">
+<div class="paragraph data-line-38">
 <p>De Vlaamse Kunstcollectie (VKC) werkte reeds eerder samen met meemoo aan de uitbouw van een digitaal ecosysteem. Er werd een (proef)opstelling gebouwd waarbij metadata en beelden via een zogenaamde Datahub, en IIIF-Imagehub en -Imageserver vanuit de registratiesystemen en de DAMS voor hergebruik worden beschikbaar gemaakt in de Arthub met IIIF-viewer.</p>
 </div>
-<div class="paragraph data-line-43">
-<p>Het IIIF-2 project bouwt verder op deze samenwerking door vanuit concrete use cases, verbeteringen aan te brengen, met het oog op twee belangrijke doelen: de maximale geautomatiseerde aggregatie van content en het maximaal geautomatiseerd ter beschikking stellen van die content voor hergebruik.</p>
+<div class="paragraph data-line-40">
+<p>Het IIIF-2 project bouwt verder op deze samenwerking door vanuit concrete use cases verbeteringen aan te brengen met het oog op twee belangrijke doelen: de maximale geautomatiseerde aggregatie van content en het maximaal geautomatiseerd ter beschikking stellen van die content voor hergebruik.</p>
 </div>
-<div class="paragraph data-line-45">
-<p>Het project voorziet in een nauwere aansluiting op de meemoo infrastructuur en archiefsysteem, de verkenning van IIIF-annotaties en IIIF-multi-layerviewers, en de opmaak van een metadatahandboek. Het systeem zal ook worden uitgetest op hybride collecties.</p>
+<div class="paragraph data-line-42">
+<p>Het project voorziet in een nauwere aansluiting op de infrastructuur en het archiefsysteem van meemoo, de verkenning van IIIF-annotaties en IIIF-multi-layerviewers, en de opmaak van een metadatahandboek. Het systeem zal ook worden uitgetest op hybride collecties.</p>
 </div>
 </div>
-<div class="sect3 data-line-47">
+<div class="sect3 data-line-44">
 <h4 id="_over_iiif">Over IIIF</h4>
-<div class="paragraph data-line-49">
+<div class="paragraph data-line-46">
 <p>IIIF of het International Image Interoperability Framework staat voor:</p>
 </div>
-<div class="ulist data-line-51">
+<div class="ulist data-line-48">
 <ul>
-<li class="data-line-51">
+<li class="data-line-48">
 <p>een set van open standaarden die contentbeheerders toelaat hun digitale collecties en bijhorende informatie te ontsluiten</p>
 </li>
-<li class="data-line-52">
+<li class="data-line-49">
 <p>een community: LAM&#8217;s, softwarebedrijven, developers en anderen die samen de IIIF standaarden omschrijven, ontwikkelen, testen en propageren</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-54">
+<div class="paragraph data-line-51">
 <p>Het volledige IIIF-raamwerk bestaat uit vier API&#8217;s (application programming interfaces), waarvan de twee belangrijkste de Image API en de Presentation API zijn. De API&#8217;s bieden een gestandardiseerde methode om bestanden te beschrijven en aan te leveren of uit te wisselen via het internet.</p>
 </div>
-<div class="olist arabic data-line-56">
+<div class="olist arabic data-line-53">
 <ol class="arabic">
-<li class="data-line-56">
+<li class="data-line-53">
 <p><a href="https://iiif.io/api/image/">Image API</a> voor het aanbieden in al dan niet bewerkte vorm (rotatie, zoom, fragment, kleuraanpassing, formaat) van bestanden en de technische metadata (info.json)</p>
 </li>
-<li class="data-line-57">
+<li class="data-line-54">
 <p><a href="https://iiif.io/api/presentation/">Presentation API</a> voor de beschrijving in json-formaat (manifests) van de structuur en/of layout van een object, een collectie van objecten of gerelateerde objecten</p>
 </li>
-<li class="data-line-58">
+<li class="data-line-55">
 <p><a href="https://iiif.io/api/search/">Content Search API</a> voor het doorzoeken van transcripties (OCR), vertalingen, annotaties van een via IIIF aangeboden bron</p>
 </li>
-<li class="data-line-59">
+<li class="data-line-56">
 <p><a href="https://iiif.io/api/auth/">Authentication API</a> voor het afschermen van de bronnen voor niet geauthenticeerd gebruik (bearer token)</p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-61">
+<div class="paragraph data-line-58">
 <p>Er zijn nog API&#8217;s in ontwikkeling:</p>
 </div>
-<div class="olist arabic data-line-63">
+<div class="olist arabic data-line-60">
 <ol class="arabic">
-<li class="data-line-63">
+<li class="data-line-60">
 <p><a href="https://iiif.io/api/discovery/0.9/">Change Discovery API</a> die het machines eenvoudiger maken om IIIF-bronnen te vinden, bv. voor de ontwikkeling van (thematische) zoekmachines en portaalapplicaties</p>
 </li>
-<li class="data-line-64">
+<li class="data-line-61">
 <p><a href="https://iiif.io/api/content-state/0.3/">Content State API</a> waarmee (een deel) van de inhoud van een IIIF Presentation API bron doorgegeven kan worden aan applicaties, ongeacht hun verschillende gebruikersinterfaces en mogelijkheden</p>
 </li>
 </ol>
 </div>
-<div class="paragraph data-line-66">
+<div class="paragraph data-line-63">
 <p>Naast louter afbeeldingen kunnen via de IIIF API dus ook weergavegebaseerde of meer bepaald structurele metadata uitgewisseld worden over gestructureerde objecten. Deze metadata kan bijvoorbeeld puur het object beschrijven of kan annotaties (open annotations) op en over het object bevatten.</p>
 </div>
 <hr>
 </div>
 </div>
-<div class="sect2 data-line-70">
+<div class="sect2 data-line-67">
 <h3 id="_scope">Scope</h3>
-<div class="sect3 data-line-72">
+<div class="sect3 data-line-69">
 <h4 id="_technische_oplossing">Technische oplossing</h4>
-<div class="paragraph data-line-74">
+<div class="paragraph data-line-71">
 <p>De use case is het bouwen van een IIIF Image API 2.1 compliant endpoint voor de ontsluiting en download van hoog-kwalitatieve afbeeldingen, inclusief de nodige technische en administratieve (rechten) metadata, bewaard in het meemoo-archiefsysteem. De endpoint moet zonder meer kunnen ingeschakeld worden in het VKC-ecosysteem voor gebruik in de Imagehub.</p>
 </div>
-<div class="paragraph data-line-76">
+<div class="paragraph data-line-73">
 <p>De oplossing dient ook als proefopstelling voor meemoo met het oog op een bredere inzet van IIIF voor materiaal van meerdere aanbieders dat bij meemoo wordt bewaard en ontsloten mag of moet worden en dient dus voldoende schaalbaar te zijn om grotere en diverse collecties zonder grote drempels aan te kunnen.</p>
 </div>
 </div>
-<div class="sect3 data-line-78">
+<div class="sect3 data-line-75">
 <h4 id="_inhoudelijk_aanbod">Inhoudelijk aanbod</h4>
-<div class="paragraph data-line-80">
+<div class="paragraph data-line-77">
 <p>In het VKC-2 project zal een afgelijnde set bestanden aangeboden worden van:</p>
 </div>
-<div class="ulist data-line-82">
+<div class="ulist data-line-79">
 <ul>
-<li class="data-line-82">
-<p>Alle aangesloten musea bij VKC, i.c. de 5 Schone Kunsten musea</p>
+<li class="data-line-79">
+<p>De aangesloten musea bij VKC, i.c. de 5 Schone Kunsten musea</p>
 </li>
-<li class="data-line-83">
+<li class="data-line-80">
 <p>Collecties Brugse musea (binnen AIF is er een algemene collectie <em>musea brugge</em>)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-85">
+<div class="paragraph data-line-82">
 <p>Aangezien meemoo met de opstelling op termijn mogelijk meer collecties wil ontsluiten, zowel voor VKC als voor derden, is het relevant voorbij het huidige aanbod van VKC (Image Hub) en Art in Flanders te kijken naar zowel de maximaal potentiële omvang nu als de verwachtte aanwas. Met andere woorden, net als voor het technische aspect is schaalbaarheid een belangrijk aandachtspunt.</p>
 </div>
-<div class="paragraph data-line-87">
+<div class="paragraph data-line-84">
 <p>Aan de hand van de metadata in het meemoo-archiefsysteem voor de silo Lukas/Art in Flanders (AIF) kan een exhaustieve en maximale lijst en omvang bepaald worden van de te ontsluiten werken. Hieruit blijkt dat voor bovenstaande aanbieders momenteel 15905 werken ontsloten worden op Art in Flanders.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch data-line-91">
-<caption class="title">Table 1. Omvang aanbod in scope</caption>
+<table class="tableblock frame-all grid-all stretch data-line-88">
+<caption class="title">Table 1. Totale omvang ontsloten en niet-ontsloten archiefbeelden in de Lukas/AIF tenant in het meemoo archiefsysteem, cijfers per aanbieder (februari 2021).</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -682,92 +676,106 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </tbody>
 </table>
-<div class="paragraph data-line-105">
-<p>Totalen ontsloten en niet-ontsloten archiefbeelden in de Lukas/AIF tenant in het meemoo archiefsysteem, cijfers per aanbieder (februari 2021).</p>
 </div>
-</div>
-<div class="sect3 data-line-107">
+<div class="sect3 data-line-104">
 <h4 id="_bestaande_implementaties">Bestaande implementaties</h4>
-<div class="sect4 data-line-109">
+<div class="sect4 data-line-106">
 <h5 id="_het_vkc_ecosysteem_fase_1">Het VKC ecosysteem (fase 1)</h5>
-<div class="sect5 data-line-111">
+<div class="admonitionblock important data-line-108">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Onderstaande eventueel te vervangen of aan te vullen door een korte summary aan te leveren door VKC over de effectieve opstelling zoals nu actief
+</td>
+</tr>
+</table>
+</div>
+<div class="sect5 data-line-110">
 <h6 id="_verkenning">Verkenning</h6>
-<div class="paragraph data-line-113">
+<div class="paragraph data-line-112">
 <p>Samen met VKC verkende meemoo verschillende technische componenten voor de bouw van de IIIF-infrastructuur. Bij de selectie van de componenten werd ook rekening gehouden met de bestaande infrastructuur van VKC. In de eerste fase van het project, van 2018 tot 2019, werden onderstaande acties uitgevoerd:</p>
 </div>
-<div class="ulist data-line-115">
+<div class="ulist data-line-114">
 <ul>
-<li class="data-line-115">
+<li class="data-line-114">
 <p>De verkenning van verschillende IIIF-beeldservercomponenten in de internationale academische en erfgoedwereld en de selectie van de meest bruikbare component in functie van de hierna genoemde compilatie;</p>
 </li>
-<li class="data-line-116">
+<li class="data-line-115">
 <p>De compilatie van dergelijke IIIF-componenten in een proefopstelling van een beeldinfrastructuur, complementair met de arthub;</p>
 </li>
-<li class="data-line-117">
+<li class="data-line-116">
 <p>De koppeling, in een proefopstelling, van dergelijke IIIF-beeldinfrastructuur aan de VKC-datahub;</p>
 </li>
-<li class="data-line-118">
+<li class="data-line-117">
 <p>Een beknopte analyse van de koppeling met de onderbouw;</p>
 </li>
-<li class="data-line-119">
+<li class="data-line-118">
 <p>De publicatie van de technische informatie van deze proefopstelling op Github en de bekendmaking ervan op relevante nationale en internationale fora;</p>
 </li>
-<li class="data-line-120">
+<li class="data-line-119">
 <p>Tegelijk het voorbereiden van de musea en andere beeldenleveranciers op de noodzakelijke IIIF-metadata.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-122">
+<div class="paragraph data-line-121">
 <p>Schema van de gekozen componenten voor de IIIF-proefopstelling, meemoo CC BY-SA</p>
 </div>
 </div>
-<div class="sect5 data-line-124">
+<div class="sect5 data-line-123">
 <h6 id="_selectie_van_componenten">Selectie van componenten</h6>
-<div class="paragraph data-line-126">
+<div class="paragraph data-line-125">
 <p>In het voorjaar van 2019 zette meemoo samen met de VKC, <a href="http://artinflanders.be/">Blauwdruk gedistribueerd beeldbeheer</a> die we eerder opstelden.</p>
 </div>
-<div class="paragraph data-line-128">
-<p>Centraal in deze tweede fase staat de implementatie van de IIIF-specificaties in online services. Deze open specificaties laten toe om de interacties tussen eindconsument, de toepassing waarin beelden worden gevisualiseerd, en de communicatie met de onderliggende online services te standaardiseren en te automatiseren. Verschillende technische componenten werden verkend voor de bouw van de IIIF-infrastructuur. De keuze van de componenten moet het eenvoudig maken om de beeldinfrastructuur ook in de toekomst te beheren.</p>
+<div class="paragraph data-line-127">
+<p>Centraal in deze fase stond de implementatie van de IIIF-specificaties in online services. Deze open specificaties laten toe om de interacties tussen eindconsument, de toepassing waarin beelden worden gevisualiseerd, en de communicatie met de onderliggende online services te standaardiseren en te automatiseren. Verschillende technische componenten werden verkend voor de bouw van de IIIF-infrastructuur. De keuze van de componenten moet het eenvoudig maken om de beeldinfrastructuur ook in de toekomst te beheren.</p>
 </div>
-<div class="ulist data-line-130">
+<div class="imageblock data-line-130">
+<div class="content">
+<img src="images/VKC-IIIF-1-architectuur.png" alt="VKC IIIF 1 architectuur">
+</div>
+<div class="title">Figure 1. Schema van de gekozen componenten voor de IIIF-proefopstelling</div>
+</div>
+<div class="ulist data-line-132">
 <ul>
-<li class="data-line-130">
+<li class="data-line-132">
 <p>Als ingestcomponent is gekozen voor <a href="https://www.resourcespace.com/">ResourceSpace</a>, een software die al door een aantal partners van VKC gebruikt wordt voor de ontsluiting van hun beelden. ResourceSpace is een DAM-systeem (beeldbeheersysteem) waarmee de beelden opgenomen kunnen worden in de proefopstellingen en waarin vervolgens de metadata uit de Datahub gekoppeld kunnen worden aan de beelden.</p>
 </li>
-<li class="data-line-131">
-<p>Als IIIF-beeldenserver kozen we <a href="https://cantaloupe-project.github.io/">Cantaloupe</a>, omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopieën van de afgeleiden. Via Cantaloupe zullen de beelden uitwisselbaar zijn via de IIIF Image API.</p>
-</li>
-<li class="data-line-132">
-<p>Er werd een <a href="http://imagehub.vlaamsekunstcollectie.be/">Imagehub</a> ontwikkeld om de beelden en hun metadata via de IIIF Presentation API te ontsluiten (via IIIF-manifests). Deze webapplicatie wordt gemaakt in hetzelfde framework waarmee de Datahub ontwikkeld werd (PHP/Symfony).</p>
-</li>
 <li class="data-line-133">
-<p>De IIIF-manifests zelf zullen getoond worden in de <a href="https://universalviewer.io/">Universal Viewer</a>. Dit is een beeldenviewer die IIIF-manifests kan weergeven.</p>
+<p>Als IIIF-beeldenserver kozen we <a href="https://cantaloupe-project.github.io/">Cantaloupe</a>, omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopieën van de afgeleiden. Via Cantaloupe zijn de beelden uitwisselbaar via de IIIF Image API 2.</p>
+</li>
+<li class="data-line-134">
+<p>Er werd een <a href="http://imagehub.vlaamsekunstcollectie.be/">Imagehub</a> ontwikkeld om de beelden en hun metadata via de IIIF Presentation API te ontsluiten (via IIIF-manifests). Deze webapplicatie is gemaakt in hetzelfde framework waarmee de Datahub ontwikkeld werd (PHP/Symfony).</p>
+</li>
+<li class="data-line-135">
+<p>De IIIF-manifests zelf worden getoond in de <a href="https://universalviewer.io/">Universal Viewer</a>. Dit is een beeldenviewer die IIIF-manifests kan weergeven.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-135">
-<p>Samen vormden deze componenten de IIIF-proefopstelling. Testen gebeurde met tweehonderd beelden uit de collecties van de partnermusea van de VKC. De aangepaste versie van de Arthub ontsluit nu beelden via de Universal Viewer door een koppeling met de <a href="http://imagehub.vlaamsekunstcollectie.be/">Imagehub</a>.</p>
-</div>
 <div class="paragraph data-line-137">
-<p>Verdere details over de opzet en architectuur van het VKC-ecosyteem zijn te vinden in Deliverable 1, Architectuur van de proefopstelling, van het VKC-1 project.</p>
+<p>Samen vormen deze componenten de IIIF-proefopstelling. Testen gebeurde met tweehonderd beelden uit de collecties van de partnermusea van de VKC. De aangepaste versie van de Arthub ontsluit nu beelden via de Universal Viewer door een koppeling met de <a href="http://imagehub.vlaamsekunstcollectie.be/">Imagehub</a>.</p>
 </div>
 <div class="paragraph data-line-139">
-<p>TODO Eventueel te vervangen of aan te vullen door een korte summary aan te leveren door VKC over de effectieve opstelling zoals nu actief?</p>
+<p>Verdere details over de opzet en architectuur van het VKC-ecosysteem zijn te vinden in <a href="https://vlaamsekunstcollectie.files.wordpress.com/2019/10/d1_-architectuur-van-de-proefopstelling-2.pdf">Deliverable 1, Architectuur van de proefopstelling</a>, van het VKC-1 project.</p>
 </div>
 </div>
 </div>
 <div class="sect4 data-line-141">
 <h5 id="_nieuws_van_de_groote_oorlog">Nieuws van de Groote Oorlog</h5>
-<div class="sect5 data-line-143">
-<h6 id="_voorbeeldpagina">Voorbeeldpagina</h6>
-<div class="paragraph data-line-145">
-<p>Detailpagina op website NVDGO: <a href="https://nieuwsvandegrooteoorlog.hetarchief.be/nl/media//l1MefUOcXVhxmdUiFta43bZl">L&#8217;indépendance belge | Nieuws van de Groote Oorlog (hetarchief.be)</a></p>
-</div>
-<div class="paragraph data-line-147">
+<div class="paragraph data-line-143">
 <p>Voor de website <a href="https://nieuwsvandegrooteoorlog.hetarchief.be/">Nieuws van de Groote Oorlog</a> (NVDGO) heeft meemoo (destijds VIAA) een IIPImage server, of ipsrv, opgezet voor de ontsluiting van multipage kranten en andere documenten via een OpenLayers3 canvas-viewer op de site. Als protocol wordt in de viewer Zoomify gebruikt, maar ook IIP en IIIF zijn ondersteund.</p>
 </div>
+<div class="exampleblock data-line-145">
+<div class="content">
+<div class="paragraph data-line-146">
+<p>Voorbeeld detailpagina NVDGO: <a href="https://nieuwsvandegrooteoorlog.hetarchief.be/nl/pid/wp9t14vr7s">L&#8217;indépendance belge | Nieuws van de Groote Oorlog (hetarchief.be)</a></p>
+</div>
+</div>
+</div>
 <div class="paragraph data-line-149">
-<p>Voor meer info en documentatie zie:</p>
+<p>Voor meer informatie en documentatie over de IIIF-implementatie voor NVDGO zie:</p>
 </div>
 <div class="ulist data-line-151">
 <ul>
@@ -798,13 +806,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph data-line-160">
 <p>Hiervoor werd een Python script geschreven dat via nginx-specifieke X-Accel-Redirect headers de request doorstuurt naar de relevante URL op <a href="http://images.hetarchief.be/">https://github.com/viaacode/iiif-mapping</a> .</p>
 </div>
-</div>
-<div class="sect5 data-line-162">
-<h6 id="_image_information_request">Image information request</h6>
-<div class="paragraph data-line-164">
+<div class="exampleblock data-line-163">
+<div class="title">Example 1. Image information request</div>
+<div class="content">
+<div class="exampleblock data-line-164">
+<div class="content">
+<div class="paragraph data-line-165">
 <p><a href="https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json">https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json</a></p>
 </div>
-<div class="listingblock data-line-167">
+</div>
+</div>
+<div class="listingblock data-line-168">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "@context": "http://iiif.io/api/image/2/context.json",
@@ -844,22 +856,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
-<div class="sect5 data-line-205">
-<h6 id="_image_request">Image request</h6>
-<div class="ulist data-line-207">
-<ul>
-<li class="data-line-207">
+</div>
+<div class="exampleblock data-line-208">
+<div class="title">Example 2. Image request:</div>
+<div class="content">
+<div class="exampleblock data-line-209">
+<div class="content">
+<div class="olist arabic data-line-210">
+<ol class="arabic">
+<li class="data-line-210">
 <p><a href="https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg">https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg</a></p>
 </li>
-<li class="data-line-208">
+<li class="data-line-212">
 <p><a href="https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg">https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg</a></p>
 </li>
-</ul>
+</ol>
 </div>
-<div class="paragraph data-line-210">
-<p>Hoewel via beide routes de request wordt afgehandeld door dezelfde image server wijkt de info.json via de <a href="http://iif.meemoo.be/">https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90</a>)</p>
 </div>
-<div class="listingblock data-line-213">
+</div>
+<div class="listingblock data-line-215">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "@context": "http://iiif.io/api/image/2/context.json",
@@ -895,47 +910,55 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     "maxWidth": 5000,
     "maxHeight": 5000
   }],
-  "rights": "https://nieuwsvandegrooteoorlog.hetarchief.be/nl/gebruiksvoorwaarden"
+  "rights": "https://nieuwsvandegrooteoorlog.hetarchief.be/nl/gebruiksvoorwaarden" <b class="conum">(1)</b>
 }</code></pre>
+</div>
+</div>
+<div class="colist arabic data-line-253">
+<ol>
+<li>
+<p>Uit het voorbeeld blijkt dat image langs twee routes via IIIF kan opgevraagd worden. Hoewel beide requests afgehandeld worden door dezelfde image server wijkt de info.json via <a href="http://iif.meemoo.be" class="bare">http://iif.meemoo.be</a> af. Zie <a href="https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90">meemoo iiif-mapping op Github</a>.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <hr>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2 data-line-254">
+<div class="sect2 data-line-258">
 <h3 id="_specificaties">Specificaties</h3>
-<div class="sect3 data-line-256">
+<div class="sect3 data-line-260">
 <h4 id="_functioneel">Functioneel</h4>
-<div class="sect4 data-line-258">
+<div class="sect4 data-line-262">
 <h5 id="_image_server">Image server</h5>
-<div class="ulist data-line-260">
+<div class="ulist data-line-264">
 <ul>
-<li class="data-line-260">
+<li class="data-line-264">
 <p>We bieden minstens de Image API 2.1 aan, we voorzien op termijn de mogelijkheid om versie 3.0 te ondersteunen</p>
 </li>
-<li class="data-line-261">
+<li class="data-line-265">
 <p>We streven een level 2 compliance na, echter indien level 1 voldoende functionaliteit biedt voor VKC kan hiermee worden volstaan (<a href="https://iiif.io/api/image/3.0/compliance">https://iiif.io/api/image/3.0/compliance</a>)</p>
 </li>
-<li class="data-line-262">
-<p>De bestanden worden door de image server aangeboden als jpeg en indien mogelijk in png-formaat</p>
+<li class="data-line-266">
+<p>De bestanden worden door de image server aangeboden als jpeg en optioneel indien mogelijk in png-formaat</p>
 </li>
-<li class="data-line-263">
+<li class="data-line-267">
 <p>Afgeleiden kunnen optioneel in hun geheel gedownload worden, bij voorkeur als TIFF</p>
 </li>
-<li class="data-line-264">
+<li class="data-line-268">
 <p>De archiefbestanden (on_tape) worden niet als download beschikbaar gemaakt, maar kunnen aangevraagd worden bij meemoo via de bestaande kanalen</p>
 </li>
-<li class="data-line-265">
+<li class="data-line-269">
 <p>Er wordt geen presentation API aangeboden in het kader van dit project</p>
 </li>
-<li class="data-line-266">
+<li class="data-line-270">
 <p>Er wordt in het kader van dit project geen authenticatie voorzien</p>
 </li>
 </ul>
 </div>
-<table class="tableblock frame-all grid-all stretch data-line-270">
+<table class="tableblock frame-all grid-all stretch data-line-274">
 <caption class="title">Table 2. Features MVP en roadmap</caption>
 <colgroup>
 <col style="width: 33.3333%;">
@@ -961,19 +984,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default output</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jpg</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jpg, png</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Download full</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ja, als origineel: jp2 of tiff</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ja, als: jp2 en tiff</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Download full image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ja, als jpg</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ja, origineel en raster</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Donwload archive</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Download archival image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nee</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nee</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Presentation API</p></td>
@@ -983,153 +1006,170 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Authentication API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TBA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TBD</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sect4 data-line-281">
+<div class="sect4 data-line-285">
 <h5 id="_beeldbestanden">Beeldbestanden</h5>
-<div class="sect5 data-line-283">
+<div class="sect5 data-line-287">
 <h6 id="_afgeleiden">Afgeleiden</h6>
-<div class="paragraph data-line-285">
-<p>Het gebruiken van archiefmasters is om verschillende redenen praktisch niet haalbaar. De bestanden zijn zeer groot wat de load op de image server en bandbreedte impacteert en het raadplegen onnodig vertraagd, de kwaliteit is ook hoger dan nodig bij het eenvoudig raadplegen op een gewoon beeldscherm. Bovendien bevatten de beelden doorgaans randen en kleurkaarten die, hoewel relevant binnen een archiefcontext en voor hergebruik. Standaard worden daarom afgeleide bestanden voor ontsluiting en raadpleging gemaakt.</p>
+<div class="paragraph data-line-289">
+<p>Het gebruiken van archiefmasters is om verschillende redenen praktisch niet haalbaar. De bestanden zijn zeer groot wat de load op de image server en bandbreedte impacteert en het raadplegen onnodig vertraagd, de kwaliteit is ook hoger dan nodig bij het eenvoudig raadplegen op een gewoon beeldscherm. Bovendien bevatten de beelden doorgaans randen en kleurkaarten die enkel relevant zijn in een archivistische context of voor hergebruik. Standaard worden daarom afgeleide bestanden voor ontsluiting en raadpleging gemaakt.</p>
 </div>
-<div class="paragraph data-line-287">
-<p>Bij het omzetten van de bronbestanden naar afgeleide bestanden worden de volgende vuistregels gehanteerd:</p>
+<div class="paragraph data-line-291">
+<p>Bij het omzetten van de archiefbestanden naar afgeleide bestanden worden de volgende vuistregels gehanteerd:</p>
 </div>
-<div class="exampleblock data-line-289">
+<div class="exampleblock data-line-293">
 <div class="content">
-<div class="ulist data-line-290">
+<div class="ulist data-line-294">
 <ul>
-<li class="data-line-290">
-<p>De resolutie (ppi) is maximaal 300 ppi voor werken in het publieke domein, afhankelijk van de originele waarde in bronbestand. Voor werken die auteursrechtelijk beschermd zijn, worden de op het moment van creatie van het afgeleide beeld geldende hergebruiksvoorwaarden gerespecteerd.</p>
+<li class="data-line-294">
+<p>De resolutie (ppi) is maximaal 300 ppi voor werken in het publieke domein, afhankelijk van de originele waarde in het bronbestand. Voor werken die auteursrechtelijk beschermd zijn, worden de op het moment van creatie van het afgeleide beeld geldende hergebruiksvoorwaarden gerespecteerd.</p>
 </li>
-<li class="data-line-291">
+<li class="data-line-295">
 <p>De afbeeldingen worden herschaald tot een baseline resolutie (grootte) van 5000 pixels voor de langste zijde, de maximale boven- en ondergrens is daarbij de originele resolutie, bestanden worden niet "opgeblazen" indien ze kleiner zijn, maar kunnen bij heel grote bestanden wel verkleind worden.</p>
 </li>
-<li class="data-line-292">
+<li class="data-line-296">
 <p>De beelden worden bijgesneden zodat randen, kleurkaarten kaders niet meer worden getoond.</p>
 </li>
-<li class="data-line-293">
+<li class="data-line-297">
 <p>Bestanden worden aangeboden op en voor het web in sRGB, tegenover AdobeRGB voor de originelen.</p>
 </li>
-<li class="data-line-294">
-<p>Embedded metadata(XMP, Exif, ICC) worden in zoverre in de bron beschikbaar en mogelijk, in de afbeeldingen opgeslaan</p>
+<li class="data-line-298">
+<p>Embedded metadata(XMP, Exif, ICC) worden in zoverre in de bron beschikbaar en mogelijk, in de afbeeldingen opgeslaan.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph data-line-297">
-<p>De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld staat hier niet steeds tot in verhouding en is afhankelijk van het tijdstip van opname, de fotograaf, het toestel, etc. Voor sommige grote werken zijn verschillende foto&#8217;s aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.</p>
-</div>
-<div class="paragraph data-line-299">
-<p>Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate de herschaling dynamisch kan gebeuren aan de hand van de fysieke afmetingen afgezet tegen de digitale. We vertrekken daarbij van van typewerken zoals Pierrot et Squelette en Jaune van James Ensor.</p>
-</div>
 <div class="paragraph data-line-301">
-<p>Bijkomend moet bij het herschalen onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met sabam heeft worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een definitie van maximum 72dpi hebben.</p>
+<p>De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld is niet per se in verhouding en is afhankelijk van de leeftijd, de fotograaf, het opnametoestel, etc. Voor sommige grote werken zijn verschillende foto&#8217;s aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.</p>
 </div>
-<div class="imageblock data-line-304">
+<div class="paragraph data-line-303">
+<p>Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate een relatie bestaat tussen de fysieke en digitale afmetingen op basis waarvan herschaling dynamisch kan gebeuren. We onderzoeken dit aan de hand vaan een aantal typewerken zoals <em>Pierrot et Squelette en Jaune</em> van James Ensor.</p>
+</div>
+<div class="admonitionblock caution data-line-305">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+Bij het herschalen moet onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met de auteursrechtenorganisatie Sabam heeft, worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een resolutie van maximum 72dpi hebben.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-307">
+<p>Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
+Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.</p>
+</div>
+<div class="imageblock data-line-311">
 <div class="content">
 <a class="image" href="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7"><img src="images/iiif-jp2-derived-image-workflow.svg" alt="workflow voor creatie afgeleiden als jp2"></a>
 </div>
-<div class="title">Figure 1. Manuele workflow voor creatie van jp2 afgeleide beeldbestanden</div>
-</div>
-<div class="paragraph data-line-307">
-<p>Om zowel de specificaties an sich als de workflow voor de creatie van afgeleide beelden te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties bijgewerkt worden op basis van voortschrijdend inzicht.</p>
+<div class="title">Figure 2. Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden</div>
 </div>
 </div>
-<div class="sect5 data-line-309">
+<div class="sect5 data-line-313">
 <h6 id="_bestandsformaat">Bestandsformaat</h6>
-<div class="paragraph data-line-311">
+<div class="paragraph data-line-315">
 <p>De twee meest gebruikte bestandsformaten voor het aanbieden van kwalitatieve hoogresolutiebestanden via een image server zijn piramidale tiff&#8217;s (pTIFF) en JPEG2000 (jp2) bestanden. Beide bestandsformaten zijn uitermate geschikt voor grote, hoogkwalitatieve bestanden met verschillende resoluties en grote kleurdieptes, kunnen metadata bevatten, bieden ruime compressiemogelijkheden (lossless en lossy) en ondersteuning voor meerdere colorspaces. De formaten worden als volgt omschreven:</p>
 </div>
-<div class="quoteblock data-line-314">
+<div class="quoteblock data-line-318">
 <blockquote>
-<div class="paragraph data-line-315">
-<p><strong>JPEG 2000</strong> is an image coding system that uses state-of-the-art compression techniques based on wavelet technology and offers an extremely high level of scalability and accessibility. Content can be coded once at any quality, up to lossless, but accessed and decoded at a potentially very large number of other qualities and resolutions and/or by region of interest, with no significant penalty in coding efficiency.</p>
+<div class="paragraph data-line-319">
+<p><strong>JPEG 2000</strong> is an image coding system that uses state-of-the-art compression techniques based on wavelet technology and offers an extremely high level of scalability and accessibility. Content can be coded once at any quality, up to lossless, but accessed and decoded at a potentially very large number of other qualities and resolutions and/or by region of interest, with no significant penalty in coding efficiency.&#8201;&#8212;&#8201;<a href="https://jpeg.org/jpeg2000">jpeg.org</a></p>
 </div>
 </blockquote>
-<div class="attribution">
-&#8212; jpeg.org<br>
-<cite>https://jpeg.org/jpeg2000</cite>
 </div>
-</div>
-<div class="quoteblock data-line-320">
+<div class="quoteblock data-line-325">
 <blockquote>
-<div class="paragraph data-line-321">
-<p><strong>TIFF</strong> is a tag-based file format for storing and interchanging raster images. It serves as a wrapper for different bitstream encodings for bit-mapped (raster) images. The different encodings may represent different compression schemes and different schemes for color representation (photometric interpretation).</p>
+<div class="paragraph data-line-326">
+<p><strong>TIFF</strong> is a tag-based file format for storing and interchanging raster images. It serves as a wrapper for different bitstream encodings for bit-mapped (raster) images. The different encodings may represent different compression schemes and different schemes for color representation (photometric interpretation).&#8201;&#8212;&#8201;<a href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml">Library of Congress</a></p>
 </div>
 </blockquote>
-<div class="attribution">
-&#8212; Library of Congress<br>
-<cite>https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml</cite>
 </div>
+<div class="paragraph data-line-331">
+<p>De keuze voor een bestandsformaat voor ontsluiting hangt af van verschillende factoren:</p>
 </div>
-<div class="paragraph data-line-325">
-<p>De keuze voor 1 van de twee bestanden kan afhangen van verschillende factoren:</p>
-</div>
-<div class="ulist data-line-327">
+<div class="ulist data-line-333">
 <ul>
-<li class="data-line-327">
+<li class="data-line-333">
 <p><strong>Encodering</strong>: bronbestanden converteren naar jp2 is doorgaans eenvoudiger (1 stap) en sneller (resources), mits gebruik van een goede encoder zoals kdu_compress (Kakadu). De creatie van piramidale tiffs is door de band trager. Voor een eenmalige conversie van een in aantal beperkte collectie is de impact beperkt. Wanneer regelmatig grotere batches moeten worden omgezet is de keuze voor jp2 evidenter.</p>
 </li>
-<li class="data-line-328">
+<li class="data-line-334">
 <p><strong>Decodering</strong>: jp2-bestanden moeten in tegenstelling tot tiffs on-the-fly gedecodeerd worden door de image server. Dit zorgt voor een kleine overhead bij het aanbieden van jp2-bestanden die echter beperkt kan worden gehouden door de performante Kakadu library te gebruiken. Anderzijds biedt jp2 de mogelijkheid tot progressive transmission waarbij eerst een lagere resolutie wordt getoond tot de hogere resoluties ingeladen zijn.</p>
 </li>
-<li class="data-line-329">
-<p><strong>Compressie en bestandsgrootte</strong>: afhankelijk van de complexiteit en resolutie van een beeldbestand enerzijds en anderzijds de gekozen compressie-methode kunnen zowel ptiffs als jp2&#8217;s kleiner zijn dan de andere. Zie voorbeeld Getty. Wanneer kwaliteit(sverlies) een belangrijk aandachtpunt is dan biedt jp2 het voordeel van een lossless compressie met een visueel gelijkwaardige kwaliteit van een uncompressed TIFF voor eeen bestand van kleinere omvang. Het verschil in grootte zonder merkbaar kwaliteitsverlies van jp2 tegenover tiff is vooral uitgesproken bij compressie van grotere bestanden met hogere resoluties.</p>
+<li class="data-line-335">
+<p><strong>Compressie en bestandsgrootte</strong>: afhankelijk van de complexiteit en resolutie van een beeldbestand enerzijds en anderzijds de gekozen compressie-methode kunnen zowel ptiffs als jp2&#8217;s kleiner zijn dan de andere. Zie voorbeeld Getty. Wanneer kwaliteit(sverlies) een belangrijk aandachtpunt is dan biedt jp2 het voordeel van een lossless compressie met een visueel gelijkwaardige kwaliteit van een uncompressed TIFF voor eeen bestand van kleinere omvang. Het verschil in grootte zonder merkbaar kwaliteitsverlies van jp2 tegenover tiff is vooral uitgesproken bij compressie van grotere bestanden met hogere resoluties. Voor een vergelijking van bestandsgroottes na omzetting zie Appendix A.</p>
 </li>
-<li class="data-line-330">
+<li class="data-line-336">
 <p><strong>Resolutie</strong>: jp2 wordt opgeslagen in de hoogste resolutie maar kan door de gebruikte wavelettechnologie op verschillende (lagere) resoluties gedecodeerd worden. Tiff moet worden opgeslagen met de gewenste resolutielagen, de weergave is beperkt tot deze resoluties.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-332">
+<div class="exampleblock data-line-338">
+<div class="content">
+<div class="paragraph data-line-339">
 <p>Gelet op bovenstaande vergelijking, in combinatie met de expertise bij meemoo met de omzetting en het gebruik van jpeg2000, is gekozen om de afgeleide bestanden in een gecomprimeerd jp2-formaat op te slaan voor gebruik in de image server.</p>
 </div>
-<div class="paragraph data-line-334">
-<p>Voor een vergelijking van bestandsgroottes na omzetting zie Appendix A.</p>
 </div>
 </div>
 </div>
-<div class="sect4 data-line-336">
+</div>
+<div class="sect4 data-line-342">
 <h5 id="_identifiers">Identifiers</h5>
-<div class="paragraph data-line-338">
-<p>De base uri van de Image API is opgebouwd als: {scheme}://{server}/{prefix}/{identifier}. De image server verwacht dat de identifier verwijst naar een (lokaal) bestand.</p>
-</div>
-<div class="paragraph data-line-340">
-<p>Binnen het Archiefsysteem (MAM) van meemoo heeft elke intellectuele entiteit (IE) een persistent identifier of pid, vb.: wp9t14vr7s (krant). Pids worden toegekend aan het begin en gebruikt doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting. Elk media-object van een IE heeft ook een external_id die bestaat uit de pid en bij meervoudige objecten een bijkomende classifier, vb.: wp9t14vr7s_19140404_0001 (pagina 1 van krant).</p>
-</div>
-<div class="paragraph data-line-342">
-<p>Catalogusnummers en overige lokale identifiers kunnen bewaard worden in de metadata van een object in het archiefsysteem. Het gebruiken van deze identifiers veronderstelt echter dat deze enerzijds altijd bekend zijn en anderzijds consequent toegevoegd en beheerd worden.</p>
-</div>
 <div class="paragraph data-line-344">
-<p>Om een zekere en unieke identifier te hebben kiezen we daarom om de external_id te gebruiken uit het meemoo-archiefsysteem. Om bovendien de relatie te bewaren met de IE worden de afgeleide bestanden opgeslagen als {identifier}.{ext}, vb.wp9t14vr7s_19140404_0001.jp2.</p>
+<p>De URI van een typische <em>image request</em> is <a href="https://example.com/iiif/<code>identifier</code>" class="bare">https://example.com/iiif/<code>identifier</code></a>
+Aan de hand van de identifier in de uri weet of kan de image server achterhalen (<em>resolve</em>) welk beeld in de <em>response</em> teruggeven moet worden. Het formaat van de identifier kan vrij gekozen worden (ARK, URN, filename, &#8230;&#8203;) zolang de link met en naar een beeld achterhaalbaar, uniek en persistent is.</p>
 </div>
-<div class="paragraph data-line-346">
-<p>Vertaald naar het gebruik van de identifier in de Image API wordt een information request:</p>
+<div class="paragraph data-line-347">
+<p>Doel is om op een eenduidige manier aan de hand van een gekende pid een beeld te kunnen opvragen via de image API van meemoo zonder dat hiervoor nog de tussenstap van een zogenaamde resolver nodig is. Vaak wordt de identifier gebruikt in de bestandsnaam van het beeld dat wordt opgevraagd.</p>
 </div>
-<div class="paragraph data-line-348">
-<p><a href="https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json">https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json</a></p>
+<div class="paragraph data-line-349">
+<p>In het VKC-project zijn verschillende identifiers gekend voor dezelfde werken, afhankelijk van het systeem waar de collectie en de metadata van de beelden beheerd worden, van historische inventarisnummers tot persistente digitaal-archiefnummers.</p>
 </div>
-<div class="paragraph data-line-350">
-<p>Het is niet de bedoeling een bijkomende resolver te gebruiken om een image request te mappen van een local (VKC) identifier naar een external_id (meemoo) identifier. Om in <a href="https://arthub.vlaamsekunstcollectie.be/nl/iiif/2/kmska:494/manifest.json">cataloognummer</a> (kmska:494) gemapte meemoo-identifier bij VKC bijgehouden moeten worden. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld (vb. via de MediaHaven Rest API).</p>
+<div class="paragraph data-line-351">
+<p>In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke <em>persistent identifier</em> (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor <a href="https://n2t.net/e/noid.html">noid</a>, vb. <code>wp9t14vr7s</code>. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.</p>
 </div>
-</div>
-<div class="sect4 data-line-352">
-<h5 id="_info_json">info.json</h5>
-<div class="paragraph data-line-354">
-<p>Via de info.json biedt de image server informatie over het beeld, voornamelijk technische gegevens maar ook informatie over rechten of services kunnen hierin worden opgenomen.</p>
+<div class="admonitionblock note data-line-354">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een <em>underscore</em>, bijvoorbeeld: <code>wp9t14vr7s_19140404_0001</code>, pagina 1 van krant <code>wp9t14vr7s</code>. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph data-line-356">
+<p>De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoint zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vbijvoorbeeld: <code>wp9t14vr7s_19140404_0001.jp2</code> .
+De meemoo-identifiers moeten uiteraard bekend zijn in de datahub van VKC, bij voorkeur zonder de nood aan bijkomende resolvers en mappings. Met andere woorden VKC zal de meemoo-identifier in de metadata van <a href="https://arthub.vlaamsekunstcollectie.be/nl/catalog/kmska:5006">kmska:494</a> moeten bijhouden om de image en information requests te kunnen doen. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld via de API&#8217;s.</p>
+</div>
+<div class="paragraph data-line-359">
+<p>Vertaald naar een image information request:</p>
+</div>
+<div class="paragraph data-line-361">
+<p><a href="https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json" class="bare">https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json</a></p>
+</div>
+</div>
+<div class="sect4 data-line-363">
+<h5 id="_info_json">info.json</h5>
+<div class="paragraph data-line-365">
+<p>Via de info.json biedt de image server informatie over het beeld, voornamelijk technische gegevens maar ook informatie over rechten of services kunnen hierin worden opgenomen.</p>
+</div>
+<div class="paragraph data-line-367">
 <p>De structuur van een request is: {scheme}://{server}\{/prefix}/{identifier}/info.json, de response is een JSON-LD. Om vlot te werken moet CORS (Cross Origin Resource Sharing) toegestaan zijn en moeten de correcte Accept of Content-type headers gebruikt worden in respectievelijk de request of de response.</p>
 </div>
-<div class="paragraph data-line-358">
+<div class="paragraph data-line-369">
 <p>In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit zou moeten volstaan binnen de scope van dit project en verder. Let wel, <a href="https://iiif.io/api/image/2.1/%23image-information">https://iiif.io/api/image/3.0/#5-image-information</a></p>
 </div>
-<table class="tableblock frame-all grid-all stretch data-line-362">
+<table class="tableblock frame-all grid-all stretch data-line-373">
 <caption class="title">Table 3. info.json properties en hun omschrijving: overgenomen van iiif.io</caption>
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1201,10 +1241,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </tbody>
 </table>
-<div class="paragraph data-line-377">
-<p>Voorbeeld json</p>
-</div>
-<div class="listingblock data-line-380">
+<div class="listingblock data-line-390">
+<div class="title">Voorbeeld json</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "@context": "http://iiif.io/api/image/2/context.json",
@@ -1234,175 +1272,175 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
-<div class="sect4 data-line-408">
+<div class="sect4 data-line-418">
 <h5 id="_authenticatie_en_authorisatie">Authenticatie en authorisatie</h5>
-<div class="paragraph data-line-410">
-<p>Authenticatie en authorisatie zijn niet binnen scope van dit project. meemoo behoudt weliswaar de mogelijkheid om in een later stadium authenticatie te voorzien bijvoorbeeld op basis van de IIIF Authentication API in combinatie met de eigen accesstoken-authenticatie services. In dat geval zal de afnemer (i.c. VKC) voldoende documentatie krijgen om de authenticatie te integreren.</p>
+<div class="paragraph data-line-420">
+<p>Authenticatie en authorisatie zijn niet binnen scope van dit project. meemoo behoudt weliswaar de mogelijkheid om in een later stadium authenticatie te voorzien bijvoorbeeld op basis van de IIIF Authentication API in combinatie met de eigen accesstoken-authenticatie services. In dat geval zal de afnemer (i.c. VKC) voldoende documentatie krijgen om de authenticatie te integreren. Hiervoor dient eerst een grondige analyse te worden uitgevoerd.</p>
 </div>
 <hr>
 </div>
 </div>
-<div class="sect3 data-line-414">
+<div class="sect3 data-line-424">
 <h4 id="_technisch">Technisch</h4>
-<div class="sect4 data-line-416">
+<div class="sect4 data-line-426">
 <h5 id="_standaardisatie">Standaardisatie</h5>
-<div class="paragraph data-line-418">
+<div class="paragraph data-line-428">
 <p>meemoo standardiseert in de mate van het mogelijke haar services op het vlak van programmeertalen, software, RTE, tools voor deployment, gebruik van (open) standaarden, etc. Om tot een onderhoudbare oplossing te komen wordt hierbij best zo nauw mogelijk aangesloten.</p>
 </div>
-<div class="paragraph data-line-420">
+<div class="paragraph data-line-430">
 <p>Ter informatie sommen we de typische toepassingen en software bij meemoo op:</p>
 </div>
-<div class="ulist data-line-422">
+<div class="ulist data-line-432">
 <ul>
-<li class="data-line-422">
+<li class="data-line-432">
 <p>Programmeertaal: Python (in mindere mate Ruby)</p>
 </li>
-<li class="data-line-423">
+<li class="data-line-433">
 <p>Database: PostgreSQL</p>
 </li>
-<li class="data-line-424">
+<li class="data-line-434">
 <p>Webserver en proxy: nginx+</p>
 </li>
-<li class="data-line-425">
+<li class="data-line-435">
 <p>Authenticatie en authorisatie: eigen IdP met authenticatie op basis van SAML2.0 en<br>
 OAuth met LDAP als directory</p>
 </li>
-<li class="data-line-427">
+<li class="data-line-437">
 <p>Runtime environment: containers op Openshift (Cloud) of VMWare (on premise)</p>
 </li>
-<li class="data-line-428">
+<li class="data-line-438">
 <p>Deployment: CI/CD met Jenkins (pipelines), Puppet met Foreman (indien VM)</p>
 </li>
-<li class="data-line-429">
+<li class="data-line-439">
 <p>Versioning: Git (Github)</p>
 </li>
-<li class="data-line-430">
+<li class="data-line-440">
 <p>Logging: stdout naar Elasticsearch/Kibana</p>
 </li>
-<li class="data-line-431">
+<li class="data-line-441">
 <p>Queue: RabbitMQ</p>
 </li>
-<li class="data-line-432">
+<li class="data-line-442">
 <p>Reporting: Data Warehouse + Tableau of PowerBI</p>
 </li>
-<li class="data-line-433">
+<li class="data-line-443">
 <p>Storage: Object Store (S3) of persistent local storage (VM)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-435">
+<div class="paragraph data-line-445">
 <p>Daarnaast streeft meemoo naar het maximaal inpassen van nieuwe ontwikkelingen in haar eigen eco-systeem. Voor de platformen gericht op ontsluiting en interactie is een architectuur uitgewerkt die herhaalbaar en breed inzetbaar is: de zogenaamde Shared Components. Een voorbeeld van een applicatie die volledig met de componenten is gebouwd is <a href="https://onderwijs.hetarchief.be/">Het Archief voor Onderwijs</a>.</p>
 </div>
-<div class="paragraph data-line-437">
+<div class="paragraph data-line-447">
 <p>Het systeem omvat een volledige en modulaire middleware op vlak van ETL, opslag, zoekindex, metadata-API, authenticatie en media delivery, waaruit op basis van de nood componenten kunnen worden ingezet voor de bouw van een toepassing:</p>
 </div>
-<div class="ulist data-line-439">
+<div class="ulist data-line-449">
 <ul>
-<li class="data-line-439">
+<li class="data-line-449">
 <p><a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1172930633/Syncrator">Syncrator</a>: taakgebaseerde ETL-service die de synchronisatie van metadata uit het MAM (de bron) naar de lokale datastore (het doel) verzorgt</p>
 </li>
-<li class="data-line-440">
+<li class="data-line-450">
 <p>(Meta)datastore: een postgresql database die onder meer de metadata van de te ontsluiten archiefitems bevat en ook applicatiespecifieke tabellen kan bevatten</p>
 </li>
-<li class="data-line-441">
+<li class="data-line-451">
 <p><a href="https://gitlab.com/shared-components/indexer">Indexer</a>: een ETL service die de synchronisatie tussen database en index regelt op basis van database triggers en webhooks</p>
 </li>
-<li class="data-line-442">
+<li class="data-line-452">
 <p>ElasticSearch als standaard index die de zoekfunctionaliteit in de platformen mogelijk maakt</p>
 </li>
-<li class="data-line-443">
+<li class="data-line-453">
 <p><a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1373274138">Hasura GraphQL</a> voor naadloos gebruik bovenop een postgresql database. Dit vormt de basis-API waarmee de frontendapplicaties met de datastore kunnen connecteren.</p>
 </li>
-<li class="data-line-444">
+<li class="data-line-454">
 <p><a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1546977330">IDM</a>: een volledige Identity en Access Management stack:</p>
 </li>
-<li class="data-line-446">
+<li class="data-line-456">
 <p>een LDAP store</p>
 </li>
-<li class="data-line-447">
+<li class="data-line-457">
 <p>een SAML IdP</p>
 </li>
-<li class="data-line-448">
+<li class="data-line-458">
 <p>een self-service user management applicatie</p>
 </li>
-<li class="data-line-449">
+<li class="data-line-459">
 <p>een account manager voor admins</p>
 </li>
-<li class="data-line-451">
+<li class="data-line-461">
 <p>Event logger</p>
 </li>
-<li class="data-line-452">
+<li class="data-line-462">
 <p>Media services zoals play ticketing en streaming</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="sect3 data-line-454">
+<div class="sect3 data-line-464">
 <h4 id="_meemoo_infrastructuur">meemoo-infrastructuur</h4>
-<div class="sect4 data-line-456">
+<div class="sect4 data-line-466">
 <h5 id="_hosting_en_deployment">Hosting en deployment</h5>
-<div class="paragraph data-line-458">
+<div class="paragraph data-line-468">
 <p>De image server kan gehost worden bij meemoo op 2 manieren</p>
 </div>
-<div class="ulist data-line-460">
+<div class="ulist data-line-470">
 <ul>
-<li class="data-line-460">
+<li class="data-line-470">
 <p>Virtualisatie in een VM in het eigen datacenter in Oostkamp (DCO)</p>
 </li>
-<li class="data-line-461">
+<li class="data-line-471">
 <p>Virtualisatie in containers op Openshift in IBM Cloud</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-463">
-<p>Gelet op onderstaande punten wordt gekozen voor de eerste oplossing, want:</p>
-</div>
-<div class="ulist data-line-465">
-<ul>
-<li class="data-line-465">
-<p>Netwerkverkeer en bandbreedte zijn goedkoper in DCO dan in de Cloud</p>
-</li>
-<li class="data-line-466">
-<p>Storage is eveneens goedkoper en makkelijk uitbreidbaar in DCO (zie <em>Opslag</em>)</p>
-</li>
-<li class="data-line-467">
-<p>Het netwerkverkeer verloopt via onze eigen nginx proxy met flexibiliteit onder meer op vlak van URL rewrites en image cache</p>
-</li>
-</ul>
-</div>
-<div class="paragraph data-line-469">
-<p>Voor de deployment en management van de software rekenen we op de combinatie Puppet en Foreman. De codebase wordt bewaard en geversioneerd in de Github van meemoo.</p>
-</div>
-</div>
-<div class="sect4 data-line-471">
-<h5 id="_opslag">Opslag</h5>
 <div class="paragraph data-line-473">
-<p>File storage voldoet bij voorkeur aan de volgende vereisten:</p>
+<p>Gelet op onderstaande punten wordt gekozen voor de eerste oplossing, want:</p>
 </div>
 <div class="ulist data-line-475">
 <ul>
 <li class="data-line-475">
-<p>low-latency</p>
+<p>Netwerkverkeer en bandbreedte zijn goedkoper in DCO dan in de Cloud</p>
 </li>
 <li class="data-line-476">
-<p>high-availability</p>
+<p>Storage is eveneens goedkoper en makkelijk uitbreidbaar in DCO (zie <em>Opslag</em>)</p>
 </li>
 <li class="data-line-477">
+<p>Het netwerkverkeer verloopt via onze eigen nginx proxy met flexibiliteit onder meer op vlak van URL rewrites en image cache</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-479">
+<p>Voor de deployment en management van de software rekenen we op de combinatie Puppet en Foreman. De codebase wordt bewaard en geversioneerd in de Github van meemoo.</p>
+</div>
+</div>
+<div class="sect4 data-line-481">
+<h5 id="_opslag">Opslag</h5>
+<div class="paragraph data-line-483">
+<p>File storage voldoet bij voorkeur aan de volgende vereisten:</p>
+</div>
+<div class="ulist data-line-485">
+<ul>
+<li class="data-line-485">
+<p>low-latency</p>
+</li>
+<li class="data-line-486">
+<p>high-availability</p>
+</li>
+<li class="data-line-487">
 <p>low-cost</p>
 </li>
-<li class="data-line-478">
+<li class="data-line-488">
 <p>scaleable</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-480">
+<div class="paragraph data-line-490">
 <p>De door meemoo twee gebruikte oplossingen zijn een eigen Swarm Object Store met S3-connector waarop onder meer de on_disk archiefbestanden en browse copies van het MAM worden bewaard of local disk storage in het datacenter. Beide oplossingen voldoen aan bovenstaande vereisten. Echter, image servers hebben bij voorkeur de bestanden dichtbij en hoewel er S3-oplossingen voor verschillende image servers bestaan zal dit toch trager zijn dan lokale I/O door de overhead van het netwerkverkeer (GET). Aangezien de image server toch in het datacenter wordt gehost en de afgeleide bestanden louter en alleen voor de image server bestaan is het logischer deze te hosten in ons eigen datacenter.</p>
 </div>
-<div class="paragraph data-line-482">
+<div class="paragraph data-line-492">
 <p>Om een inschatting te kunnen maken van de nodige opslag is op een aantal testbestanden een conversie uitgevoerd. Voor de creatie van de jp2 bestanden is kdu_compress van Kakadu gebruikt volgens een profiel van het Bodlean.</p>
 </div>
-<div class="listingblock data-line-485">
+<div class="listingblock data-line-495">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ kdu_compress -i input.tif -o output.jp2
   Clevels=6 Clayers=6 \
@@ -1420,36 +1458,36 @@ OAuth met LDAP als directory</p>
   -rate -|3</code></pre>
 </div>
 </div>
-<div class="ulist data-line-502">
+<div class="ulist data-line-512">
 <ul>
-<li class="data-line-502">
+<li class="data-line-512">
 <p>Creversible: of de compressie omkeerbaar is (lossless) of niet (lossy)</p>
 </li>
-<li class="data-line-503">
+<li class="data-line-513">
 <p>rate: de mate van compressie. een integer of enkel dash (geen)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-505">
+<div class="paragraph data-line-515">
 <p>Hieruit blijkt een reductie van de bestandsgrootte van:</p>
 </div>
-<div class="ulist data-line-507">
+<div class="ulist data-line-517">
 <ul>
-<li class="data-line-507">
+<li class="data-line-517">
 <p>full, lossless &#8658; -43%</p>
 </li>
-<li class="data-line-508">
+<li class="data-line-518">
 <p>bijgeknipt en resized, lossless &#8658; -84%</p>
 </li>
-<li class="data-line-509">
+<li class="data-line-519">
 <p>bijgeknipt en geresized, lossy &#8658; -98%</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-511">
+<div class="paragraph data-line-521">
 <p>Voor het berekenen van de onder- en bovengrens voor benodigde schijfruimte vertrekken we van de totale omvang van de VKC tenant in het meemoo MAM: 32502 tiffs van gemiddeld 250 MB per tiffs = 8.125TB</p>
 </div>
-<table class="tableblock frame-all grid-all stretch data-line-515">
+<table class="tableblock frame-all grid-all stretch data-line-525">
 <caption class="title">Table 4. Schatting minimaal benodigde opslagruimte, afhankelijk van formaat</caption>
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1476,397 +1514,408 @@ OAuth met LDAP als directory</p>
 </tr>
 </tbody>
 </table>
-<div class="paragraph data-line-521">
+<div class="paragraph data-line-531">
 <p>Ter vergelijking, de ca. 300.000 pagina&#8217;s op NVDGO zijn samen 2.4TB, gemiddeld 8MB per afbeelding.</p>
 </div>
 </div>
-<div class="sect4 data-line-523">
+<div class="sect4 data-line-533">
 <h5 id="_monitoring_en_logging">Monitoring en logging</h5>
-<div class="paragraph data-line-525">
+<div class="paragraph data-line-535">
 <p>Applicaties bij meemoo worden gemonitored. Hieronder verstaan we enerzijds het monitoren van de toestand van de applicatie en anderzijds wat er in die toestand gebeurt:</p>
 </div>
-<div class="ulist data-line-527">
+<div class="ulist data-line-537">
 <ul>
-<li class="data-line-527">
+<li class="data-line-537">
 <p>monitoring: draait mijn applicatie, is ze gezond, zijn er issues</p>
 </li>
-<li class="data-line-528">
+<li class="data-line-538">
 <p>logging: wat doet mijn applicatie, welke acties worden uitgevoerd</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-530">
+<div class="paragraph data-line-540">
 <p>De Image endpoint is geen uitzondering. In praktijk houdt dit in dat we de gebruikte resources, de health en uptime en eventuele errors in de gaten houden via PRTG (sensors).</p>
 </div>
-<div class="paragraph data-line-532">
+<div class="paragraph data-line-542">
 <p>Typische voorbeelden van sensoren zijn:</p>
 </div>
-<div class="ulist data-line-534">
+<div class="ulist data-line-544">
 <ul>
-<li class="data-line-534">
+<li class="data-line-544">
 <p>CPU, RAM en Disk usage</p>
 </li>
-<li class="data-line-535">
+<li class="data-line-545">
 <p>Connectiviteit (intern en extern)</p>
 </li>
-<li class="data-line-536">
+<li class="data-line-546">
 <p>HTTP health &amp; liveness checks</p>
 </li>
-<li class="data-line-537">
+<li class="data-line-547">
 <p>Certificaatgeldigheid (indien van toepassing)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-539">
+<div class="paragraph data-line-549">
 <p>De developer guidelines van meemoo worden gehanteerd. Deze kunnen geraadpleegd worden op: <a href="https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging">logging guidelines voor developers</a>.</p>
 </div>
-<div class="paragraph data-line-541">
+<div class="paragraph data-line-551">
 <p>De toepassing logt via stdout naar een ELK-stack (Elasticsearch-Logstash-Kibana). Kort samengevat moeten de log messages voldoen aan de volgende voorwaarden:</p>
 </div>
-<div class="ulist data-line-543">
+<div class="ulist data-line-553">
 <ul>
-<li class="data-line-543">
+<li class="data-line-553">
 <p>Single-line JSON*</p>
 </li>
-<li class="data-line-544">
+<li class="data-line-554">
 <p>Standaard gestructureerd formaat en labels</p>
 </li>
-<li class="data-line-545">
+<li class="data-line-555">
 <p>Logs worden weggeschreven naar stdout/err</p>
 </li>
-<li class="data-line-546">
+<li class="data-line-556">
 <p>De x-correlation-id van de request wordt gebruikt als trace of span-id</p>
 </li>
-<li class="data-line-547">
+<li class="data-line-557">
 <p>Healthz en andere monitoring checks worden niet gelogd</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-549">
+<div class="paragraph data-line-559">
 <p>Optioneel biedt meemoo de mogelijkheid voor het loggen van user events, de zogenaamde event-logger. Aangezien de endpoint voornamelijk bevraagd zal worden door andere services (machines) wordt deze vorm van loggen gezien als buiten scope van dit project en louter vermeld ter informatie.</p>
 </div>
 </div>
 </div>
-<div class="sect3 data-line-551">
+<div class="sect3 data-line-561">
 <h4 id="_performantie">Performantie</h4>
-<div class="paragraph data-line-553">
+<div class="paragraph data-line-563">
 <p>De proefopstelling zal dienen om de baseline performantie te meten en eventuele verbeteringen door te voeren of een voorstel te doen, vb. voor een redundante HA setup, proxy cache, etc. Dit kan op basis van de gegevens uit monitoring en debug logging, maar we voorzien ook de optie van geautomatiseerde load en stress testing. De aandacht richt zich hierbij op:</p>
 </div>
-<div class="ulist data-line-555">
+<div class="ulist data-line-565">
 <ul>
-<li class="data-line-555">
+<li class="data-line-565">
 <p>Throughput (bandbreedte)</p>
 </li>
-<li class="data-line-556">
+<li class="data-line-566">
 <p>nRequests/sec</p>
 </li>
-<li class="data-line-557">
+<li class="data-line-567">
 <p>Response Time</p>
 </li>
-<li class="data-line-558">
+<li class="data-line-568">
 <p>Up Time</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3 data-line-560">
+<div class="sect3 data-line-570">
 <h4 id="_documentatie">Documentatie</h4>
-<div class="paragraph data-line-562">
-<p>Alle applicaties bij meemoo worden beschreven en gedocumenteerd op de Confluence wiki van meemoo in de _Software Factory._Daarnaast bevat elke code repository een README. Handleidingen en developer documentatie worden afhankelijk van de mate van openbaarheid bewaard op de vermelde wiki of indien nuttig ontsloten via <a href="https://developer.meemoo.be/">https://developer.meemoo.be</a>.</p>
+<div class="paragraph data-line-572">
+<p>Alle applicaties bij meemoo worden beschreven en gedocumenteerd op de Confluence wiki van meemoo in de <em>Software Factory.</em> Daarnaast bevat elke code repository een README. Handleidingen en technische documentatie worden afhankelijk van de nodige toegang bewaard op de wiki of indien nuttig ontsloten via <a href="https://developer.meemoo.be/">developer.meemoo.be</a> of het partnerportaal van meemoo.</p>
 </div>
-<div class="paragraph data-line-564">
+<div class="paragraph data-line-574">
 <p>Worden minstens gedocumenteerd:</p>
 </div>
-<div class="ulist data-line-566">
+<div class="ulist data-line-576">
 <ul>
-<li class="data-line-566">
+<li class="data-line-576">
 <p>technische details omgeving (uri&#8217;s, auth, software, dependencies, repo, etc.)</p>
 </li>
-<li class="data-line-567">
+<li class="data-line-577">
 <p>verantwoordelijke en medewerkers</p>
 </li>
-<li class="data-line-568">
+<li class="data-line-578">
 <p>installatieprocedure</p>
 </li>
-<li class="data-line-569">
+<li class="data-line-579">
 <p>links naar externe documentatie</p>
+</li>
+<li class="data-line-580">
+<p>API calls en responses</p>
 </li>
 </ul>
 </div>
 <hr>
 </div>
 </div>
-<div class="sect2 data-line-573">
+<div class="sect2 data-line-584">
 <h3 id="_architectuur">Architectuur</h3>
-<div class="sect3 data-line-575">
+<div class="sect3 data-line-586">
 <h4 id="_diagram_eenvoudig">Diagram (eenvoudig)</h4>
-<div class="imageblock data-line-578">
+<div class="imageblock data-line-589">
 <div class="content">
 <img src="images/iiif-basic-architecture.png" alt="Simple architecture diagram">
 </div>
-<div class="title">Figure 2. Eenvoudige voorstelling van IIIF-architectuur (to be) bij meemoo</div>
+<div class="title">Figure 3. Eenvoudige voorstelling van IIIF-architectuur (to be) bij meemoo</div>
 </div>
 </div>
-<div class="sect3 data-line-580">
+<div class="sect3 data-line-591">
 <h4 id="_componenten">Componenten</h4>
-<div class="paragraph data-line-582">
-<p>Er zijn drie specifieke softwarecomponenten, maar alleen 1 en (optioneel) 2 zijn in scope van dit project:</p>
+<div class="paragraph data-line-593">
+<p>Er zijn drie specifieke softwarecomponenten, maar alleen 1 is in scope van dit project:</p>
 </div>
-<div class="olist arabic data-line-584">
+<div class="olist arabic data-line-595">
 <ol class="arabic">
-<li class="data-line-584">
+<li class="data-line-595">
 <p>Image API: de IIIF compliant image server die beelden levert aan een image viewer</p>
 </li>
-<li class="data-line-585">
-<p>Download API: een custom applicatie die een hoogresolutiebestand levert in een bepaald formaat</p>
+<li class="data-line-596">
+<p><em>Download API: een custom applicatie die een hoogresolutiebestand levert in een bepaald formaat</em></p>
 </li>
-<li class="data-line-586">
-<p>Presentation API: een custom applicatie die IIIF compliant manifests levert</p>
+<li class="data-line-597">
+<p><em>Presentation API: een custom applicatie die IIIF compliant manifests levert</em></p>
 </li>
 </ol>
 </div>
-<div class="sect4 data-line-588">
+<div class="sect4 data-line-599">
 <h5 id="_http_proxy">HTTP Proxy</h5>
-<div class="paragraph data-line-590">
-<p>Requests verstuurd naar <a href="https://images.meemoo.be/">https://images.meemoo.be</a> worden opgevangen op de nginx proxy-server van meemoo. De Proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL&#8217;s vertaald en herschreven.</p>
+<div class="paragraph data-line-601">
+<p>Requests verstuurd naar <a href="https://images.hetarchief.be/">https://images.hetarchief.be</a> worden opgevangen op de nginx proxy-server van meemoo. De proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL&#8217;s vertaald en herschreven.</p>
 </div>
-<div class="paragraph data-line-592">
+<div class="paragraph data-line-603">
 <p>Daarnaast fungeert de proxy ook als <a href="https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/%23processes">content cache</a> voor de image server. Dit gebeurt bijvoorbeeld voor de jpeg-afbeeldingen die door image server van NVDGO worden aangemaakt. De disk cache van de proxy is een aanvulling op de memcached cache van de image server.</p>
 </div>
 </div>
-<div class="sect4 data-line-594">
+<div class="sect4 data-line-605">
 <h5 id="_image_api">Image API</h5>
-<div class="paragraph data-line-596">
+<div class="paragraph data-line-607">
 <p>IIIF beschrijft een set aan verplichte en optionele voorwaarden en aanbevelingen waaraan een API moet voldoen. Bijvoorbeeld op vlak van de request URI&#8217;s, response formats en metadata. Het voornaamste en quasi enige doel van de image server is het aanleveren van afbeeldingen voor (her)gebruik in een image viewer of andere toepassingen, op basis van de parameters in de zogenaamde image request request.</p>
 </div>
-<div class="sect5 data-line-598">
-<h6 id="_image_request_2">Image request</h6>
-<div class="paragraph data-line-600">
-<p><a href="https://images.meemoo.be/iiif/&lt;identifier:external_id&gt;/{region}/{size}/{rotation}/{quality}.{format}" class="bare">https://images.meemoo.be/iiif/&lt;identifier:external_id&gt;/{region}/{size}/{rotation}/{quality}.{format}</a></p>
+<div class="exampleblock data-line-610">
+<div class="title">Example 3. Image request</div>
+<div class="content">
+<div class="paragraph data-line-611">
+<p><code>https://images.hetarchief.be/iiif/&lt;identifier:external_id&gt;/\{region}/\{size}/\{rotation}/\{quality}.\{format}</code></p>
 </div>
-<div class="paragraph data-line-602">
+</div>
+</div>
+<div class="paragraph data-line-614">
 <p>Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij <a href="https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json">info.json</a>.</p>
 </div>
+<div class="exampleblock data-line-617">
+<div class="title">Example 4. Image information request</div>
+<div class="content">
+<div class="paragraph data-line-618">
+<p><code>https://images.hetarchief.be/iiif/\{identifier:external_id}/\{info.json}</code></p>
 </div>
-<div class="sect5 data-line-604">
-<h6 id="_image_information_request_2">Image information request</h6>
-<div class="paragraph data-line-606">
-<p><a href="https://images.meemoo.be/iiif/\{identifier:external_id}/\{info.json}" class="bare">https://images.meemoo.be/iiif/\{identifier:external_id}/\{info.json}</a></p>
 </div>
-<div class="paragraph data-line-608">
-<p>Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, &#8230;&#8203;). Doorgaans wordt verwezen naar <a href="https://github.com/IIIF/awesome-iiif%23image-servers">IIIF/awesome-iiif</a> voor de meest volledige lijst van "mature" image servers die voldoen aan de specificaties van IIIF.</p>
 </div>
-<div class="paragraph data-line-610">
-<p>Voor dit document is geen nieuwe benchmark of technische vergelijking op basis van installaties gemaakt van de verschillende image servers. Er zijn vergelijkingen en benchmarks van image servers beschikbaar zoals recent nog in het <a href="https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing">Getty Common Image Service Research &amp; Design Report (2018)</a>. Ook hier komt IIPImage zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.</p>
+<div class="paragraph data-line-621">
+<p>Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, &#8230;&#8203;). Zie <a href="https://github.com/IIIF/awesome-iiif%23image-servers">IIIF/awesome-iiif</a> voor een uitgebreide lijst van "mature" IIIF-compliant image servers.</p>
 </div>
-<div class="paragraph data-line-612">
-<p>Typische pluspunten die naar voren worden geschoven:</p>
+<div class="paragraph data-line-623">
+<p>Voor dit document is geen technische benchmark verricht op basis van geïnstalleerde image servers. Een recente vergelijking en benchmark van image servers werd uitgevoerd door Getty en gerapporteerd in <a href="https://drive.google.com/file/d/1pB2eqlSlC4Ua5ZrEEEdJTbofl0wdDApg/view?usp%3Dsharing">Getty Common Image Service Research &amp; Design Report (2018)</a>. IIPImage komt hier zowel voor tiff als voor jp2 (indien met Kakadu als decoder) als betrouwbaar en consistent performant naar boven.</p>
 </div>
-<div class="ulist data-line-614">
+<div class="paragraph data-line-625">
+<p>Typische pluspunten die naar voren worden geschoven zijn:</p>
+</div>
+<div class="ulist data-line-627">
 <ul>
-<li class="data-line-614">
-<p>Bewezen technologie. IIPimage wordt breed ingezet in productieomgevingen tot zeer grote omvang en bij<br>
-grote spelers</p>
+<li class="data-line-627">
+<p>Bewezen technologie. IIPImage wordt breed ingezet in productieomgevingen tot zeer grote omvang en bij grote spelers</p>
 </li>
-<li class="data-line-616">
+<li class="data-line-628">
 <p>Jpeg2000 (jp2) ondersteuning met zowel Kakadu als de verbeterde OpenJpeg</p>
 </li>
-<li class="data-line-617">
+<li class="data-line-629">
 <p>Stabiele prestaties en betrouwbare performantie ook met grote datasets van hogere kwaliteit (C++)</p>
 </li>
-<li class="data-line-618">
+<li class="data-line-630">
 <p>Eenvoudige installatie(vereisten): PHP+webserver met fastcgi zoals nginx, Apache</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-620">
-<p>Ook in het voordeel:</p>
+<div class="paragraph data-line-632">
+<p>Spreken ook in het voordeel:</p>
 </div>
-<div class="ulist data-line-622">
+<div class="ulist data-line-634">
 <ul>
-<li class="data-line-622">
+<li class="data-line-634">
 <p>Configureerbaar via variabelen</p>
 </li>
-<li class="data-line-623">
-<p>Wordt actief ontwikkeld en ondersteund</p>
+<li class="data-line-635">
+<p>Matuur en nog steeds actief ontwikkeld en ondersteund</p>
 </li>
-<li class="data-line-624">
-<p>Online documentatie, forum, code</p>
+<li class="data-line-636">
+<p>Online beschikbaarheid van documentatie, gebruikersforum, code</p>
 </li>
-<li class="data-line-625">
-<p>Ondersteuning voor Image API 2.1 <a href="https://github.com/ruven/iipsrv/issues/177">en sinds kort ook 3.0</a> (zie onder)</p>
-</li>
-<li class="data-line-626">
-<p>Embedded metadata in tiles</p>
+<li class="data-line-637">
+<p>Ondersteuning voor Image API 2.1 <a href="https://github.com/ruven/iipsrv/issues/177">en sinds kort ook 3.0</a>:</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-628">
-<p>Nadelen:</p>
-</div>
-<div class="ulist data-line-630">
-<ul>
-<li class="data-line-630">
-<p>Niet level 2 compliant wegens geen png output (zelf toe te voegen)</p>
-</li>
-<li class="data-line-631">
-<p>API versie 3.0 is nog maar zeer recent</p>
-</li>
-<li class="data-line-632">
-<p>Slechts 1 maintainer (wel community)</p>
-</li>
-<li class="data-line-633">
-<p>Soms veel tijd tussen releases (maar die zijn dan wel stabiel )</p>
-</li>
-</ul>
-</div>
-<div class="paragraph data-line-635">
-<p>Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.</p>
-</div>
-<div class="paragraph data-line-637">
+<div class="quoteblock data-line-638">
+<blockquote>
+<div class="paragraph data-line-639">
 <p>IIPImage is now fully version 3 compliant. This commit 1d6c0d5 adds a new server directive IIIF_VERSION which allows you to set the IIIF Image API version (2 or 3). Essentially this affects the info.json output.</p>
 </div>
-<div class="paragraph data-line-639">
-<p>Nodig voor de installatie van IIPImage server (ipsrv) zijn:</p>
+</blockquote>
 </div>
 <div class="ulist data-line-641">
 <ul>
 <li class="data-line-641">
+<p>Embedded metadata in tiles</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-643">
+<p>Er zijn echter ook minpunten:</p>
+</div>
+<div class="ulist data-line-645">
+<ul>
+<li class="data-line-645">
+<p>Niet level 2 compliant wegens geen png output (zelf toe te voegen)</p>
+</li>
+<li class="data-line-646">
+<p>Ondersteuning voor de Image API versie 3.0 is nog maar zeer recent</p>
+</li>
+<li class="data-line-647">
+<p>Slechts 1 hoofd-maintainer (wel community)</p>
+</li>
+<li class="data-line-648">
+<p>Soms veel tijd tussen releases (maar die zijn dan wel stabiel)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph data-line-652">
+<p>Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.</p>
+</div>
+<div class="paragraph data-line-654">
+<p>De standaardvereisten voor de installatie van de IIPImage software (ipsrv) zijn:</p>
+</div>
+<div class="ulist data-line-656">
+<ul>
+<li class="data-line-656">
 <p>OS: Debian</p>
 </li>
-<li class="data-line-642">
+<li class="data-line-657">
 <p>Installatie: autoconf of via apt-get (Debian 7+)</p>
 </li>
-<li class="data-line-643">
-<p>Webserver: Apache+fcgi module (mod_fastcgi) + Nginx proxy</p>
+<li class="data-line-658">
+<p>Webserver: Apache+fcgi module (mod_fastcgi) + Nginx proxy (rewrites etc.)</p>
 </li>
-<li class="data-line-644">
+<li class="data-line-659">
 <p>Libraries: libtiff, zlib, kakadu</p>
 </li>
-<li class="data-line-645">
+<li class="data-line-660">
 <p>Configuratie: startup variables, httpd.conf, clean URL&#8217;s en logging (syslog)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-647">
+<div class="paragraph data-line-662">
 <p>Voor meer opties en configuratiemogelijkheden zie: <a href="https://iipimage.sourceforge.io/documentation/server/">https://iipimage.sourceforge.io/documentation/server/</a></p>
 </div>
 </div>
-</div>
-<div class="sect4 data-line-649">
+<div class="sect4 data-line-664">
 <h5 id="_download_api">Download API</h5>
-<div class="paragraph data-line-651">
-<p>Kleine webapplicatie die op basis van het path een bronbestand in een bepaald formaat als download aanbiedt.</p>
+<div class="paragraph data-line-666">
+<p>IIPImage voorziet als default enkel de "download" van het volledige bestand in jpeg-formaat. Het is niet mogelijk het jp2-bestand of een rasterformaat zoals tiff of png te downloaden via de IIIF endpoint. Indien er voldoende vraag is naar beelden in de verschillende bestandsformaten en of andere transformatie te downloaden kan dit worden opgevangen met een kleine webapplicatie die op basis van de identifier een afgeleide in een bepaald formaat als download aanbiedt.</p>
 </div>
-<div class="paragraph data-line-653">
-<p>WIP In welke mate maakt dit deel uit van de scope van dit project, is dit een vereiste?</p>
+<div class="paragraph data-line-668">
+<p>Tenzij dit wordt gezien als een ernstige regressie van de huidige setup van VKC, behoort deze API niet tot de scope van het project, maar dit kan op termijn wel deel uiitmaken van de meemoo-setup.</p>
 </div>
-<div class="paragraph data-line-655">
-<p><a href="https://images.meemoo.be/download/%257Bidentifier:external_id%257D/%257Bformat:jp2%257Ctiff%257Cpng">https://images.meemoo.be/download/\{identifier:external_id}/\{format:jp2|tiff|png</a>}</p>
+<div class="exampleblock data-line-671">
+<div class="title">Example 5. Mogelijke download request</div>
+<div class="content">
+<div class="paragraph data-line-672">
+<p><code>https://images.hetarchief.be/download/\{identifier:external-id}.{format:jpg|jp2|tiff|png]}</code></p>
 </div>
 </div>
-<div class="sect4 data-line-657">
+</div>
+</div>
+<div class="sect4 data-line-675">
 <h5 id="_presentation_api">Presentation API</h5>
-<div class="paragraph data-line-659">
-<p>De presentation API is niet in scope van dit project aangezien de bestaande API binnen het VKC-ecosysteem zal worden gebruikt. Op termijn zal meemoo wel een presentation API (3.0) voorzien, gebruik makend van de eigen shared components (meemoo-ecoysteem) voor ETL, metadata storage en API endpoint.</p>
+<div class="paragraph data-line-677">
+<p>De presentation API is niet in scope van dit project aangezien de bestaande API binnen het VKC-ecosysteem zal worden gebruikt. Op termijn wil meemoo wel een presentation API (3.0) voorzien, gebruik makend van de eigen shared components (meemoo-ecoysteem) voor ETL, metadata storage en API endpoint.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect2 data-line-661">
-<h3 id="_impact_en_timing">Impact en timing</h3>
-<div class="paragraph data-line-663">
+<div class="sect2 data-line-679">
+<h3 id="_impact">Impact</h3>
+<div class="paragraph data-line-681">
 <p>Voor de realisatie van de in dit document beschreven opstelling wordt een impact verwacht op:</p>
 </div>
-<div class="paragraph data-line-665">
-<p>Infrastructuur:</p>
-</div>
-<div class="ulist data-line-667">
+<div class="dlist data-line-683">
+<dl>
+<dt class="hdlist1">Infrastructuur</dt>
+<dd>
+<div class="ulist data-line-684">
 <ul>
-<li class="data-line-667">
+<li class="data-line-684">
 <p>aanmaken en configureren van VM&#8217;s</p>
 </li>
-<li class="data-line-668">
+<li class="data-line-685">
 <p>allocatie van storage</p>
 </li>
-<li class="data-line-669">
-<p>netwerkconnectiviteit</p>
+<li class="data-line-686">
+<p>voorzien en configureren netwerkconnectiviteit</p>
 </li>
-<li class="data-line-670">
-<p>DNS</p>
+<li class="data-line-687">
+<p>DNS-configuratie</p>
 </li>
-<li class="data-line-671">
-<p>nginx configuratie</p>
+<li class="data-line-688">
+<p>nginx-configuratie</p>
 </li>
-<li class="data-line-672">
+<li class="data-line-689">
 <p>monitoring en maintenance</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-674">
-<p>Devops:</p>
-</div>
-<div class="ulist data-line-676">
+</dd>
+<dt class="hdlist1">Devops</dt>
+<dd>
+<div class="ulist data-line-693">
 <ul>
-<li class="data-line-676">
-<p>installatie en configuratie software</p>
+<li class="data-line-693">
+<p>installatie en configuratie van de IIPImage software</p>
 </li>
-<li class="data-line-677">
-<p>ontwikkeling custom componenten</p>
+<li class="data-line-694">
+<p>deployment configuratie: Openshift en Jenkins</p>
 </li>
-<li class="data-line-678">
-<p>deployment configuratie</p>
+<li class="data-line-695">
+<p>ontwikkeling custom componenten en scripts</p>
 </li>
-<li class="data-line-679">
+<li class="data-line-696">
 <p>automatisering workflow afgeleide beeldbestanden</p>
 </li>
-<li class="data-line-680">
-<p>maintenance</p>
+<li class="data-line-697">
+<p>monitoring en maintenance</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-682">
-<p>Business:</p>
-</div>
-<div class="ulist data-line-684">
+</dd>
+<dt class="hdlist1">Business</dt>
+<dd>
+<div class="ulist data-line-701">
 <ul>
-<li class="data-line-684">
-<p>aanmaak en controle afgeleide beeldbestanden (bewerking, bijsnijden en verkleinen) ism devops</p>
+<li class="data-line-701">
+<p>workflow aanmaak en controle afgeleide beeldbestanden (bewerking, bijsnijden en verkleinen) ism devops</p>
 </li>
-<li class="data-line-685">
+<li class="data-line-702">
 <p>QA en testen van de opstelling</p>
 </li>
-<li class="data-line-686">
+<li class="data-line-703">
 <p>metadatabeheer</p>
+</li>
+<li class="data-line-704">
+<p>opvolging</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note data-line-688">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Todo &#8658; Inschatting + planning (Gantt).
-</td>
-</tr>
-</table>
+</dd>
+</dl>
 </div>
 </div>
-<div class="sect2 data-line-690">
-<h3 id="_wip_conclusie">WIP Conclusie</h3>
-<div class="admonitionblock note data-line-692">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Te schrijven bij finaliseren deliverable.
-</td>
-</tr>
-</table>
+<div class="sect2 data-line-708">
+<h3 id="_conclusie">Conclusie</h3>
+<div class="paragraph data-line-710">
+<p>meemoo voorziet in het kader van het IIIF-project fase 2 van VKC een IIIF Image API. De API zal in eerste instantie een aanbod van De Musea voor Schone Kunsten en de Brugse Musea ontsluiten voor gebruik door VKC. VKC voorziet in de presentation API. Op termijn zal de endpoint breder ingezet worden met een groter aanbod en zowel voor gebruik door derden als voor eigen gebruik van meemoo.</p>
+</div>
+<div class="paragraph data-line-712">
+<p>De endpoint zal bestaan uit een IIPImage image server met lokale opslag en bereikbaar via een nginx proxy-server. De implementatie gebeurt volledig op de infrastructuur van en door meemoo.</p>
+</div>
+<div class="paragraph data-line-714">
+<p>Als ontsluitingsformaat wordt jpeg2000 (jp2) gehanteerd. Er wordt een workflow uitgewerkt waarmee de archiefbestanden vlot kunnen worden omgezet naar dit formaat. De afgeleide bestanden worden op de meemoo-infrastructuur bewaard.</p>
 </div>
 </div>
 </div>
