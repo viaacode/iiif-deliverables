@@ -162,7 +162,7 @@ Hiervoor werd een Python script geschreven dat via nginx-specifieke X-Accel-Redi
 .Image information request
 ====
 https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json]
-====
+
 [source,json]
 ----
 {
@@ -201,13 +201,13 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
   }]
 }
 ----
+====
 
 .Image request:
 ====
 . https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
 
 . https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
-====
 
 [source,json]
 ----
@@ -249,6 +249,7 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
 }
 ----
 <1> Uit het voorbeeld blijkt dat image langs twee routes via IIIF kan opgevraagd worden. Hoewel beide requests afgehandeld worden door dezelfde image server wijkt de info.json via http://iif.meemoo.be af. Zie https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90[meemoo iiif-mapping op Github].
+====
 
 '''''
 
@@ -566,7 +567,7 @@ De proefopstelling zal dienen om de baseline performantie te meten en eventuele 
 
 ==== Documentatie
 
-Alle applicaties bij meemoo worden beschreven en gedocumenteerd op de Confluence wiki van meemoo in de _Software Factory._Daarnaast bevat elke code repository een README. Handleidingen en developer documentatie worden afhankelijk van de mate van openbaarheid bewaard op de vermelde wiki of indien nuttig ontsloten via https://developer.meemoo.be/[https://developer.meemoo.be].
+Alle applicaties bij meemoo worden beschreven en gedocumenteerd op de Confluence wiki van meemoo in de _Software Factory._ Daarnaast bevat elke code repository een README. Handleidingen en technische documentatie worden afhankelijk van de nodige toegang bewaard op de wiki of indien nuttig ontsloten via https://developer.meemoo.be/[developer.meemoo.be] of het partnerportaal van meemoo.
 
 Worden minstens gedocumenteerd:
 
@@ -574,6 +575,7 @@ Worden minstens gedocumenteerd:
 * verantwoordelijke en medewerkers
 * installatieprocedure
 * links naar externe documentatie
+* API calls en responses
 
 '''''
 
