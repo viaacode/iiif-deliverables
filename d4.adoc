@@ -1,7 +1,7 @@
 IIIF : Deliverable 4: IIIF image endpoint bij meemoo
 ====================================================
 Bart Debunne <bart.debunne@meemoo.be>
-3, 28-04-2021
+3, 29-04-2021
 :Revision: 3
 :nofooter:
 :imagesdir: images
