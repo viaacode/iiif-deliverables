@@ -707,7 +707,7 @@ Business::
 
 === Conclusie
 
-meemoo voorziet in het kader van het IIIF-project fase 2 van VKC een IIIF Image API. De API zal in eerste instantie een aanbod van De Musea voor Schone Kunsten en de Brugse Musea ontsluiten voor gebruik door VKC. VKC voorziet in de presentation API. Op termijn zal de endpoint breder ingezet worden met een groter aanbod en zowel voor gebruik door derden als voor eigen gebruik van meemoo.
+meemoo voorziet in het kader van het IIIF-project fase 2 van VKC een IIIF Image API. De API zal in eerste instantie een aanbod van De Schone Kunsten Musea ontsluiten voor gebruik door VKC. VKC voorziet in de presentation API. Op termijn zal de endpoint breder ingezet worden met een groter aanbod en zowel voor gebruik door derden als voor eigen gebruik van meemoo.
 
 De endpoint zal bestaan uit een IIPImage image server met lokale opslag en bereikbaar via een nginx proxy-server. De implementatie gebeurt volledig op de infrastructuur van en door meemoo.
 
