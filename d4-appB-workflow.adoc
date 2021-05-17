@@ -105,6 +105,13 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 _https://readthedocs.org/projects/image-processing/downloads/pdf/latest/_
 
 
+===== Copy metadata
+
+kdu_compress kopieert niet alle metadata tags.
+
+Suggestie: copy (all) tags from src to dest, met exiftool
+https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html#copying%20examples
+
 ===== Test en validate
 
 Test:
