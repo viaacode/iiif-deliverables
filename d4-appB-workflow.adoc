@@ -39,7 +39,8 @@ CAUTION: Voor afgeleide bestanden moet onderscheid worden gemaakt tussen werken 
 * Embedded metadata(XMP, Exif, ICC) wordt indien aanwezig overgenomen van het origineel
 ====
 
-=== Resampling vs resizing vs
+=== Resampling vs resizing vs ...
+
 De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld is niet per se in verhouding en is afhankelijk van de leeftijd, de fotograaf, het opnametoestel, etc. Voor sommige grote werken zijn verschillende foto's aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.
 
 Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate een relatie bestaat tussen de fysieke en digitale afmetingen op basis waarvan herschaling dynamisch kan gebeuren. We onderzoeken dit aan de hand vaan een aantal typewerken zoals _Pierrot et Squelette en Jaune_ van James Ensor.
@@ -66,29 +67,30 @@ Te onderzoeken hoe in een productieomgeving dit getriggered kan worden. Bijvoorb
 
 ==== Transform
 
-.Detect en crop kleurenkaart
+===== Detect en crop kleurenkaart
 
 Voor het detecteren van de kleurenkaart maken we gebruik van de colorchecker zoals ontwikkeled voor het Flore de Gand project. Wanneer een kleurenkaart wordt herkend dan wordt de afbeelding bijgesneden en opgeslaan.
 
 Zie: https://github.com/tckrishna/colorchecker.git
 
-  The code is such that, when an input image is provided, it would perform detections and crop out the colour scale so that only the painting would be saved.
+[quote]
+The code is such that, when an input image is provided, it would perform detections and crop out the colour scale so that only the painting would be saved.
 
 Documentatie en tutorial op: https://colab.research.google.com/drive/1OreAxCrCTkTqbIxu2Z_8KWuCujKyyncI?usp=sharing
 
-.Resize
+===== Resize
 
-NOTE: `TODO` Analyse nodig van de ratio fysieke afmeting tgo afmeting in pixels.
+`TODO` Analyse nodig van de ratio fysieke afmeting tgo afmeting in pixels.
 
 https://pillow.readthedocs.io/en/stable/reference/Image.html
 
-.Detect and set Color Profile
+===== Detect and set Color Profile
 
 In de volgende stap `kdu_compress` wordt het kleurenprofiel vervangen door de value voor `-jp2_space`. Het is echter onduidelijk of dit ook daadwerkelijk het bestand omzet naar dit profiel. En of dit ook geldt wanneer een afbeelding geen kleurenprofiel heeft.
 
 Zoniet moet eerst gedetecteerd worden of er een profile aanwezig is en zoniet moet dit worden gezet als `sRGB`.
 
-.Encode
+===== Encode
 
 Voor het comprimeren en opslaan als jp2 gebruiken we de Kakadu software (binaries) waarvoor we een license hebben.
 
@@ -103,7 +105,7 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 _https://readthedocs.org/projects/image-processing/downloads/pdf/latest/_
 
 
-.Test en validate
+===== Test en validate
 
 Test:
 
@@ -124,6 +126,10 @@ https://exiftool.org/exiftool_pod.html
 Bestanden worden naar een dest folder gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden.
 
 De folder doet ook dienst als media mount of fodler voor de IIPImage server.
+
+==== Clean
+
+Remove intermediary and temp files
 
 == Technische specs
 
