@@ -62,7 +62,7 @@ De workflow kan gezien worden als een ETL-proces. Hierin worden min of meer proc
 
 === Extract
 
-Exporteer de originele tiff-bestanden van tape naar lokale disk. Op basis van een of meerdere pids (external_id).
+Exporteer de originele tiff-bestanden van tape naar lokale disk. Op basis van een of meerdere pids (external_id) met behulp van de MediaHaven REST API. (There's a python lib for that)
 
 In deze fase doen we eenmalig een export van beelden die nu reeds ontsloten worden via de VKC Arthub, vb. https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A, naar disk. Van daaruit kunnen dan een of meer bestanden naar een werkfolder gekopieerd worden om de workflow te bouwen en te testen, zonder dat de originele bestanden telkens opnieuw geëxporteerd moeten worden.
 
