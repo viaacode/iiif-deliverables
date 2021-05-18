@@ -27,7 +27,9 @@ toc::[]
 
 == Doelstelling
 
-== Image specs
+== Specificaties
+
+=== Afgeleide beeldbestanden
 
 CAUTION: Voor afgeleide bestanden moet onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met de auteursrechtenorganisatie Sabam heeft, worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een resolutie van maximum 72dpi hebben. Onderstaande specificaties hebben betrekking op werken die niet onder die overeenkomst vallen.
 
@@ -39,29 +41,30 @@ CAUTION: Voor afgeleide bestanden moet onderscheid worden gemaakt tussen werken 
 * Embedded metadata(XMP, Exif, ICC) wordt indien aanwezig overgenomen van het origineel
 ====
 
-=== Resampling vs resizing vs ...
+=== anchor:rel-scale[]Relatief herschalen
 
-De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld is niet per se in verhouding en is afhankelijk van de leeftijd, de fotograaf, het opnametoestel, etc. Voor sommige grote werken zijn verschillende foto's aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.
+De te ontsluiten collectie is zowel qua type als qua fysieke afmeting zeer divers, voor de hele VKC-collectie spreken we over heel kleine objecten van een paar centimeter tot wandtapijten, of een wandkaart van ettelijke meters hoog en breed. De afmeting in pixels van het digitale beeld is niet per se in verhouding en is afhankelijk van het moment van de opname, de fotograaf, het opnametoestel, etc. Voor sommige grote werken zijn verschillende foto's aan elkaar geplakt (stitching). Andere zijn gevat in 1 foto. Relatief gesproken kan een groter fysiek werk in aantal pixels kleiner of gelijk zijn aan een fysiek kleiner werk.
 
-Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate een relatie bestaat tussen de fysieke en digitale afmetingen op basis waarvan herschaling dynamisch kan gebeuren. We onderzoeken dit aan de hand vaan een aantal typewerken zoals _Pierrot et Squelette en Jaune_ van James Ensor.
+Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte van kleine werken met een in verhouding hoger aantal pixels, zal binnen dit project bekeken worden in welke mate een relatie bestaat tussen de fysieke en digitale afmetingen op basis waarvan herschaling dynamisch kan gebeuren. We onderzoeken dit aan de hand van een aantal typewerken zoals bijvoorbeeld _Pierrot et Squelette en Jaune_ van James Ensor.
 
-== Workflow
+== Taken
 
-.Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden
-image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7",alt="workflow voor creatie afgeleiden als jp2"]
+De workflow kan gezien worden als een ETL-proces. Hierin worden min of meer procedureel de volgende taken uitgevoerd:
 
-Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
-Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.
+* Haal bestand op van tape aan de hand van een id
+* Detecteer randinformatie en snij bij indien nodig
+* Herschaal tot bepaalde grootte
+* Zet om naar sRGB
+* Sla op als gecomprimeerde jp2 inclusief originele metadata
+* Analyseer en valideer resultaat
+* Verplaatst naar eindbestemming
+* Kuis op
 
-=== Taken
-
-De workflow kan gezien worden als een ETL.
-
-==== Extract
+=== Extract
 
 Exporteer de originele tiff-bestanden van tape naar lokale disk. Op basis van een of meerdere pids (external_id).
 
-In deze fase doen we eenmalig een export van de beelden die nu reeds ontsloten worden via de VKC Arthub, vb. https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A, naar disk. Van daaruit kunnen dan een of meer bestanden naar een werkfolder gekopieerd worden om de workflow te bouwen en te testen, zonder dat de originele bestanden telkens opnieuw geëxporteerd moeten worden.
+In deze fase doen we eenmalig een export van beelden die nu reeds ontsloten worden via de VKC Arthub, vb. https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A, naar disk. Van daaruit kunnen dan een of meer bestanden naar een werkfolder gekopieerd worden om de workflow te bouwen en te testen, zonder dat de originele bestanden telkens opnieuw geëxporteerd moeten worden.
 
 Te onderzoeken hoe in een productieomgeving dit getriggered kan worden. Bijvoorbeeld door plaatsen van een metadata flag in MAM waardoor export naar een watch_folder on disk en de rest van de workflow automatisch getriggerd kan worden.
 
@@ -69,7 +72,7 @@ Te onderzoeken hoe in een productieomgeving dit getriggered kan worden. Bijvoorb
 
 ===== Detect en crop kleurenkaart
 
-Voor het detecteren van de kleurenkaart maken we gebruik van de colorchecker zoals ontwikkeled voor het Flore de Gand project. Wanneer een kleurenkaart wordt herkend dan wordt de afbeelding bijgesneden en opgeslaan.
+Voor het detecteren van de kleurenkaart maken we gebruik van de https://github.com/tckrishna/colorchecker[colorchecker] zoals ontwikkeled voor het Flore de Gand project. Wanneer een kleurenkaart wordt herkend dan wordt de afbeelding bijgesneden en opgeslaan.
 
 Zie: https://github.com/tckrishna/colorchecker.git
 
@@ -80,15 +83,29 @@ Documentatie en tutorial op: https://colab.research.google.com/drive/1OreAxCrCTk
 
 ===== Resize
 
-`TODO` Analyse nodig van de ratio fysieke afmeting tgo afmeting in pixels.
+`TODO` Analyse nodig van de ratio fysieke afmeting tgo afmeting in pixels. Aan de hand van een representatief staal wordt gekeken of er een relevante relatie is tussen de grootte van een afbeelding en de fysieke afmeting van een werk en of het al dan niet nuttig is rekening mee te houden bij het herschalen van het digitale beeld. Zie boven bij <<rel-scale,Relatief herschalen>>
 
-https://pillow.readthedocs.io/en/stable/reference/Image.html
+De afbeelding wordt herschaald binnen een voorafbepaalde marge. Momenteel is de baseline vastgesteld op 5000px voor de langste zijde.
+
+Zowel de huidige afmetingen bepalen als _resize_ kan met standaard python modules zoals
+https://pillow.readthedocs.io/en/stable/reference/Image.html[pillow]. Bijvoorbeeld:
+[source,python]
+----
+from PIL import Image
+
+# Image size in pixels
+image = Image.open('some.tif')
+width, height = image.size
+----
 
 ===== Detect and set Color Profile
 
-In de volgende stap `kdu_compress` wordt het kleurenprofiel vervangen door de value voor `-jp2_space`. Het is echter onduidelijk of dit ook daadwerkelijk het bestand omzet naar dit profiel. En of dit ook geldt wanneer een afbeelding geen kleurenprofiel heeft.
+Bij het encoderen van een bestand met `kdu_compress` wordt het kleurenprofiel vervangen door de value voor `-jp2_space` (zie <<kdu-icc,kdu_compress>>) Het is echter onduidelijk of dit ook daadwerkelijk het bestand omzet naar dit profiel. En of dit ook geldt wanneer een afbeelding geen kleurenprofiel heeft.
 
 Zoniet moet eerst gedetecteerd worden of er een profile aanwezig is en zoniet moet dit worden gezet als `sRGB`.
+
+Voorbeeld in Python met pillow of skimage:
+https://scikit-image.org/docs/dev/api/skimage.color.html#convert-colorspace
 
 ===== Encode
 
@@ -98,7 +115,7 @@ Voor het comprimeren en opslaan als jp2 gebruiken we de Kakadu software (binarie
 kdu_compress -i input.tif -o output.jp2 Clevels=6 Clayers=6 "Cprecincts={256,256},{256,256},{128,128}" "Stiles={512,512}" Corder=RPCL ORGgen_plt=yes ORGtparts=R "Cblk={64,64}" -jp2_space "sRGB" Cuse_sop=yes Cuse_eph=yes -flush_period 1024 Creversible=no -rate 3
 
 IMPORTANT: The JPEG 2000 format supports only a restricted set of ICC Profile features.
-The -jp2_space parameter on kdu_compress sets the colour profile in the image metadata, but does not otherwise convert the image - the pixel values remain the same. The sRGB value sets the colour profile to the sRGB IEC61966-2.1 profile. (This is not the only way to set the colour profile)
+The anchor:kdu-icc[]-jp2_space parameter on kdu_compress sets the colour profile in the image metadata, but does not otherwise convert the image - the pixel values remain the same. The sRGB value sets the colour profile to the sRGB IEC61966-2.1 profile. (This is not the only way to set the colour profile)
 Kakadu (and JP2 itself) will not support CYMK images:
 Only three colour channels, R (red), G (green) and B (blue), are supported by the JP2 file format.
 For example the sRGB v4 ICC preference profile is not supported, and cannot be embedded into a JP2 file using Kakadu. Setting -jp2_space sRGB on kdu_compress will erase the embedded profile and so allow it to be converted. The sRGB IEC61966-2.1 profile thus assigned is sufficiently different that in some cases there is a noticeable tint to the created JP2.
@@ -137,6 +154,14 @@ De folder doet ook dienst als media mount of fodler voor de IIPImage server.
 ==== Clean
 
 Remove intermediary and temp files
+
+== Workflow
+
+.Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden
+image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7",alt="workflow voor creatie afgeleiden als jp2"]
+
+Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
+Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.
 
 == Technische specs
 
