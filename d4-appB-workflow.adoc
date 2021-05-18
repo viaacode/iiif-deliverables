@@ -131,29 +131,27 @@ https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html#copying%20exam
 
 ===== Test en validate
 
-Test:
+Valideer dat het eindresultaat voldoet aan de volgende assertions
 
-* ppi => 300
-* icc => sRGB
-* iptc, xmp same as source
-* valid jp2
+* ppi = 300
+* icc = sRGB
+* metadata tags = source file tags
+* file is valid jp2
 
 https://jpylyzer.openpreservation.org
 https://github.com/openpreserve/jpylyzer
 https://exiftool.org/index.html
 https://exiftool.org/exiftool_pod.html
 
-
-
 ==== Load
 
-Bestanden worden naar een dest folder gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden.
+Bestanden worden naar de eindbestemming gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden.
 
-De folder doet ook dienst als media mount of fodler voor de IIPImage server.
+De eidnbestemming is een folder die de media mount point is voor de IIPImage server.
 
 ==== Clean
 
-Remove intermediary and temp files
+Tussentijdse bestanden en met succes verwerkte bronbestanden worden verwijderd.
 
 == Workflow
 
@@ -163,16 +161,15 @@ image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d89303
 Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
 Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.
 
-== Technische specs
-
-* Scripting: Python
-* Metadata: exiftool
-* JP2-encode: kdu_compress
-* JP2-validaty: jpylyzer
-* Tests: ?
-* Orchestartion: Airflow?
-
-== Infrastructuur
+== Omgeving
 
 DEV: lokaal
-QAS en PRD: VM +data
+QAS en PRD: Debian VM + data store (disk)
+
+Minstens nodig:
+* Taal: Python
+* Metadata read/write: exiftool
+* jp2 schrijven: kdu_compress (kakadu)
+* jp2 validatie: jpylyzer
+* Tests: ?
+* Orchestration: Airflow?
