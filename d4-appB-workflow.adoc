@@ -132,8 +132,14 @@ _https://readthedocs.org/projects/image-processing/downloads/pdf/latest/_
 
 kdu_compress kopieert niet alle metadata tags.
 
-Suggestie: copy (all) tags from src to dest, met exiftool
-https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html#copying%20examples
+Met behulp van een tool als. _exiftool_ kunnen embedded metadatatags zoals XMP en IPTC gelezen, geschreven of eventueel gekopieerd worden. Onderstaand commando geeft alle XMP en IPTC tags gegroepeerd per _tag family_ terug in JSON-formaat.
+
+[source,shell]
+$ exiftool 7659c97c0w.tif -XMP:All -IPTC:All -g0:1 -json
+
+De resulterende json kan gebruikt worden om de relevante tags in de afgeleide jp2 file te schrijven. Het kan nodig zijn redundante en niet (langer) relevante tags eerst te verwijderen.
+
+Zie voor meer informatie de https://exiftool.org/[Exiftool website] en de https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html[Exiftool manual met voorbeelden.]
 
 ===== Test en validate
 
