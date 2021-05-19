@@ -1,8 +1,8 @@
 IIIF : Deliverable 4 - APPENDIX B: image processing workflow
 ============================================================
 Bart Debunne <bart.debunne@meemoo.be>
-1, 17-05-2021
-:Revision: 1
+2, 19-05-2021
+:Revision: 2
 :nofooter:
 :imagesdir: images
 :source-highlighter: rouge
@@ -57,12 +57,16 @@ De workflow kan gezien worden als een ETL-proces. Hierin worden min of meer proc
 * Zet om naar sRGB
 * Sla op als gecomprimeerde jp2 inclusief originele metadata
 * Analyseer en valideer resultaat
-* Verplaatst naar eindbestemming
+* Verplaats naar eindbestemming
 * Kuis op
 
 === Extract
 
-Exporteer de originele tiff-bestanden van tape naar lokale disk. Op basis van een of meerdere pids (external_id) met behulp van de MediaHaven REST API. (There's a python lib for that)
+Exporteer de originele tiff-bestanden van tape naar lokale disk. Op basis van een of meerdere pids (external_id) met behulp van de MediaHaven REST API.
+
+Voor het exporteren van een esssence is een fragment-id nodig. Indien niet bekend kan die worden opgehaald aan de hand van de pid en een metadata query naar de REST API.
+
+Voor meer informatie over de REST API van MediaHaven en het exporteren van essences zie de https://archief.viaa.be/mediahaven-rest-api/#mediahaven-rest-api-manual-exporting[Mediahaven REST API manual]
 
 In deze fase doen we eenmalig een export van beelden die nu reeds ontsloten worden via de VKC Arthub, vb. https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A, naar disk. Van daaruit kunnen dan een of meer bestanden naar een werkfolder gekopieerd worden om de workflow te bouwen en te testen, zonder dat de originele bestanden telkens opnieuw geëxporteerd moeten worden.
 
@@ -73,6 +77,8 @@ Te onderzoeken hoe in een productieomgeving dit getriggered kan worden. Bijvoorb
 ===== Detect en crop kleurenkaart
 
 Voor het detecteren van de kleurenkaart maken we gebruik van de https://github.com/tckrishna/colorchecker[colorchecker] zoals ontwikkeled voor het Flore de Gand project. Wanneer een kleurenkaart wordt herkend dan wordt de afbeelding bijgesneden en opgeslaan.
+
+De colorchecker zou ook in staat moeten zijn om kaders en randen te detecteren, zoals een passe-partout of lijst. Het zou in een tweede fase mogelijk zijn om een model te trainen om ook dit bij te snijden.
 
 Zie: https://github.com/tckrishna/colorchecker.git
 
@@ -136,7 +142,8 @@ Valideer dat het eindresultaat voldoet aan de volgende assertions
 * ppi = 300
 * icc = sRGB
 * metadata tags = source file tags
-* file is valid jp2
+* file format = valid jp2
+* file name = pid
 
 https://jpylyzer.openpreservation.org
 https://github.com/openpreserve/jpylyzer
@@ -145,13 +152,14 @@ https://exiftool.org/exiftool_pod.html
 
 ==== Load
 
-Bestanden worden naar de eindbestemming gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden.
+Bestanden worden naar de eindbestemming gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden. Als bestandsnaam wordt de meemoo pid (external_id) gebruikt en `.jp2` als extensie.
 
-De eidnbestemming is een folder die de media mount point is voor de IIPImage server.
+De eindbestemming is een folder die de media mount point is voor de IIPImage server.
 
 ==== Clean
 
 Tussentijdse bestanden en met succes verwerkte bronbestanden worden verwijderd.
+Gefaalde bestanden blijven staan voor inspectie.
 
 == Workflow
 
@@ -161,15 +169,26 @@ image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d89303
 Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
 Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.
 
-== Omgeving
+== Tech specs
 
-DEV: lokaal
+=== Omgevingen
+
+DEV: lokale omgeving bij dev
 QAS en PRD: Debian VM + data store (disk)
 
-Minstens nodig:
+Deployment via Puppet/Foreman en parametriseerbaar.
+
+=== Stack
+
 * Taal: Python
 * Metadata read/write: exiftool
 * jp2 schrijven: kdu_compress (kakadu)
 * jp2 validatie: jpylyzer
-* Tests: ?
-* Orchestration: Airflow?
+
+=== Execute
+
+Via orchestrator zoals Airflow? Webhook of event based triggers?
+
+=== Observability
+
+Single line json logging naar stdout op machine.
