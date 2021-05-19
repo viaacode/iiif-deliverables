@@ -132,14 +132,16 @@ _https://readthedocs.org/projects/image-processing/downloads/pdf/latest/_
 
 kdu_compress kopieert niet alle metadata tags.
 
-Met behulp van een tool als. _exiftool_ kunnen embedded metadatatags zoals XMP en IPTC gelezen, geschreven of eventueel gekopieerd worden. Onderstaand commando geeft alle XMP en IPTC tags gegroepeerd per _tag family_ terug in JSON-formaat.
+Met behulp van een tool als. _exiftool_ kunnen embedded metadatatags zoals XMP en IPTC gelezen, geschreven of eventueel gekopieerd worden. Onderstaand commando bijvoorbeeld geeft alle XMP en IPTC tags gegroepeerd per _tag family_ terug in JSON-formaat.
 
 [source,shell]
 $ exiftool 7659c97c0w.tif -XMP:All -IPTC:All -g0:1 -json
 
-De resulterende json kan gebruikt worden om de relevante tags in de afgeleide jp2 file te schrijven. Het kan nodig zijn redundante en niet (langer) relevante tags eerst te verwijderen.
+De resulterende json kan gebruikt worden om de relevante tags in de afgeleide jp2 file te schrijven. Het kan nodig zijn redundante en niet (langer) relevante tags eerst te verwijderen. Het is eveneens mogelijk tags toe te voegen op basis van metadata uit het MAM of de VKC databronnen.
 
 Zie voor meer informatie de https://exiftool.org/[Exiftool website] en de https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html[Exiftool manual met voorbeelden.]
+
+Meer info over IPTC: http://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata
 
 ===== Test en validate
 
@@ -197,4 +199,4 @@ Via orchestrator zoals Airflow? Webhook of event based triggers?
 
 === Observability
 
-Single line json logging naar stdout op machine.
+Single line json logging naar stdout op machine en via Filebeat(?) naar Elastic.
