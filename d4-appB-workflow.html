@@ -70,8 +70,8 @@ table {
 <div class="details">
 <span id="author" class="author">Bart Debunne</span><br>
 <span id="email" class="email"><a href="mailto:bart.debunne@meemoo.be">bart.debunne@meemoo.be</a></span><br>
-<span id="revnumber">version 1,</span>
-<span id="revdate">17-05-2021</span>
+<span id="revnumber">version 2,</span>
+<span id="revdate">19-05-2021</span>
 </div>
 </div>
 <div id="content">
@@ -99,7 +99,14 @@ table {
 </ul>
 </li>
 <li><a href="#_workflow">Workflow</a></li>
-<li><a href="#_omgeving">Omgeving</a></li>
+<li><a href="#_tech_specs">Tech specs</a>
+<ul class="sectlevel2">
+<li><a href="#_omgevingen">Omgevingen</a></li>
+<li><a href="#_stack">Stack</a></li>
+<li><a href="#_execute">Execute</a></li>
+<li><a href="#_observability">Observability</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <hr>
@@ -190,7 +197,7 @@ Voor afgeleide bestanden moet onderscheid worden gemaakt tussen werken in public
 <p>Analyseer en valideer resultaat</p>
 </li>
 <li class="data-line-60">
-<p>Verplaatst naar eindbestemming</p>
+<p>Verplaats naar eindbestemming</p>
 </li>
 <li class="data-line-61">
 <p>Kuis op</p>
@@ -200,46 +207,55 @@ Voor afgeleide bestanden moet onderscheid worden gemaakt tussen werken in public
 <div class="sect2 data-line-63">
 <h3 id="_extract">Extract</h3>
 <div class="paragraph data-line-65">
-<p>Exporteer de originele tiff-bestanden van tape naar lokale disk. Op basis van een of meerdere pids (external_id) met behulp van de MediaHaven REST API. (There&#8217;s a python lib for that)</p>
+<p>Exporteer de originele tiff-bestanden van tape naar lokale disk. Op basis van een of meerdere pids (external_id) met behulp van de MediaHaven REST API.</p>
 </div>
 <div class="paragraph data-line-67">
-<p>In deze fase doen we eenmalig een export van beelden die nu reeds ontsloten worden via de VKC Arthub, vb. <a href="https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A" class="bare">https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A</a>, naar disk. Van daaruit kunnen dan een of meer bestanden naar een werkfolder gekopieerd worden om de workflow te bouwen en te testen, zonder dat de originele bestanden telkens opnieuw geëxporteerd moeten worden.</p>
+<p>Voor het exporteren van een esssence is een fragment-id nodig. Indien niet bekend kan die worden opgehaald aan de hand van de pid en een metadata query naar de REST API.</p>
 </div>
 <div class="paragraph data-line-69">
+<p>Voor meer informatie over de REST API van MediaHaven en het exporteren van essences zie de <a href="https://archief.viaa.be/mediahaven-rest-api/#mediahaven-rest-api-manual-exporting">Mediahaven REST API manual</a></p>
+</div>
+<div class="paragraph data-line-71">
+<p>In deze fase doen we eenmalig een export van beelden die nu reeds ontsloten worden via de VKC Arthub, vb. <a href="https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A" class="bare">https://arthub.vlaamsekunstcollectie.be/nl/catalog/mskgent:1907-A</a>, naar disk. Van daaruit kunnen dan een of meer bestanden naar een werkfolder gekopieerd worden om de workflow te bouwen en te testen, zonder dat de originele bestanden telkens opnieuw geëxporteerd moeten worden.</p>
+</div>
+<div class="paragraph data-line-73">
 <p>Te onderzoeken hoe in een productieomgeving dit getriggered kan worden. Bijvoorbeeld door plaatsen van een metadata flag in MAM waardoor export naar een watch_folder on disk en de rest van de workflow automatisch getriggerd kan worden.</p>
 </div>
-<div class="sect3 data-line-71">
+<div class="sect3 data-line-75">
 <h4 id="_transform">Transform</h4>
-<div class="sect4 data-line-73">
+<div class="sect4 data-line-77">
 <h5 id="_detect_en_crop_kleurenkaart">Detect en crop kleurenkaart</h5>
-<div class="paragraph data-line-75">
+<div class="paragraph data-line-79">
 <p>Voor het detecteren van de kleurenkaart maken we gebruik van de <a href="https://github.com/tckrishna/colorchecker">colorchecker</a> zoals ontwikkeled voor het Flore de Gand project. Wanneer een kleurenkaart wordt herkend dan wordt de afbeelding bijgesneden en opgeslaan.</p>
 </div>
-<div class="paragraph data-line-77">
+<div class="paragraph data-line-81">
+<p>De colorchecker zou ook in staat moeten zijn om kaders en randen te detecteren, zoals een passe-partout of lijst. Het zou in een tweede fase mogelijk zijn om een model te trainen om ook dit bij te snijden.</p>
+</div>
+<div class="paragraph data-line-83">
 <p>Zie: <a href="https://github.com/tckrishna/colorchecker.git" class="bare">https://github.com/tckrishna/colorchecker.git</a></p>
 </div>
-<div class="quoteblock data-line-80">
+<div class="quoteblock data-line-86">
 <blockquote>
 The code is such that, when an input image is provided, it would perform detections and crop out the colour scale so that only the painting would be saved.
 </blockquote>
 </div>
-<div class="paragraph data-line-82">
+<div class="paragraph data-line-88">
 <p>Documentatie en tutorial op: <a href="https://colab.research.google.com/drive/1OreAxCrCTkTqbIxu2Z_8KWuCujKyyncI?usp=sharing" class="bare">https://colab.research.google.com/drive/1OreAxCrCTkTqbIxu2Z_8KWuCujKyyncI?usp=sharing</a></p>
 </div>
 </div>
-<div class="sect4 data-line-84">
+<div class="sect4 data-line-90">
 <h5 id="_resize">Resize</h5>
-<div class="paragraph data-line-86">
+<div class="paragraph data-line-92">
 <p><code>TODO</code> Analyse nodig van de ratio fysieke afmeting tgo afmeting in pixels. Aan de hand van een representatief staal wordt gekeken of er een relevante relatie is tussen de grootte van een afbeelding en de fysieke afmeting van een werk en of het al dan niet nuttig is rekening mee te houden bij het herschalen van het digitale beeld. Zie boven bij <a href="#rel-scale">Relatief herschalen</a></p>
 </div>
-<div class="paragraph data-line-88">
+<div class="paragraph data-line-94">
 <p>De afbeelding wordt herschaald binnen een voorafbepaalde marge. Momenteel is de baseline vastgesteld op 5000px voor de langste zijde.</p>
 </div>
-<div class="paragraph data-line-90">
+<div class="paragraph data-line-96">
 <p>Zowel de huidige afmetingen bepalen als <em>resize</em> kan met standaard python modules zoals
 <a href="https://pillow.readthedocs.io/en/stable/reference/Image.html">pillow</a>. Bijvoorbeeld:</p>
 </div>
-<div class="listingblock data-line-93">
+<div class="listingblock data-line-99">
 <div class="content">
 <pre class="highlight"><code class="language-python" data-lang="python">from PIL import Image
 
@@ -249,30 +265,30 @@ width, height = image.size</code></pre>
 </div>
 </div>
 </div>
-<div class="sect4 data-line-101">
+<div class="sect4 data-line-107">
 <h5 id="_detect_and_set_color_profile">Detect and set Color Profile</h5>
-<div class="paragraph data-line-103">
+<div class="paragraph data-line-109">
 <p>Bij het encoderen van een bestand met <code>kdu_compress</code> wordt het kleurenprofiel vervangen door de value voor <code>-jp2_space</code> (zie <a href="#kdu-icc">kdu_compress</a>) Het is echter onduidelijk of dit ook daadwerkelijk het bestand omzet naar dit profiel. En of dit ook geldt wanneer een afbeelding geen kleurenprofiel heeft.</p>
 </div>
-<div class="paragraph data-line-105">
+<div class="paragraph data-line-111">
 <p>Zoniet moet eerst gedetecteerd worden of er een profile aanwezig is en zoniet moet dit worden gezet als <code>sRGB</code>.</p>
 </div>
-<div class="paragraph data-line-107">
+<div class="paragraph data-line-113">
 <p>Voorbeeld in Python met pillow of skimage:
 <a href="https://scikit-image.org/docs/dev/api/skimage.color.html#convert-colorspace" class="bare">https://scikit-image.org/docs/dev/api/skimage.color.html#convert-colorspace</a></p>
 </div>
 </div>
-<div class="sect4 data-line-110">
+<div class="sect4 data-line-116">
 <h5 id="_encode">Encode</h5>
-<div class="paragraph data-line-112">
+<div class="paragraph data-line-118">
 <p>Voor het comprimeren en opslaan als jp2 gebruiken we de Kakadu software (binaries) waarvoor we een license hebben.</p>
 </div>
-<div class="listingblock data-line-115">
+<div class="listingblock data-line-121">
 <div class="content">
 <pre class="highlight"><code>kdu_compress -i input.tif -o output.jp2 Clevels=6 Clayers=6 "Cprecincts={256,256},{256,256},{128,128}" "Stiles={512,512}" Corder=RPCL ORGgen_plt=yes ORGtparts=R "Cblk={64,64}" -jp2_space "sRGB" Cuse_sop=yes Cuse_eph=yes -flush_period 1024 Creversible=no -rate 3</code></pre>
 </div>
 </div>
-<div class="admonitionblock important data-line-117">
+<div class="admonitionblock important data-line-123">
 <table>
 <tr>
 <td class="icon">
@@ -290,38 +306,54 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 </table>
 </div>
 </div>
-<div class="sect4 data-line-125">
+<div class="sect4 data-line-131">
 <h5 id="_copy_metadata">Copy metadata</h5>
-<div class="paragraph data-line-127">
+<div class="paragraph data-line-133">
 <p>kdu_compress kopieert niet alle metadata tags.</p>
 </div>
-<div class="paragraph data-line-129">
-<p>Suggestie: copy (all) tags from src to dest, met exiftool
-<a href="https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html#copying%20examples" class="bare">https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html#copying%20examples</a></p>
+<div class="paragraph data-line-135">
+<p>Met behulp van een tool als. <em>exiftool</em> kunnen embedded metadatatags zoals XMP en IPTC gelezen, geschreven of eventueel gekopieerd worden. Onderstaand commando bijvoorbeeld geeft alle XMP en IPTC tags gegroepeerd per <em>tag family</em> terug in JSON-formaat.</p>
+</div>
+<div class="listingblock data-line-138">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ exiftool 7659c97c0w.tif -XMP:All -IPTC:All -g0:1 -json</code></pre>
 </div>
 </div>
-<div class="sect4 data-line-132">
+<div class="paragraph data-line-140">
+<p>De resulterende json kan gebruikt worden om de relevante tags in de afgeleide jp2 file te schrijven. Het kan nodig zijn redundante en niet (langer) relevante tags eerst te verwijderen. Het is eveneens mogelijk tags toe te voegen op basis van metadata uit het MAM of de VKC databronnen.</p>
+</div>
+<div class="paragraph data-line-142">
+<p>Zie voor meer informatie de <a href="https://exiftool.org/">Exiftool website</a> en de <a href="https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html">Exiftool manual met voorbeelden.</a></p>
+</div>
+<div class="paragraph data-line-144">
+<p>Meer info over IPTC: <a href="http://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata" class="bare">http://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata</a></p>
+</div>
+</div>
+<div class="sect4 data-line-146">
 <h5 id="_test_en_validate">Test en validate</h5>
-<div class="paragraph data-line-134">
+<div class="paragraph data-line-148">
 <p>Valideer dat het eindresultaat voldoet aan de volgende assertions</p>
 </div>
-<div class="ulist data-line-136">
+<div class="ulist data-line-150">
 <ul>
-<li class="data-line-136">
+<li class="data-line-150">
 <p>ppi = 300</p>
 </li>
-<li class="data-line-137">
+<li class="data-line-151">
 <p>icc = sRGB</p>
 </li>
-<li class="data-line-138">
+<li class="data-line-152">
 <p>metadata tags = source file tags</p>
 </li>
-<li class="data-line-139">
-<p>file is valid jp2</p>
+<li class="data-line-153">
+<p>file format = valid jp2</p>
+</li>
+<li class="data-line-154">
+<p>file name = pid</p>
 </li>
 </ul>
 </div>
-<div class="paragraph data-line-141">
+<div class="paragraph data-line-156">
 <p><a href="https://jpylyzer.openpreservation.org" class="bare">https://jpylyzer.openpreservation.org</a>
 <a href="https://github.com/openpreserve/jpylyzer" class="bare">https://github.com/openpreserve/jpylyzer</a>
 <a href="https://exiftool.org/index.html" class="bare">https://exiftool.org/index.html</a>
@@ -329,54 +361,83 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 </div>
 </div>
 </div>
-<div class="sect3 data-line-146">
+<div class="sect3 data-line-161">
 <h4 id="_load">Load</h4>
-<div class="paragraph data-line-148">
-<p>Bestanden worden naar de eindbestemming gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden.</p>
+<div class="paragraph data-line-163">
+<p>Bestanden worden naar de eindbestemming gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden. Als bestandsnaam wordt de meemoo pid (external_id) gebruikt en <code>.jp2</code> als extensie.</p>
 </div>
-<div class="paragraph data-line-150">
-<p>De eidnbestemming is een folder die de media mount point is voor de IIPImage server.</p>
+<div class="paragraph data-line-165">
+<p>De eindbestemming is een folder die de media mount point is voor de IIPImage server.</p>
 </div>
 </div>
-<div class="sect3 data-line-152">
+<div class="sect3 data-line-167">
 <h4 id="_clean">Clean</h4>
-<div class="paragraph data-line-154">
-<p>Tussentijdse bestanden en met succes verwerkte bronbestanden worden verwijderd.</p>
+<div class="paragraph data-line-169">
+<p>Tussentijdse bestanden en met succes verwerkte bronbestanden worden verwijderd.
+Gefaalde bestanden blijven staan voor inspectie.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-156">
+<div class="sect1 data-line-172">
 <h2 id="_workflow">Workflow</h2>
 <div class="sectionbody">
-<div class="imageblock data-line-159">
+<div class="imageblock data-line-175">
 <div class="content">
 <a class="image" href="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7"><img src="images/iiif-jp2-derived-image-workflow.svg" alt="workflow voor creatie afgeleiden als jp2"></a>
 </div>
 <div class="title">Figure 1. Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden</div>
 </div>
-<div class="paragraph data-line-161">
+<div class="paragraph data-line-177">
 <p>Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
 Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.</p>
 </div>
 </div>
 </div>
-<div class="sect1 data-line-164">
-<h2 id="_omgeving">Omgeving</h2>
+<div class="sect1 data-line-180">
+<h2 id="_tech_specs">Tech specs</h2>
 <div class="sectionbody">
-<div class="paragraph data-line-166">
-<p>DEV: lokaal
+<div class="sect2 data-line-182">
+<h3 id="_omgevingen">Omgevingen</h3>
+<div class="paragraph data-line-184">
+<p>DEV: lokale omgeving bij dev
 QAS en PRD: Debian VM + data store (disk)</p>
 </div>
-<div class="paragraph data-line-169">
-<p>Minstens nodig:
-* Taal: Python
-* Metadata read/write: exiftool
-* jp2 schrijven: kdu_compress (kakadu)
-* jp2 validatie: jpylyzer
-* Tests: ?
-* Orchestration: Airflow?</p>
+<div class="paragraph data-line-187">
+<p>Deployment via Puppet/Foreman en parametriseerbaar.</p>
+</div>
+</div>
+<div class="sect2 data-line-189">
+<h3 id="_stack">Stack</h3>
+<div class="ulist data-line-191">
+<ul>
+<li class="data-line-191">
+<p>Taal: Python</p>
+</li>
+<li class="data-line-192">
+<p>Metadata read/write: exiftool</p>
+</li>
+<li class="data-line-193">
+<p>jp2 schrijven: kdu_compress (kakadu)</p>
+</li>
+<li class="data-line-194">
+<p>jp2 validatie: jpylyzer</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2 data-line-196">
+<h3 id="_execute">Execute</h3>
+<div class="paragraph data-line-198">
+<p>Via orchestrator zoals Airflow? Webhook of event based triggers?</p>
+</div>
+</div>
+<div class="sect2 data-line-200">
+<h3 id="_observability">Observability</h3>
+<div class="paragraph data-line-202">
+<p>Single line json logging naar stdout op machine en via Filebeat(?) naar Elastic.</p>
+</div>
 </div>
 </div>
 </div>
