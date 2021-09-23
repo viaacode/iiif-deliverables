@@ -2,9 +2,9 @@ IIIF : Deliverable 4: IIIF image endpoint bij meemoo
 ====================================================
 Bart Debunne <bart.debunne@meemoo.be>
 3, 29-04-2021
-:Revision: 3
+:Revision: 4, final
 :nofooter:
-:imagesdir: images
+:imagesdir: ../images
 :source-highlighter: rouge
 // fix missing admonition icons on Github
 ifdef::env-github[]
