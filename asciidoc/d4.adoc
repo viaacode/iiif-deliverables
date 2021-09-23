@@ -602,7 +602,7 @@ Er zijn drie specifieke softwarecomponenten, maar alleen 1 is in scope van dit p
 
 ===== HTTP Proxy
 
-Requests verstuurd naar https://images.hetarchief.be/[https://images.hetarchief.be] worden opgevangen op de nginx proxy-server van meemoo. De proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL's vertaald en herschreven.
+Requests verstuurd naar https://images.meemoo.be/[https://images.meemoo.be] worden opgevangen op de nginx proxy-server van meemoo. De proxy routeert het verkeer op basis van het path naar de gewenste onderliggende applicatie of onderliggende functie en geeft de respectievelijke responses terug aan de "requester". Indien nodig worden tijdens dit proces URL's vertaald en herschreven en headers toegevoegd.
 
 Daarnaast fungeert de proxy ook als https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/%23processes[content cache] voor de image server. Dit gebeurt bijvoorbeeld voor de jpeg-afbeeldingen die door image server van NVDGO worden aangemaakt. De disk cache van de proxy is een aanvulling op de memcached cache van de image server.
 
@@ -612,14 +612,14 @@ IIIF beschrijft een set aan verplichte en optionele voorwaarden en aanbevelingen
 
 .Image request
 ====
-`https://images.hetarchief.be/iiif/<identifier:external_id>/\{region}/\{size}/\{rotation}/\{quality}.\{format}`
+`https://images.meemoo.be/iiif/<identifier:external_id>.<ext>/{region}/{size}/{rotation}/{quality}.{format}`
 ====
 
-Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een JSON-LD bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie boven bij https://meemoo.atlassian.net/wiki/spaces/IIIF/pages/2473952003/Deliverable%2B4%2BIIIF%2Bimage%2Bendpoint%2Bbij%2Bmeemoo%23info.json[info.json].
+Daarnaast moet de API ook kunnen antwoorden op een image information request. De response moet een json (of JSON-LD in versie 3.0)bestand teruggeven: info.json. Naast een set aan verplichte en optionele technische informatie kan dit bestand ook metadata bevatten over rechten en licenties en aan het beeldbestand gerelateerde services zoals authenticatie. Zie het hoofdstuk over info.json.
 
 .Image information request
 ====
-`https://images.hetarchief.be/iiif/\{identifier:external_id}/\{info.json}`
+`https://images.meemoo.be/iiif/\{identifier:external_id}/\{info.json}`
 ====
 
 Hoewel de API strikt omschreven is kunnen IIIF-compliant Image servers sterk verschillen op het vlak van gemak van installatie en configuratie, snelheid en features, roadmap en ondersteuning en de gebruikte programmeertaal (Ruby, Python, PHP, Java, C++, ...). Zie https://github.com/IIIF/awesome-iiif%23image-servers[IIIF/awesome-iiif] voor een uitgebreide lijst van "mature" IIIF-compliant image servers.
@@ -642,16 +642,14 @@ Spreken ook in het voordeel:
 ____
 IIPImage is now fully version 3 compliant. This commit 1d6c0d5 adds a new server directive IIIF_VERSION which allows you to set the IIIF Image API version (2 or 3). Essentially this affects the info.json output.
 ____
-* Embedded metadata in tiles
+* level 2 compliancy door toevoeging van png als output format
 
 Er zijn echter ook minpunten:
 
-* Niet level 2 compliant wegens geen png output (zelf toe te voegen)
+* Embedded metadata in tiles is enkel voor tiff
 * Ondersteuning voor de Image API versie 3.0 is nog maar zeer recent
-* Slechts 1 hoofd-maintainer (wel community)
+* 1 hoofd-maintainer (maar wel actieve community)
 * Soms veel tijd tussen releases (maar die zijn dan wel stabiel)
-
-
 
 Aangezien meemoo reeds ervaring heeft met de installatie en opzet van een IIPImage server, inclusief Kakadu, en deze al een paar jaar stabiel in productie draait en gelet op de maturiteit en boven beschreven voordelen zal verder worden gebouwd op deze expertise.
 
@@ -667,9 +665,9 @@ Voor meer opties en configuratiemogelijkheden zie: https://iipimage.sourceforge.
 
 ===== Download API
 
-IIPImage voorziet als default enkel de "download" van het volledige bestand in jpeg-formaat. Het is niet mogelijk het jp2-bestand of een rasterformaat zoals tiff of png te downloaden via de IIIF endpoint. Indien er voldoende vraag is naar beelden in de verschillende bestandsformaten en of andere transformatie te downloaden kan dit worden opgevangen met een kleine webapplicatie die op basis van de identifier een afgeleide in een bepaald formaat als download aanbiedt.
+IIPImage voorziet als default enkel de "download" van het volledige bestand in jpeg- of png-formaat. Het is niet mogelijk het jp2-bestand of een rasterformaat zoals tiff te downloaden via de IIIF endpoint. Indien er voldoende vraag is naar beelden in de verschillende bestandsformaten en of andere transformatie te downloaden kan dit worden opgevangen met een kleine webapplicatie die op basis van de identifier een afgeleide in een bepaald formaat als download aanbiedt.
 
-Tenzij dit wordt gezien als een ernstige regressie van de huidige setup van VKC, behoort deze API niet tot de scope van het project, maar dit kan op termijn wel deel uiitmaken van de meemoo-setup.
+Tenzij dit wordt gezien als een ernstige regressie van de huidige setup van VKC, behoort deze API niet tot de scope van het project, maar dit kan op termijn wel deel uitmaken van de meemoo-setup.
 
 .Mogelijke download request
 ====
@@ -713,6 +711,6 @@ Business::
 
 meemoo voorziet in het kader van het IIIF-project fase 2 van VKC een IIIF Image API. De API zal in eerste instantie een aanbod van De Schone Kunsten Musea ontsluiten voor gebruik door VKC. VKC voorziet in de presentation API. Op termijn zal de endpoint breder ingezet worden met een groter aanbod en zowel voor gebruik door derden als voor eigen gebruik van meemoo.
 
-De endpoint zal bestaan uit een IIPImage image server met lokale opslag en bereikbaar via een nginx proxy-server. De implementatie gebeurt volledig op de infrastructuur van en door meemoo.
+De endpoint zal bestaan uit een IIPImage image server met lokale opslag en bereikbaar via een nginx proxy-server op images.meemoo.be. De implementatie gebeurt volledig op de infrastructuur van en door meemoo.
 
 Als ontsluitingsformaat wordt jpeg2000 (jp2) gehanteerd. Er wordt een workflow uitgewerkt waarmee de archiefbestanden vlot kunnen worden omgezet naar dit formaat. De afgeleide bestanden worden op de meemoo-infrastructuur bewaard.
