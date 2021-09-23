@@ -119,12 +119,12 @@ Samen met VKC verkende meemoo verschillende technische componenten voor de bouw 
 
 ====== Selectie van componenten
 
-In het voorjaar van 2019 zette meemoo samen met de VKC, artinflanders.be en andere beeldpartners de eerste stappen naar een vlotte, efficiënte en geautomatiseerde ontsluiting van beeldmateriaal in de tweede fase van dit project. Daarbij werd rekening gehouden met de (technische) aanbevelingen (de zogenaamde modelarchitectuur) uit de Blauwdruk gedistribueerd beeldbeheer die eerder was opgesteld.
+In het voorjaar van 2019 zette meemoo samen met de VKC, https://artinflanders.be[artinflanders.be] en andere beeldpartners de eerste stappen naar een vlotte, efficiënte en geautomatiseerde ontsluiting van beeldmateriaal in de tweede fase van dit project. Daarbij werd rekening gehouden met de (technische) aanbevelingen (de zogenaamde modelarchitectuur) uit de https://www.projectcest.be/wiki/Projecten:Blauwdruk_Gedistribueerd_Beeldbeheer[Blauwdruk gedistribueerd beeldbeheer] die eerder was opgesteld.
 
 Centraal in deze fase stond de implementatie van de IIIF-specificaties in online services. Deze open specificaties laten toe om de interacties tussen eindconsument, de toepassing waarin beelden worden gevisualiseerd, en de communicatie met de onderliggende online services te standaardiseren en te automatiseren. Verschillende technische componenten werden verkend voor de bouw van de IIIF-infrastructuur. De keuze van de componenten moet het eenvoudig maken om de beeldinfrastructuur ook in de toekomst te beheren.
 
 .Schema van de gekozen componenten voor de IIIF-proefopstelling
-image::VKC-IIIF-1-architectuur.png[]
+image::VKC-IIIF-1-architectuur.png[VKC ecosysteem Fase 1]
 
 * Als ingestcomponent is gekozen voor https://www.resourcespace.com/[ResourceSpace], een software die al door een aantal partners van VKC gebruikt wordt voor de ontsluiting van hun beelden. ResourceSpace is een DAM-systeem (beeldbeheersysteem) waarmee de beelden opgenomen kunnen worden in de proefopstellingen en waarin vervolgens de metadata uit de Datahub gekoppeld kunnen worden aan de beelden.
 * Als IIIF-beeldenserver is gekozen voor https://cantaloupe-project.github.io/[Cantaloupe], omwille van de mogelijkheid om de metadata die ingebed wordt in de beelden te behouden in de kopieën van de afgeleiden. Via Cantaloupe zijn de beelden uitwisselbaar via de IIIF Image API 2.
@@ -158,11 +158,13 @@ Hiervoor werd een https://github.com/viaacode/iiif-mapping[Python script] geschr
 
 Resultaat is een IIIF Image API 2.0 met level 1 compliancy voor een 300.000 documenten.
 
-.Image information request
+.Image information request: NvdGO
 ====
+
 =====
 https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json[https://images.hetarchief.be/iipsrv/?IIIF=/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/wp9t14vr7s_19140404_0001/info.json] 
 =====
+
 [source,json]
 ----
 {
@@ -203,9 +205,13 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
 ----
 ====
 
+.Image information request: meemoo IIIF
+====
+
 =====
 https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/info.json[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/info.json]
 =====
+
 [source,json]
 ----
 {
@@ -248,7 +254,7 @@ https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/info.json[https://iiif.meemoo.be
 <1> Uit het voorbeeld blijkt dat image langs twee routes via IIIF kan opgevraagd worden. Hoewel beide requests afgehandeld worden door dezelfde image server wijkt de info.json via http://iif.meemoo.be af. Zie https://github.com/viaacode/iiif-mapping/commit/58da7b0b6a7355a955cd313c5f54f76de654af90[meemoo iiif-mapping op Github].
 ====
 
-.Image request:
+.Image request
 ====
 
 https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
