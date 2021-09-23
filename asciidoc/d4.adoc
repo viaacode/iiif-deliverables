@@ -458,10 +458,10 @@ Het systeem omvat een volledige en modulaire middleware op vlak van ETL, opslag,
 * ElasticSearch als standaard index die de zoekfunctionaliteit in de platformen mogelijk maakt
 * https://meemoo.atlassian.net/wiki/spaces/SF/pages/1373274138[Hasura GraphQL] voor naadloos gebruik bovenop een postgresql database. Dit vormt de basis-API waarmee de frontendapplicaties met de datastore kunnen connecteren.
 * https://meemoo.atlassian.net/wiki/spaces/SF/pages/1546977330[IDM]: een volledige Identity en Access Management stack:
-** een LDAP store
-** een SAML IdP
+** een LDAP directory
+** een SAML identity provider
 ** een self-service user management applicatie
-** een account manager voor admins
+** een account manager voor beheerders
 * Event logger
 * Media services zoals play ticketing en streaming
 
@@ -474,13 +474,13 @@ De image server kan gehost worden bij meemoo op 2 manieren
 * Virtualisatie in een VM in het eigen datacenter in Oostkamp (DCO)
 * Virtualisatie in containers op Openshift in IBM Cloud
 
-Gelet op onderstaande punten wordt gekozen voor de eerste oplossing, want:
+Gelet op onderstaande punten wordt gekozen voor de eerste oplossing:
 
 * Netwerkverkeer en bandbreedte zijn goedkoper in DCO dan in de Cloud
 * Storage is eveneens goedkoper en makkelijk uitbreidbaar in DCO (zie 'Opslag')
 * Het netwerkverkeer verloopt via onze eigen nginx proxy met flexibiliteit onder meer op vlak van URL rewrites en image cache
 
-Voor de deployment en management van de software rekenen we op de combinatie Puppet en Foreman. De codebase wordt bewaard en geversioneerd in de Github van meemoo.
+Voor de deployment en management van de software rekenen we op de combinatie Puppet en Foreman. De codebase wordt bewaard en geversioneerd in een Git repository van meemoo.
 
 ===== Opslag
 
@@ -491,7 +491,7 @@ File storage voldoet bij voorkeur aan de volgende vereisten:
 * low-cost
 * scaleable
 
-De door meemoo twee gebruikte oplossingen zijn een eigen Swarm Object Store met S3-connector waarop onder meer de on_disk archiefbestanden en browse copies van het MAM worden bewaard of local disk storage in het datacenter. Beide oplossingen voldoen aan bovenstaande vereisten. Echter, image servers hebben bij voorkeur de bestanden dichtbij en hoewel er S3-oplossingen voor verschillende image servers bestaan zal dit toch trager zijn dan lokale I/O door de overhead van het netwerkverkeer (GET). Aangezien de image server toch in het datacenter wordt gehost en de afgeleide bestanden louter en alleen voor de image server bestaan is het logischer deze te hosten in ons eigen datacenter.
+De twee door meemoo gebruikte oplossingen zijn een eigen Swarm Object Store met S3-connector waarop onder meer de on_disk archiefbestanden en browse copies van het MAM worden bewaard of local disk storage in het datacenter. Beide oplossingen voldoen aan bovenstaande vereisten. Echter, image servers hebben bij voorkeur de bestanden dichtbij en hoewel er S3-oplossingen voor verschillende image servers bestaan zal dit toch trager zijn dan lokale I/O door de overhead van het netwerkverkeer (GET). Aangezien de image server toch in het datacenter wordt gehost en de afgeleide bestanden louter en alleen voor de image server bestaan is het logischer deze te hosten in ons eigen datacenter.
 
 Om een inschatting te kunnen maken van de nodige opslag is op een aantal testbestanden een conversie uitgevoerd. Voor de creatie van de jp2 bestanden is kdu_compress van Kakadu gebruikt volgens een profiel van het Bodlean.
 
@@ -550,7 +550,7 @@ Typische voorbeelden van sensoren zijn:
 * HTTP health & liveness checks
 * Certificaatgeldigheid (indien van toepassing)
 
-De developer guidelines van meemoo worden gehanteerd. Deze kunnen geraadpleegd worden op: https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging[logging guidelines voor developers].
+De developer guidelines van meemoo worden hierbij gehanteerd. Deze kunnen opgevraagd worden of geraadpleegd op: https://meemoo.atlassian.net/wiki/spaces/SF/pages/1177387132/Dev%2Bguidelines%2Blogging[logging guidelines voor developers].
 
 De toepassing logt via stdout naar een ELK-stack (Elasticsearch-Logstash-Kibana). Kort samengevat moeten de log messages voldoen aan de volgende voorwaarden:
 
