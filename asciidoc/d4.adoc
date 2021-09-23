@@ -266,7 +266,7 @@ https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://
 
 ===== Image server
 
-* We bieden minstens de Image API 2.1 aan, we voorzien op termijn de mogelijkheid om versie 3.0 te ondersteunen
+* We bieden minstens de Image API 2.1 aan, we voorzien op korte termijn de mogelijkheid om versie 3.0 te ondersteunen
 * We streven een level 2 compliance na, echter indien level 1 voldoende functionaliteit biedt voor VKC kan hiermee worden volstaan (https://iiif.io/api/image/3.0/compliance[https://iiif.io/api/image/3.0/compliance])
 * De bestanden worden door de image server aangeboden als jpeg en optioneel indien mogelijk in png-formaat
 * Afgeleiden kunnen optioneel in hun geheel gedownload worden, bij voorkeur als TIFF
@@ -281,7 +281,7 @@ https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://
 |Image API |2.1 |3.0
 |Level compliancy |1 |2
 |Default output |jpg |jpg, png
-|Download full image |ja, als jpg |ja, origineel en raster
+|Download full image |ja, als jpg |ja, als afgeleide
 |Download archival image |nee |nee
 |Presentation API |- |3.0
 |Authentication API |- |TBD
@@ -297,7 +297,7 @@ Bij het omzetten van de archiefbestanden naar afgeleide bestanden worden de volg
 
 ====
 * De resolutie (ppi) is maximaal 300 ppi voor werken in het publieke domein, afhankelijk van de originele waarde in het bronbestand. Voor werken die auteursrechtelijk beschermd zijn, worden de op het moment van creatie van het afgeleide beeld geldende hergebruiksvoorwaarden gerespecteerd.
-* De afbeeldingen worden herschaald tot een baseline resolutie (grootte) van 5000 pixels voor de langste zijde, de maximale boven- en ondergrens is daarbij de originele resolutie, bestanden worden niet "opgeblazen" indien ze kleiner zijn, maar kunnen bij heel grote bestanden wel verkleind worden.
+* De afbeeldingen worden herschaald tot een baseline resolutie (grootte) van 5000 pixels voor de kortste zijde, de maximale boven- en ondergrens is daarbij de originele resolutie, bestanden worden niet "opgeblazen" indien ze kleiner zijn, maar kunnen bij heel grote bestanden wel verkleind worden.
 * De beelden worden bijgesneden zodat randen, kleurkaarten kaders niet meer worden getoond.
 * Bestanden worden aangeboden op en voor het web in sRGB, tegenover AdobeRGB voor de originelen.
 * Embedded metadata(XMP, Exif, ICC) worden in zoverre in de bron beschikbaar en mogelijk, in de afbeeldingen opgeslaan.
@@ -309,8 +309,8 @@ Om te vermijden dat (heel) grote werken te fel herschaald worden ten opzichte va
 
 CAUTION: Bij het herschalen moet onderscheid worden gemaakt tussen werken in public domain en werken die nog onder het auteursrecht vallen. In de overeenkomst die de VKC momenteel met de auteursrechtenorganisatie Sabam heeft, worden volgende hergebruiksvoorwaarden vooropgesteld voor werken die onder het auteursrecht vallen: de resolutie van het gereproduceerde beeld mag niet meer dan 640x480 pixels zijn en een resolutie van maximum 72dpi hebben.
 
-Voor de creatie van de afgeleiden starten we met een vrij manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een  automatiseerbare workflow.
-Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.
+Voor de creatie van de afgeleiden starten we met een manuele workflow die eenvoudig kan bijgesteld worden om uiteindelijk te komen tot een automatiseerbare workflow.
+Om zowel de workflow voor de creatie van afgeleide beelden als de specificaties an sich te testen beperken we ons in eerste instantie tot de omzetting van de originele testset aan beelden die nu reeds beschikbaar zijn in de IIIF-viewer in de VKC Arthub. Hierbij zal worden onderzocht welke een haalbare workflow is voor de aanmaak van de afgeleide beeldbestanden en in welke mate dit proces geautomatiseerd kan worden. Indien nodig kunnen bovenstaande specificaties dan ook bijgewerkt worden op basis van voortschrijdend inzicht.
 
 .Voorbeeld manuele workflow voor creatie van jp2 afgeleide beeldbestanden
 image::iiif-jp2-derived-image-workflow.svg[link="https://cawemo.com/share/d893035f-bdbc-419b-9524-e9ff161992d7",alt="workflow voor creatie afgeleiden als jp2"]
@@ -353,17 +353,18 @@ Doel is om op een eenduidige manier aan de hand van een gekende pid een beeld te
 
 In het VKC-project zijn verschillende identifiers gekend voor dezelfde werken, afhankelijk van het systeem waar de collectie en de metadata van de beelden beheerd worden, van historische inventarisnummers tot persistente digitaal-archiefnummers.
 
-In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke _persistent identifier_ (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor https://n2t.net/e/noid.html[noid], vb. `wp9t14vr7s`. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.
+In het archiefsysteem van meemoo is elk werk een intellectuele entiteit (IE). Een IE heeft een unieke _persistent identifier_ (pid), die onveranderlijk is doorheen de hele keten van registratie, digitalisering, archivering tot ontsluiting, we gebruiken hiervoor https://n2t.net/e/noid.html[noid] in eigen formaat, vb. `wp9t14vr7s`. Catalogusnummers en overige lokale identifiers van de collectiebeheerders worden, indien gekend en gewenst, bewaard in de metadata van de IE. Ze worden echter beschouwd als niet-autoratieve metadata.
 
-[NOTE]
+[CAUTION]
 In het geval van enkelvoudige objecten is de relatie tussen de IE en het gearchiveerde media-object 1-op-1. De pid kan herleid worden naar 1 mediabestand. Meervoudige objecten hebben echter meerdere objecten die samen een IE vormen. Zoals kranten waarbij elke pagina een afzonderlijk bestand is. Elk media-object dat deel uitmaakt van eenzelfde IE heeft daarom naast de pid een unieke external_id die bestaat uit de pid van het IE met een suffix gescheiden door een _underscore_, bijvoorbeeld: `wp9t14vr7s_19140404_0001`, pagina 1 van krant `wp9t14vr7s`. Voor enkelvoudige objecten is de external_id gelijk aan de pid.
 
-De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoint zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, vbijvoorbeeld: `wp9t14vr7s_19140404_0001.jp2` .
-De meemoo-identifiers moeten uiteraard bekend zijn in de datahub van VKC, bij voorkeur zonder de nood aan bijkomende resolvers en mappings. Met andere woorden VKC zal de meemoo-identifier in de metadata van https://arthub.vlaamsekunstcollectie.be/nl/catalog/kmska:5006[kmska:494] moeten bijhouden om de image en information requests te kunnen doen. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld via de API's.
+De external_id uit het meemoo-archiefsysteem biedt een hoge mate van zekerheid op vlak van uniciteit en persistentie met voldoende granulariteit, namelijk tot op digitaal object. Om zonder omweg de identifier te kunnen gebruiken in de image endpoint zal deze toegepast worden in de naamgeving van de afgeleide beeldbestanden:{identifier}.{ext}, bijvoorbeeld: `wp9t14vr7s_19140404_0001.jp2`.
+
+De meemoo-identifiers moeten uiteraard bekend zijn in de datahub van VKC, zonder de nood aan bijkomende resolvers en mappings. Met andere woorden zal VKC de meemoo-identifier in de metadata van bijvoorbeeld https://arthub.vlaamsekunstcollectie.be/nl/catalog/kmska:5006[kmska:494] moeten bijhouden om de image en information requests te kunnen doen. In het kader van dit project levert meemoo hiervoor de nodige data met de metadata-export waarbij wordt onderzocht of en hoe die structureel kan worden uitgewisseld via de API's.
 
 Vertaald naar een image information request:
 
-https://images.hetarchief.be/iiif/wp9t14vr7s_19140101_0001/info.json
+https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/info.json
 
 ===== info.json
 
@@ -422,7 +423,7 @@ In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit
 
 ===== Authenticatie en authorisatie
 
-Authenticatie en authorisatie zijn niet binnen scope van dit project. meemoo behoudt weliswaar de mogelijkheid om in een later stadium authenticatie te voorzien bijvoorbeeld op basis van de IIIF Authentication API in combinatie met de eigen accesstoken-authenticatie services. In dat geval zal de afnemer (i.c. VKC) voldoende documentatie krijgen om de authenticatie te integreren. Hiervoor dient eerst een grondige analyse te worden uitgevoerd.
+Authenticatie en authorisatie zijn niet binnen scope van dit project. meemoo behoudt weliswaar de mogelijkheid om in een later stadium authenticatie te voorzien al dan niet op basis van de IIIF Authentication API in combinatie met de eigen accesstoken-authenticatie services. In dat geval zal de afnemer (i.c. VKC) voldoende documentatie krijgen om de authenticatie te integreren. Hiervoor dient eerst een grondige analyse te worden uitgevoerd.
 
 '''''
 
@@ -457,12 +458,10 @@ Het systeem omvat een volledige en modulaire middleware op vlak van ETL, opslag,
 * ElasticSearch als standaard index die de zoekfunctionaliteit in de platformen mogelijk maakt
 * https://meemoo.atlassian.net/wiki/spaces/SF/pages/1373274138[Hasura GraphQL] voor naadloos gebruik bovenop een postgresql database. Dit vormt de basis-API waarmee de frontendapplicaties met de datastore kunnen connecteren.
 * https://meemoo.atlassian.net/wiki/spaces/SF/pages/1546977330[IDM]: een volledige Identity en Access Management stack:
-
-* een LDAP store
-* een SAML IdP
-* een self-service user management applicatie
-* een account manager voor admins
-
+** een LDAP store
+** een SAML IdP
+** een self-service user management applicatie
+** een account manager voor admins
 * Event logger
 * Media services zoals play ticketing en streaming
 
