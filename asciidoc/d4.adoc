@@ -207,11 +207,9 @@ https://images.hetarchief.be/iipsrv/?IIIF%3D/media/5/S/S2aTZOTWggiebVVpZpSTJPWd/
 
 .Image information request: meemoo IIIF
 ====
-
 =====
 https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/info.json[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/info.json]
 =====
-
 [source,json]
 ----
 {
@@ -256,9 +254,10 @@ https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/info.json[https://iiif.meemoo.be
 
 .Image request
 ====
-
+=====
 https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg[https://iiif.meemoo.be/wp9t14vr7s_19140404_0001/full/full/0/default.jpg]
-
+=====
+====
 '''''
 
 === Specificaties
@@ -391,7 +390,7 @@ In onderstaande tabel wordt de gewenste opbouw van de info.json weergegeven. Dit
 |logo |Optional |A small image that represents an individual or organization associated with the content. Logo images _must_ be clearly rendered when content obtained from the Image API service is displayed or used. Clients _must not_ crop, rotate, or otherwise distort the image.
 |===
 
-.Voorbeeld json
+.Voorbeeld info.json
 [source,json]
 ----
 {
