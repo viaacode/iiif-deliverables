@@ -13,10 +13,18 @@ Inhoudsopgave
     -   [Relatief herschalen](#_relatief_herschalen)
 -   [Taken](#_taken)
     -   [Export (\*E\*TL:extract)](#_export_etlextract)
-        -   [Transformatie
-            (E\*T\*L:transform)](#_transformatie_etltransform)
-        -   [Verplaats (ET\*L\*:load)](#_verplaats_etlload)
-        -   [Ruim op](#_ruim_op)
+    -   [Transformatie
+        (E\*T\*L:transform)](#_transformatie_etltransform)
+        -   [Detecteer en verwijder
+            kleurenkaart](#_detecteer_en_verwijder_kleurenkaart)
+        -   [Herschaal](#_herschaal)
+        -   [Detecteer en stel kleurprofiel (ICC)
+            in](#_detecteer_en_stel_kleurprofiel_icc_in)
+        -   [Sla op als jpeg2000](#_sla_op_als_jpeg2000)
+        -   [Kopieer metadata](#_kopieer_metadata)
+        -   [Valideer](#_valideer)
+    -   [Verplaats (ET\*L\*:load)](#_verplaats_etlload)
+    -   [Ruim op](#_ruim_op)
 -   [Workflow](#_workflow)
 -   [Tech specs](#_tech_specs)
     -   [Omgevingen](#_omgevingen)
@@ -282,9 +290,9 @@ Voor meer informatie over de REST API van MediaHaven en het exporteren
 van essences zie de [Mediahaven REST API
 manual](https://archief.viaa.be/mediahaven-rest-api/#mediahaven-rest-api-manual-exporting).
 
-#### Transformatie (E\*T\*L:transform)
+### Transformatie (E\*T\*L:transform)
 
-##### Detecteer en verwijder kleurenkaart
+#### Detecteer en verwijder kleurenkaart
 
 Voor het detecteren van de kleurenkaart maken we gebruik van de
 [colorchecker](https://github.com/tckrishna/colorchecker) zoals
@@ -311,7 +319,7 @@ en de kleurenkaart verbergt onder een wit vlak ipv deze volledige weg te
 snijden heeft meemoo een paar [aanpassingen gedaan in een eigen
 fork](https://github.com/viaacode/colorchecker/commits/main).
 
-##### Herschaal
+#### Herschaal
 
 De afbeelding worden dynamisch herschaald cfr. supra [Relatief
 herschalen](#rel-scale).
@@ -337,12 +345,12 @@ Voorbeelden:
 Code:
 <https://github.com/viaacode/iiif-image-processing/blob/main/app/helpers.py#L128>
 
-##### Detecteer en stel kleurprofiel (ICC) in
+#### Detecteer en stel kleurprofiel (ICC) in
 
 We detecteren het kleurenprofiel van het om te zetten beeldbestand en
 indien afwezig of anders wordt het omgezet naar `sRGB`.
 
-##### Sla op als jpeg2000
+#### Sla op als jpeg2000
 
 Voor het comprimeren en opslaan als jp2 gebruiken we de gelicensieerde
 Kakadu software. We gebruiken [het profiel van Digital
@@ -370,7 +378,7 @@ Het instellen van de sRGB color space in de vorige stap voorkomt
 problemen (afwijkende kleur) gerelateerd aan de expliciete toekenning
 van de sRGB space in kdu\_compress.
 
-##### Kopieer metadata
+#### Kopieer metadata
 
 kdu\_compress kopieert niet alle metadata tags.
 
@@ -394,7 +402,7 @@ voorbeelden.](https://manpages.ubuntu.com/manpages/artful/man1/exiftool.1p.html)
 Meer info over IPTC:
 <http://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata>
 
-##### Valideer
+#### Valideer
 
 Valideer dat het eindresultaat voldoet aan de volgende assertions:
 
@@ -413,7 +421,7 @@ Valideer dat het eindresultaat voldoet aan de volgende assertions:
 <https://exiftool.org/index.html>
 <https://exiftool.org/exiftool_pod.html>
 
-#### Verplaats (ET\*L\*:load)
+### Verplaats (ET\*L\*:load)
 
 Bestanden worden naar de eindbestemming gekopieerd waar ze
 steekproefsgewijs visueel geïnspecteerd kunnen worden. Als bestandsnaam
@@ -422,7 +430,7 @@ wordt de meemoo pid (external\_id) gebruikt en `.jp2` als extensie.
 De eindbestemming is een folder die de media mount point is voor de
 IIPImage server.
 
-#### Ruim op
+### Ruim op
 
 Tussentijdse bestanden en met succes verwerkte bronbestanden worden
 verwijderd. Gefaalde bestanden blijven staan voor inspectie.
