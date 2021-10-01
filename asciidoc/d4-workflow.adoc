@@ -4,7 +4,7 @@ Bart Debunne <bart.debunne@meemoo.be>
 3, 01-10-2021
 :Revision: 3
 :nofooter:
-:imagesdir: images
+:imagesdir: ../images
 :source-highlighter: rouge
 // fix missing admonition icons on Github
 ifdef::env-github[]
