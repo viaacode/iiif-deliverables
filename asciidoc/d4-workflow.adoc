@@ -79,9 +79,7 @@ Resultaat:
 * gemiddeld aantal pixels = 6169px
 * geen correlatie tussen fysieke breedte en breedte in pixels: 0.09
 
-... maar kleine set en slechte p-value!
-
-Een zelfde vergelijking werd daarom uitgevoerd op de volledige set aan beelden van VKC die beschikbaar zijn op Art in Flanders (AIF), met een gelijkaardig resultaat.
+Dit is slechts een kleine set met een slechte p-value! Een zelfde vergelijking werd daarom uitgevoerd op de volledige set aan beelden van VKC die beschikbaar zijn op Art in Flanders (AIF), met een gelijkaardig resultaat.
 
 ----
 Sample: 12639
@@ -114,7 +112,6 @@ Er wordt voorgesteld de fysieke afmeting los te laten en de digitale afmeting al
 * Afbeeldingen tot 5.000px breedte worden ongemoeid gelaten
 * Van 5.001-10.000px 50% herschalen
 * Max. breedte 10.000px
-
 
 (images)
 
@@ -161,7 +158,7 @@ In deze stap worden de originele archiefmasters uit het archiefsysteem (MAM) ge√
 
 Voor het exporteren van een esssence is een Mediahaven fragment-id nodig. Indien niet bekend kan die eerst worden opgehaald aan de hand van de meemoo-identifer (pid) of overige lokale id met een metadata query naar de REST API.
 
-Voor meer informatie over de REST API van MediaHaven en het exporteren van essences zie de https://archief.viaa.be/mediahaven-rest-api/#mediahaven-rest-api-manual-exporting[Mediahaven REST API manual]
+Voor meer informatie over de REST API van MediaHaven en het exporteren van essences zie de https://archief.viaa.be/mediahaven-rest-api/#mediahaven-rest-api-manual-exporting[Mediahaven REST API manual].
 
 ==== Transformatie (E*T*L:transform)
 
@@ -184,17 +181,17 @@ Omdat de oorspronkelijke code moeilijk overweg kon met 16-bit bestanden en de kl
 De afbeelding worden dynamisch herschaald cfr. supra <<rel-scale,Relatief herschalen>>.
 
 De afmeting wordt herschaald op basis van de kortste zijde:
+
 * < 5000px: niet herschalen
 * > 5000px: herschalen naar (5000 + ((zijde - 5000) /2 ))
 * > 15000px: herschalen naar 10000
 
 Voorbeelden:
+
 * 3650 => 3650
 * 6200 => 5600
 * 10000=> 7500
 * 17000 => 10000
-
-* https://github.com/viaacode/iiif-image-processing/blob/main/app/helpers.py#L128
 
 Code: https://github.com/viaacode/iiif-image-processing/blob/main/app/helpers.py#L128
 
@@ -218,7 +215,7 @@ _https://readthedocs.org/projects/image-processing/downloads/pdf/latest/_
 
 Het instellen van de sRGB color space in de vorige stap voorkomt problemen (afwijkende kleur) gerelateerd aan de expliciete toekenning van de sRGB space in kdu_compress.
 
-===== Copy metadata
+===== Kopieer metadata
 
 kdu_compress kopieert niet alle metadata tags.
 
@@ -235,7 +232,7 @@ Meer info over IPTC: http://www.iptc.org/std/photometadata/specification/IPTC-Ph
 
 ===== Valideer
 
-Valideer dat het eindresultaat voldoet aan de volgende assertions
+Valideer dat het eindresultaat voldoet aan de volgende assertions:
 
 * ppi = 300
 * icc = sRGB
@@ -286,6 +283,7 @@ Deployment via Puppet/Foreman en parametriseerbaar.
 === Execute
 
 Manueel.
+
 In latere fase automated trigger op basis van metadata attribuut in MAM.
 
 === Observability
