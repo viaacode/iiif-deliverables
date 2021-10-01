@@ -326,13 +326,13 @@ De afmeting wordt herschaald op basis van de kortste zijde:
 
 Voorbeelden:
 
--   3650 ⇒ 3650
+-   3650 => 3650
 
--   6200 ⇒ 5600
+-   6200 => 5600
 
--   10000⇒ 7500
+-   10000 => 7500
 
--   17000 ⇒ 10000
+-   17000 => 10000
 
 Code:
 <https://github.com/viaacode/iiif-image-processing/blob/main/app/helpers.py#L128>
@@ -471,4 +471,4 @@ In latere fase automated trigger op basis van metadata attribuut in MAM.
 
 ### Observability
 
-Single line json logging naar stdout ⇒ ELK.
+Single line json logging naar stdout => ELK.
