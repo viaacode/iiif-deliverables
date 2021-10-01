@@ -1,5 +1,5 @@
 IIIF : Deliverable 4 - Image processing workflow
-============================================================
+================================================
 Bart Debunne <bart.debunne@meemoo.be>
 3, 01-10-2021
 :Revision: 3
