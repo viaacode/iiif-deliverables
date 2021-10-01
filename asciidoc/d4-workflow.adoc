@@ -164,9 +164,9 @@ Voor het exporteren van een esssence is een Mediahaven fragment-id nodig. Indien
 
 Voor meer informatie over de REST API van MediaHaven en het exporteren van essences zie de https://archief.viaa.be/mediahaven-rest-api/#mediahaven-rest-api-manual-exporting[Mediahaven REST API manual].
 
-==== Transformatie (E*T*L:transform)
+=== Transformatie (E*T*L:transform)
 
-===== Detecteer en verwijder kleurenkaart
+==== Detecteer en verwijder kleurenkaart
 
 Voor het detecteren van de kleurenkaart maken we gebruik van de https://github.com/tckrishna/colorchecker[colorchecker] zoals ontwikkeld voor het https://www.floredegand.be[Flore de Gand project]. De colorchecker gaat op zoek naar een kleurenkaart en als die wordt herkend dan wordt de strook met de kleurenkaart weggesneden en de afbeelding opgeslaan.
 
@@ -180,7 +180,7 @@ Documentatie en tutorial op: https://colab.research.google.com/drive/1OreAxCrCTk
 
 Omdat de oorspronkelijke code moeilijk overweg kon met 16-bit bestanden en de kleurenkaart verbergt onder een wit vlak ipv deze volledige weg te snijden heeft meemoo een paar https://github.com/viaacode/colorchecker/commits/main[aanpassingen gedaan in een eigen fork].
 
-===== Herschaal
+==== Herschaal
 
 De afbeelding worden dynamisch herschaald cfr. supra <<rel-scale,Relatief herschalen>>.
 
@@ -199,11 +199,11 @@ Voorbeelden:
 
 Code: https://github.com/viaacode/iiif-image-processing/blob/main/app/helpers.py#L128
 
-===== Detecteer en stel kleurprofiel (ICC) in
+==== Detecteer en stel kleurprofiel (ICC) in
 
 We detecteren het kleurenprofiel van het om te zetten beeldbestand en indien afwezig of anders wordt het omgezet naar `sRGB`.
 
-===== Sla op als jpeg2000
+==== Sla op als jpeg2000
 
 Voor het comprimeren en opslaan als jp2 gebruiken we de gelicensieerde Kakadu software. We gebruiken https://image-processing.readthedocs.io/en/latest/jp2_profile.html[het profiel van Digital Bodleian]: https://github.com/viaacode/iiif-image-processing/blob/main/app/file_transformation.py#L97
 
@@ -219,7 +219,7 @@ _https://readthedocs.org/projects/image-processing/downloads/pdf/latest/_
 
 Het instellen van de sRGB color space in de vorige stap voorkomt problemen (afwijkende kleur) gerelateerd aan de expliciete toekenning van de sRGB space in kdu_compress.
 
-===== Kopieer metadata
+==== Kopieer metadata
 
 kdu_compress kopieert niet alle metadata tags.
 
@@ -234,7 +234,7 @@ Zie voor meer informatie de https://exiftool.org/[Exiftool website] en de https:
 
 Meer info over IPTC: http://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata
 
-===== Valideer
+==== Valideer
 
 Valideer dat het eindresultaat voldoet aan de volgende assertions:
 
@@ -249,13 +249,13 @@ https://github.com/openpreserve/jpylyzer
 https://exiftool.org/index.html
 https://exiftool.org/exiftool_pod.html
 
-==== Verplaats (ET*L*:load)
+=== Verplaats (ET*L*:load)
 
 Bestanden worden naar de eindbestemming gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden. Als bestandsnaam wordt de meemoo pid (external_id) gebruikt en `.jp2` als extensie.
 
 De eindbestemming is een folder die de media mount point is voor de IIPImage server.
 
-==== Ruim op
+=== Ruim op
 
 Tussentijdse bestanden en met succes verwerkte bronbestanden worden verwijderd.
 Gefaalde bestanden blijven staan voor inspectie.
