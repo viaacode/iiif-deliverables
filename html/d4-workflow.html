@@ -678,13 +678,19 @@ pre.rouge {
 </li>
 <li><a href="#_taken">Taken</a>
 <ul class="sectlevel2">
-<li><a href="#_export_etlextract">Export (*E*TL:extract)</a>
+<li><a href="#_export_etlextract">Export (*E*TL:extract)</a></li>
+<li><a href="#_transformatie_etltransform">Transformatie (E*T*L:transform)</a>
 <ul class="sectlevel3">
-<li><a href="#_transformatie_etltransform">Transformatie (E*T*L:transform)</a></li>
-<li><a href="#_verplaats_etlload">Verplaats (ET*L*:load)</a></li>
-<li><a href="#_ruim_op">Ruim op</a></li>
+<li><a href="#_detecteer_en_verwijder_kleurenkaart">Detecteer en verwijder kleurenkaart</a></li>
+<li><a href="#_herschaal">Herschaal</a></li>
+<li><a href="#_detecteer_en_stel_kleurprofiel_icc_in">Detecteer en stel kleurprofiel (ICC) in</a></li>
+<li><a href="#_sla_op_als_jpeg2000">Sla op als jpeg2000</a></li>
+<li><a href="#_kopieer_metadata">Kopieer metadata</a></li>
+<li><a href="#_valideer">Valideer</a></li>
 </ul>
 </li>
+<li><a href="#_verplaats_etlload">Verplaats (ET*L*:load)</a></li>
+<li><a href="#_ruim_op">Ruim op</a></li>
 </ul>
 </li>
 <li><a href="#_workflow">Workflow</a></li>
@@ -973,10 +979,11 @@ sample estimates:
 <div class="paragraph">
 <p>Voor meer informatie over de REST API van MediaHaven en het exporteren van essences zie de <a href="https://archief.viaa.be/mediahaven-rest-api/#mediahaven-rest-api-manual-exporting">Mediahaven REST API manual</a>.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_transformatie_etltransform">Transformatie (E*T*L:transform)</h3>
 <div class="sect3">
-<h4 id="_transformatie_etltransform">Transformatie (E*T*L:transform)</h4>
-<div class="sect4">
-<h5 id="_detecteer_en_verwijder_kleurenkaart">Detecteer en verwijder kleurenkaart</h5>
+<h4 id="_detecteer_en_verwijder_kleurenkaart">Detecteer en verwijder kleurenkaart</h4>
 <div class="paragraph">
 <p>Voor het detecteren van de kleurenkaart maken we gebruik van de <a href="https://github.com/tckrishna/colorchecker">colorchecker</a> zoals ontwikkeld voor het <a href="https://www.floredegand.be">Flore de Gand project</a>. De colorchecker gaat op zoek naar een kleurenkaart en als die wordt herkend dan wordt de strook met de kleurenkaart weggesneden en de afbeelding opgeslaan.</p>
 </div>
@@ -996,8 +1003,8 @@ Documentatie en tutorial op: <a href="https://colab.research.google.com/drive/1O
 <p>Omdat de oorspronkelijke code moeilijk overweg kon met 16-bit bestanden en de kleurenkaart verbergt onder een wit vlak ipv deze volledige weg te snijden heeft meemoo een paar <a href="https://github.com/viaacode/colorchecker/commits/main">aanpassingen gedaan in een eigen fork</a>.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_herschaal">Herschaal</h5>
+<div class="sect3">
+<h4 id="_herschaal">Herschaal</h4>
 <div class="paragraph">
 <p>De afbeelding worden dynamisch herschaald cfr. supra <a href="#rel-scale">Relatief herschalen</a>.</p>
 </div>
@@ -1040,14 +1047,14 @@ Documentatie en tutorial op: <a href="https://colab.research.google.com/drive/1O
 <p>Code: <a href="https://github.com/viaacode/iiif-image-processing/blob/main/app/helpers.py#L128" class="bare">https://github.com/viaacode/iiif-image-processing/blob/main/app/helpers.py#L128</a></p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_detecteer_en_stel_kleurprofiel_icc_in">Detecteer en stel kleurprofiel (ICC) in</h5>
+<div class="sect3">
+<h4 id="_detecteer_en_stel_kleurprofiel_icc_in">Detecteer en stel kleurprofiel (ICC) in</h4>
 <div class="paragraph">
 <p>We detecteren het kleurenprofiel van het om te zetten beeldbestand en indien afwezig of anders wordt het omgezet naar <code>sRGB</code>.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_sla_op_als_jpeg2000">Sla op als jpeg2000</h5>
+<div class="sect3">
+<h4 id="_sla_op_als_jpeg2000">Sla op als jpeg2000</h4>
 <div class="paragraph">
 <p>Voor het comprimeren en opslaan als jp2 gebruiken we de gelicensieerde Kakadu software. We gebruiken <a href="https://image-processing.readthedocs.io/en/latest/jp2_profile.html">het profiel van Digital Bodleian</a>: <a href="https://github.com/viaacode/iiif-image-processing/blob/main/app/file_transformation.py#L97" class="bare">https://github.com/viaacode/iiif-image-processing/blob/main/app/file_transformation.py#L97</a></p>
 </div>
@@ -1077,8 +1084,8 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 <p>Het instellen van de sRGB color space in de vorige stap voorkomt problemen (afwijkende kleur) gerelateerd aan de expliciete toekenning van de sRGB space in kdu_compress.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_kopieer_metadata">Kopieer metadata</h5>
+<div class="sect3">
+<h4 id="_kopieer_metadata">Kopieer metadata</h4>
 <div class="paragraph">
 <p>kdu_compress kopieert niet alle metadata tags.</p>
 </div>
@@ -1100,8 +1107,8 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 <p>Meer info over IPTC: <a href="http://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata" class="bare">http://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata</a></p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_valideer">Valideer</h5>
+<div class="sect3">
+<h4 id="_valideer">Valideer</h4>
 <div class="paragraph">
 <p>Valideer dat het eindresultaat voldoet aan de volgende assertions:</p>
 </div>
@@ -1132,8 +1139,8 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_verplaats_etlload">Verplaats (ET*L*:load)</h4>
+<div class="sect2">
+<h3 id="_verplaats_etlload">Verplaats (ET*L*:load)</h3>
 <div class="paragraph">
 <p>Bestanden worden naar de eindbestemming gekopieerd waar ze steekproefsgewijs visueel geïnspecteerd kunnen worden. Als bestandsnaam wordt de meemoo pid (external_id) gebruikt en <code>.jp2</code> als extensie.</p>
 </div>
@@ -1141,12 +1148,11 @@ For example the sRGB v4 ICC preference profile is not supported, and cannot be e
 <p>De eindbestemming is een folder die de media mount point is voor de IIPImage server.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_ruim_op">Ruim op</h4>
+<div class="sect2">
+<h3 id="_ruim_op">Ruim op</h3>
 <div class="paragraph">
 <p>Tussentijdse bestanden en met succes verwerkte bronbestanden worden verwijderd.
 Gefaalde bestanden blijven staan voor inspectie.</p>
-</div>
 </div>
 </div>
 </div>
