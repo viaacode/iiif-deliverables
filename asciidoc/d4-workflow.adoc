@@ -73,6 +73,8 @@ sample estimates:
 0.09235595
 ----
 
+image::size-correlation-small-set.png[alt="Graph"]
+
 Resultaat:
 
 * gemiddelde breedte = 90 cm
@@ -96,6 +98,8 @@ sample estimates:
      cor
 0.231431
 ----
+
+image::size-correlation-large-set.png[alt="Graph"]
 
 Resultaat:
 
@@ -129,11 +133,11 @@ De totale omvang van de afgeleide beelden is respectievelijk 15,5% en 13% van di
 
 Er is visueel een kwaliteitsverlies waarneembaar bij het inzoomen. Bij de grootste beelden die verhoudingsgewijs meer herschaald zijn, is een verzachting van de contouren merkbaar. Het kwaliteitsverlies is progressief in die zin dat een origineel beeld van 15000px breed relatief meer effect zal ondervinden van herschaling dan een beeld van 7000px breed.
 
-Hoewel er geen detail of kleur verloren lijkt te gaan, zijn de edges en details minder scherp waardoor de afbeelding minder crisp over komt op de hogere zoomniveau’s. In de hoofdzoom is geen verschil waar te nemen.
+Hoewel er geen detail of kleur verloren lijkt te gaan, zijn de edges en details minder scherp waardoor de afbeelding minder crisp over komt op de hogere zoomniveau's. In de hoofdzoom is geen verschil waar te nemen.
 
 *Eindconclusie*
 
-Het “dynamisch” herschalen levert een gemiddelde besparing in opslag van 20%. Voor grotere bestanden komt dit met een matig en progressief kwaliteitsverlies, waarneembaar bij de diepere zoomniveau’s als een “verzachting” van de details in het beeld. 
+Het "dynamisch" herschalen levert een gemiddelde besparing in opslag van 20%. Voor grotere bestanden komt dit met een matig en progressief kwaliteitsverlies, waarneembaar bij de diepere zoomniveau’s als een "verzachting" van de details in het beeld. 
 
 Voor materiaal gelijkaardig qua resolutie aan de referentieset is de resulterende kwaliteit aanvaardbaar. Indien nog grotere beelden worden aangeboden dienen de drempelwaardes voor het herschalen echter herbekeken te worden. 
 
