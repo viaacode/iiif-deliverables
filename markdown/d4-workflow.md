@@ -328,7 +328,7 @@ De afmeting wordt herschaald op basis van de kortste zijde:
 
 -   &lt; 5000px: niet herschalen
 
--   &gt; 5000px: herschalen naar (5000 + zijde - 5000) /2
+-   &gt; 5000px: herschalen naar (5000 + ((zijde - 5000) /2 ))
 
 -   &gt; 15000px: herschalen naar 10000
 
